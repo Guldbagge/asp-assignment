@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Models.Views;
 
 namespace WebApp.Controllers;
 
@@ -6,8 +7,10 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
-        ViewData["Title"] = "Task Management Assistant You Gonna Love";
+       
+        var viewModel = new HomeIndexViewModel();
 
-        return View();
+        ViewData["Title"] = viewModel.Title;
+        return View(viewModel);
     }
 }
