@@ -2,9 +2,25 @@
 @model HomeIndexViewModel
 
 
-    @await Html.PartialAsync("~/Views/Shared/Sections/_Showcase.cshtml", Model.Showcase)
+@await Html.PartialAsync("~/Views/Shared/Sections/_Showcase.cshtml", Model.Showcase)
 
 
 <section id="features"> 
 @await Html.PartialAsync("~/Views/Shared/Sections/_Features.cshtml")
+</section>
+
+<section id="manage">
+    @await Html.PartialAsync("~/Views/Shared/Sections/_Manage.cshtml")
+</section>
+
+<section id="download">
+    @await Html.PartialAsync("~/Views/Shared/Sections/_Download.cshtml")
+</section>
+
+<section id="integrate">
+    @await Html.PartialAsync("~/Views/Shared/Sections/_Integrate.cshtml")
+</section>
+
+<section id="dontWant">
+    @await Html.PartialAsync("~/Views/Shared/Sections/_DontWant.cshtml")
 </section>
