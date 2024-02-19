@@ -1,6 +1,30 @@
-﻿namespace WebApp.wwwroot.css.scss.sections
-{
-    public class _signup
-    {
+﻿#signup {
+    height: 100%;
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        @include lg {
+            width: 60%;
+        }
+
+        @include lg {
+            width: 45%;
+        }
+
+        form {
+
+            .content {
+                display: grid;
+                gap: 1rem 2rem;
+
+                @include md {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+        }
     }
 }

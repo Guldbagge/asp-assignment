@@ -383,6 +383,38 @@ a:hover {
   color: #FFFFFF;
 }
 
+form {
+  width: 100%;
+  display: grid;
+}
+form .input-group {
+  margin: 1rem 0;
+  display: grid;
+}
+form .checkbox-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+form .checkbox-group input[type=checkbox] {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+form .checkbox-group label {
+  margin-bottom: 0;
+  font-weight: 700;
+}
+form label {
+  margin-bottom: 3px;
+  font-weight: 700;
+}
+form input {
+  padding: 1rem;
+  border-radius: 8px !important;
+  border: 1px solid #D4D7E5;
+}
+
 header {
   padding: 15px 0;
 }
@@ -958,5 +990,34 @@ footer .container .social-media {
 @media (min-width: 992px) {
   .dontWant .container .contentEmail p {
     margin-left: 90px;
+  }
+}
+
+#signup {
+  height: 100%;
+}
+#signup .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+@media (min-width: 992px) {
+  #signup .container {
+    width: 60%;
+  }
+}
+@media (min-width: 992px) {
+  #signup .container {
+    width: 45%;
+  }
+}
+#signup .container form .content {
+  display: grid;
+  gap: 1rem 2rem;
+}
+@media (min-width: 768px) {
+  #signup .container form .content {
+    grid-template-columns: 1fr 1fr;
   }
 }

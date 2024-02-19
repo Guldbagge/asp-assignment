@@ -1,0 +1,38 @@
+﻿form{
+    width: 100%;
+    display: grid;
+
+    .input-group{
+        margin: 1rem 0;
+        display: grid;
+    }
+
+    .checkbox-group{
+
+        display: flex;
+        justify-content: flex-start;
+        align-items:center;
+        gap: 1rem;
+
+        input[type="checkbox"]{
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+        label{
+            margin-bottom: 0;
+            font-weight: 700;
+        }
+    }
+
+    label{
+        margin-bottom:3px;
+        font-weight: 700;
+    }
+
+        input{
+        padding: 1rem;
+        border-radius: 8px !important;
+        border: 1px solid $gray-400;
+    }
+}
