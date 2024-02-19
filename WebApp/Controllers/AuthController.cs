@@ -2,7 +2,7 @@
 
 namespace WebApp.Controllers
 {
-    public class AccountController : Controller
+    public class AuthController : Controller
     {
         public IActionResult Index()
         {
@@ -15,7 +15,7 @@ namespace WebApp.Controllers
             ViewData["Title"] = "Sign In";
             return View();
         }
-
+        [Route("/SignUp")]
         public IActionResult SignUp()
         {
             ViewData["Title"] = "Sign Up";

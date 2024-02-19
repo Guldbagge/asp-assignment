@@ -450,6 +450,9 @@ header #mobil-menu {
   align-items: center;
   background-color: #fff;
 }
+header #mobil-menu .account-buttons .btn-gray {
+  margin-bottom: 15px;
+}
 header #mobil-menu nav {
   display: flex;
   flex-direction: column;
