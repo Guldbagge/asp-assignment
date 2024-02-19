@@ -1,9 +1,11 @@
 ﻿
 @model HomeIndexViewModel
 
+<header>
+    @await Html.PartialAsync("~/Views/Shared/Sections/_HeaderPartial.cshtml")
+</header>
 
 @await Html.PartialAsync("~/Views/Shared/Sections/_Showcase.cshtml", Model.Showcase)
-
 
 <section id="features"> 
 @await Html.PartialAsync("~/Views/Shared/Sections/_Features.cshtml")
@@ -24,3 +26,9 @@
 <section id="dontWant">
     @await Html.PartialAsync("~/Views/Shared/Sections/_DontWant.cshtml")
 </section>
+
+<footer>
+    @await Html.PartialAsync("~/Views/Shared/Sections/_FooterPartial.cshtml")
+</footer>
+
+_HeaderPartial.cshtml
