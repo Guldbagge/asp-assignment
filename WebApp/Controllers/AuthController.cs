@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
-    public class AccountController : Controller
+    public class AuthController : Controller
     {
         public IActionResult Index()
         {
@@ -16,10 +17,23 @@ namespace WebApp.Controllers
             return View();
         }
 
+        [Route("/SignUp")]
+        [HttpGet]
         public IActionResult SignUp()
         {
-            ViewData["Title"] = "Sign Up";
-            return View();
+           var viewModel = new SignUpViewModel();
+            return View(viewModel);
+        }
+
+        [Route("/SignUp")]
+        [HttpPost]
+        public IActionResult SignUp(SignUpViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                return View(viewModel);
+           
+ 
+            return RedirectToAction("SignIn", "Auth");
         }
 
         public new IActionResult SignOut()
