@@ -11,13 +11,7 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public IActionResult SignIn()
-        {
-            ViewData["Title"] = "Sign In";
-            return View();
-        }
-
-        [Route("/SignUp")]
+        [Route("/signup")]
         [HttpGet]
         public IActionResult SignUp()
         {
@@ -25,7 +19,7 @@ namespace WebApp.Controllers
             return View(viewModel);
         }
 
-        [Route("/SignUp")]
+        [Route("/signup")]
         [HttpPost]
         public IActionResult SignUp(SignUpViewModel viewModel)
         {
@@ -36,10 +30,35 @@ namespace WebApp.Controllers
             return RedirectToAction("SignIn", "Auth");
         }
 
+        [Route("/signin")]
+        [HttpGet]
+        public IActionResult SignIn()
+        {
+            var viewModel = new SignInViewModel();
+            return View(viewModel);
+        }
+
         public new IActionResult SignOut()
         {
             return RedirectToAction("Index", "Home");
         }
 
-     }
+        [Route("/signin")]
+        [HttpPost]
+        public IActionResult SignIn(SignInViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+                 return View(viewModel);
+
+            // var result = _authService.SignIn(viewModel.Form);
+            // if (result)
+            //     return RedirectToAction("Index", "Account");
+
+
+            viewModel.ErrorMessage = "Invalid email or password";
+                return View(viewModel); 
+            
+        }
+
+    }
 }

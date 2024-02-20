@@ -7,28 +7,31 @@ namespace WebApp.Models;
 public class SignUpModel
 {
     [Display(Name = "First Name", Prompt = "Enter your frist name", Order = 0)]
-    [Required (ErrorMessage = "Invalid first name")]
+    [Required (ErrorMessage = "First name is required")]
     public string FirstName { get; set; } = null!;
 
 
     [Display(Name = "Last Name", Prompt = "Enter your last name", Order = 1)]
-    [Required(ErrorMessage = "Invalid last name")]
+    [Required(ErrorMessage = "Last name is required")]
     public string LastName { get; set; } = null!;
 
     [Display(Name = "Email", Prompt = "Enter your email", Order = 2)]
     [DataType(DataType.EmailAddress)]
+    [Required(ErrorMessage = "Email is required")]
     [RegularExpression(@"^(?=.*[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$",
                           ErrorMessage = "The email format is not valid.")]
     public string Email { get; set; } = null!;
 
     [Display(Name = "Password", Prompt = "Enter your password", Order = 3)]
     [DataType(DataType.Password)]
+    [Required(ErrorMessage = "Password is required")]
     [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s])(?=.*[a-zA-Z\d]).{8,}$",
                       ErrorMessage = "The password format is not valid. It must be a strong password")]
     public string Password { get; set; } = null!;
 
     [Display(Name = "Confirm Password", Prompt = "Confirm your password", Order = 4)]
     [DataType(DataType.Password)]
+    [Required(ErrorMessage = "Password must be comfirmd")]
     [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
     public string ConfirmPassword { get; set; } = null!;
 
