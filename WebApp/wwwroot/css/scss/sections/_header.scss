@@ -66,6 +66,13 @@ header {
         gap: 15px;
         align-items: center;
         background-color: #fff;
+       
+
+        .account-buttons {
+            .btn-gray {
+                margin-bottom: 15px;
+            }
+        }
     }
 
     #mobil-menu nav {
