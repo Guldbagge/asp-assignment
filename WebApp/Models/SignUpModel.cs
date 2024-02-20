@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using WebApp.Helpers;
 
 namespace WebApp.Models;
 
@@ -23,7 +24,7 @@ public class SignUpModel
     [Display(Name = "Password", Prompt = "Enter your password", Order = 3)]
     [DataType(DataType.Password)]
     [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s])(?=.*[a-zA-Z\d]).{8,}$",
-                      ErrorMessage = "The password format is not valid. It must contain at least one uppercase letter, one digit, one special character, and be at least 8 characters long.")]
+                      ErrorMessage = "The password format is not valid. It must be a strong password")]
     public string Password { get; set; } = null!;
 
     [Display(Name = "Confirm Password", Prompt = "Confirm your password", Order = 4)]
@@ -32,7 +33,9 @@ public class SignUpModel
     public string ConfirmPassword { get; set; } = null!;
 
     [Display(Name = "I agree to the Terms and Conditions", Order = 5)]
-    [Required(ErrorMessage = "You must agree to the terms and conditions")]
+    [CheckBoxRequired(ErrorMessage = "You must agree to the terms and conditions")]
     public bool TermsAndConditions { get; set; } = false;
 }
+
+
 

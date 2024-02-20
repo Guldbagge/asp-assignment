@@ -10,7 +10,7 @@
     <div class="container">
 
 
-        <form method="post" asp-controller="Auth"  asp-action="SignUp">
+        <form method="post" novalidate asp-controller="Auth"  asp-action="SignUp">
             <h1>Create Account</h1>
             <p>Already have an account? <a asp-controller="Auth" asp-action="SignIn">Sign in here</a>. </p>
 
@@ -45,15 +45,18 @@
                     <input asp-for="Form.ConfirmPassword"/>
                 </div>
 
-                <div id="form-terms" class="checkbox-group">
-                    <input asp-for="Form.TermsAndConditions"/>
-                    <label asp-for="Form.TermsAndConditions">I agree to the <a asp-controller="About" asp-action="Terms">Terms</a> & <a asp-controller="About" asp-action="Conditions">Conditions</a>.</label>
+                <div id="form-terms" class="checkbox">
+                    <div class="checkbox-group">
+                        <input asp-for="Form.TermsAndConditions" />
+                        <label asp-for="Form.TermsAndConditions">I agree to the <a asp-controller="About" asp-action="Terms">Terms</a> & <a asp-controller="About" asp-action="Conditions">Conditions</a>.</label>
+                    </div>
+                    
                     <span asp-validation-for="Form.TermsAndConditions"> </span>
                 </div>
 
             </div>
 
-        <button type="submit" class="btn-theme-s">@Model.Title</button>
+        <button id="form-submit" type="submit" class="btn-theme-s">@Model.Title</button>
         </form>
     
     </div>  

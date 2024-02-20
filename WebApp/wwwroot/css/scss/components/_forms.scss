@@ -1,38 +1,72 @@
-﻿form{
+﻿form {
     width: 100%;
     display: grid;
 
-    .input-group{
-        margin: 1rem 0;
+    .input-group {
         display: grid;
     }
 
-    .checkbox-group{
-
-        display: flex;
-        justify-content: flex-start;
-        align-items:center;
-        gap: 1rem;
-
-        input[type="checkbox"]{
-            width: 1.2rem;
-            height: 1.2rem;
-        }
-
-        label{
-            margin-bottom: 0;
-            font-weight: 700;
+    .checkbox {
+        span {
+            &.field-validation-error {
+                position: static;
+                top: 0;
+                right: 0;
+                @include text-s;
+                color: $danger;
+            }
         }
     }
 
-    label{
-        margin-bottom:3px;
+    .checkbox-group {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5rem;
+
+        input[type="checkbox"] {
+            width: 1.2rem;
+            height: 1.2rem;
+            border: 1px solid red;
+        }
+
+        label {
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+    }
+
+    label {
+        margin-bottom: 3px;
         font-weight: 700;
     }
 
-        input{
+    input {
         padding: 1rem;
         border-radius: 8px !important;
         border: 1px solid $gray-400;
+
+        &::placeholder {
+            opacity: 0.5;
+        }
+
+        &.input-validation-error {
+            border: 1px solid $danger !important;
+            color: $danger;
+
+            &::placeholder {
+                color: $danger;
+            }
+        }
+    }
+
+    span {
+        &.field-validation-error {
+            position: absolute;
+            top: 0;
+            right: 0;
+            @include text-s;
+            color: $danger;
+        }
     }
 }
