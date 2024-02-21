@@ -1,4 +1,11 @@
-﻿<div class="dontWant">
+﻿
+@model DontWantViewModel
+
+@{
+    ViewData["Title"] = "Model.Title";
+}
+
+<div class="dontWant">
     <div class="container">
         <div class="headning">
             <h1>Don't Want to Miss Anything?</h1>
@@ -6,55 +13,68 @@
         </div>
 
         <div class="contentSignUp">
-            <form action="">
+            <form method="post" asp-controller="Home" asp-action="DontWant" novalidate>
                 <div class="contentSign">
                     <div class="column">
                         <h6>Sign up for <br> Newsletters</h6>
                     </div>
                     <div class="column">
                         <div>
-                            <input type="checkbox" id="newsletterCheckbox1" name="newsletterCheckbox1">
-                            <label for="newsletterCheckbox1">Daily Newsletter</label>
+                            <input asp-for="Form.NewsletterCheckbox1" />
+                            <label asp-for="Form.NewsletterCheckbox1">Daily Roundup</label>
                         </div>
+  
                         <div>
-                            <input type="checkbox" id="newsletterCheckbox2" name="newsletterCheckbox2">
-                            <label for="newsletterCheckbox2">Event Updates</label>
+                            <input asp-for="Form.NewsletterCheckbox2" />
+                            <label asp-for="Form.NewsletterCheckbox2">Weekly Roundup</label>
                         </div>
                     </div>
-                    <div class="column">
-                        <div>
-                            <input type="checkbox" id="newsletterCheckbox3" name="newsletterCheckbox3">
-                            <label for="newsletterCheckbox3">Advertising Updates</label>
+                        
+                        <div class="column">
+                            <div>
+                                <input asp-for="Form.NewsletterCheckbox3" />
+                                <label asp-for="Form.NewsletterCheckbox3">Monthly Roundup</label>
+                            </div>
+
+                            <div>
+                                <input asp-for="Form.NewsletterCheckbox4" />
+                                <label asp-for="Form.NewsletterCheckbox4">Special Offers</label>
+                            </div>
                         </div>
-                        <div>
-                            <input type="checkbox" id="newsletterCheckbox4" name="newsletterCheckbox4">
-                            <label for="newsletterCheckbox4">Startups Weekly</label>
+
+                        <div class="column">
+                            <div>
+                                <input asp-for="Form.NewsletterCheckbox5" />
+                                <label asp-for="Form.NewsletterCheckbox5">New Products</label>
+                            </div>
+
+                            <div>
+                                <input asp-for="Form.NewsletterCheckbox6" />
+                                <label asp-for="Form.NewsletterCheckbox6">Events</label>
+                            </div>
+
                         </div>
+                </div>
+
+                <div class="contentEmail">
+                    <div class="email">
+                        <div class="email-input">
+                            <label asp-for="Form.Email"></label>
+                            <span asp-validation-for="Form.Email"> </span>
+                            <input asp-for="Form.Email" />
+                        </div>
+                        <button id="form-submit" type="submit" class="btn-theme-s">@Model.Title</button>
                     </div>
-                    <div class="column">
-                        <div>
-                            <input type="checkbox" id="newsletterCheckbox5" name="newsletterCheckbox5">
-                            <label for="newsletterCheckbox5">Week in Review</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" id="newsletterCheckbox6" name="newsletterCheckbox6">
-                            <label for="newsletterCheckbox6">Podcasts</label>
-                        </div>
+                    
+                    <div class="terms">
+                        <p> <a href="#">*</a> Yes, I agree to the <a href="#">terms</a> and <a href="#">privacy policy</a>.</p>
+
                     </div>
                 </div>
             </form>
-
         </div>
 
-        <div class="contentEmail">
-            <form action="">
-                <div class="email">
-                    <input type="email" class="email-input" placeholder="Your email">
-                    <button class="btn-theme-s" type="submit">Subscribe*</button>
-                </div>
-                <p>* Yes, I agree to the <a href="#">terms</a> and <a href="#">privacy policy</a>.</p>
-            </form>
-        </div>
+
 
     </div>
 </div>
