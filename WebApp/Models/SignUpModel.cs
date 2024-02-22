@@ -6,17 +6,20 @@ namespace WebApp.Models;
 
 public class SignUpModel
 {
+    [DataType(DataType.Text)]
     [Display(Name = "First Name", Prompt = "Enter your frist name", Order = 0)]
     [Required (ErrorMessage = "First name is required")]
+    [MinLength(2, ErrorMessage = "First name must be at least 2 characters long")]
     public string FirstName { get; set; } = null!;
 
-
+    [DataType(DataType.Text)]
     [Display(Name = "Last Name", Prompt = "Enter your last name", Order = 1)]
     [Required(ErrorMessage = "Last name is required")]
+    [MinLength(2, ErrorMessage = "Last name must be at least 2 characters long")]
     public string LastName { get; set; } = null!;
 
-    [Display(Name = "Email", Prompt = "Enter your email", Order = 2)]
     [DataType(DataType.EmailAddress)]
+    [Display(Name = "Email", Prompt = "Enter your email", Order = 2)]
     [Required(ErrorMessage = "Email is required")]
     [RegularExpression(@"^(?=.*[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$",
                           ErrorMessage = "The email format is not valid.")]

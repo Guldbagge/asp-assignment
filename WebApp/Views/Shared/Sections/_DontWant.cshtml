@@ -18,28 +18,31 @@
                     <div class="column">
                         <h6>Sign up for <br> Newsletters</h6>
                     </div>
-                    <div class="column">
-                        <div>
-                            <input asp-for="Form.NewsletterCheckbox1" />
-                            <label asp-for="Form.NewsletterCheckbox1">Daily Roundup</label>
-                        </div>
+                        <div class="column">
+                            <div>
+                                <input asp-for="Form.NewsletterCheckbox1" />
+                                <label asp-for="Form.NewsletterCheckbox1">Daily Roundup</label>
+                            </div>
+                                <span asp-validation-for="Form.NewsletterCheckbox1"> </span>
   
-                        <div>
-                            <input asp-for="Form.NewsletterCheckbox2" />
-                            <label asp-for="Form.NewsletterCheckbox2">Weekly Roundup</label>
+                            <div>
+                                <input asp-for="Form.NewsletterCheckbox2" />
+                                <label asp-for="Form.NewsletterCheckbox2">Weekly Roundup</label>
+                            </div>
+                                <span asp-validation-for="Form.NewsletterCheckbox2"> </span>
                         </div>
-                    </div>
                         
                         <div class="column">
                             <div>
                                 <input asp-for="Form.NewsletterCheckbox3" />
                                 <label asp-for="Form.NewsletterCheckbox3">Monthly Roundup</label>
                             </div>
-
+                                <span asp-validation-for="Form.NewsletterCheckbox3"> </span>
                             <div>
                                 <input asp-for="Form.NewsletterCheckbox4" />
                                 <label asp-for="Form.NewsletterCheckbox4">Special Offers</label>
                             </div>
+                                <span asp-validation-for="Form.NewsletterCheckbox4"> </span>
                         </div>
 
                         <div class="column">
@@ -47,11 +50,13 @@
                                 <input asp-for="Form.NewsletterCheckbox5" />
                                 <label asp-for="Form.NewsletterCheckbox5">New Products</label>
                             </div>
-
+                                <span asp-validation-for="Form.NewsletterCheckbox5"> </span>
                             <div>
                                 <input asp-for="Form.NewsletterCheckbox6" />
                                 <label asp-for="Form.NewsletterCheckbox6">Events</label>
                             </div>
+                                <span asp-validation-for="Form.NewsletterCheckbox6"> </span>
+
 
                         </div>
                 </div>
