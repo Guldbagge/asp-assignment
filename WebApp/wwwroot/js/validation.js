@@ -51,6 +51,13 @@ const passwordValidator = (element) => {
     }
 }
 
+const phoneNumberValidator = (element) => {
+    const regEx = /^\d{10}$/
+    formErrorHandler(element, regEx.test(element.value))
+}
+
+
+
 const checkboxValidator = (element) => {
     if (element.checked) {
         formErrorHandler(element, true)
@@ -81,6 +88,9 @@ inputs.forEach(input => {
                         break
                     case 'password':
                         passwordValidator(e.target)
+                        break
+                    case 'tel':
+                        phoneNumberValidator(e.target)
                         break
                 }
             })
