@@ -11,13 +11,13 @@
 
         .headning {
             display: flex;
-            justify-content: center;
+            justify-content: start;
             align-items: center;
-      
+
 
             @include lg {
-                margin-right: 90px;
-                justify-content:flex-start;
+                /* margin-right: 90px;*/
+                justify-content: flex-start;
             }
 
             h1 {
@@ -33,7 +33,6 @@
 
                 @include lg {
                     display: block;
-     
                 }
             }
         }
@@ -45,7 +44,7 @@
 
                 @include lg {
                     display: flex;
-                    justify-content: center;
+                    justify-content: start;
                     align-items: center;
                 }
 
@@ -53,8 +52,14 @@
                     margin-left: 0px;
 
                     @include lg {
-                        margin-left: 100px;
-                       
+                        margin-left: 50px;
+                    }
+
+                    .input-group {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        gap: 1rem;
                     }
                 }
             }
@@ -73,7 +78,7 @@
                     margin-left: 20px;
                 }
 
-                .email-input {
+                .input-group {
                     display: block;
                     width: 100%;
                     /*                    border: 0px;
@@ -88,7 +93,7 @@
                         display: block;
                         /*    width: 650px;*/
                         padding: 13px;
-                        padding-left: 70px;
+                        padding-left: 30px;
                         border: 0px;
                         border-radius: 5px;
                     }
@@ -115,7 +120,7 @@
                 margin-left: 0px;
 
                 @include lg {
-                    margin-left: 90px;
+                    margin-left: 50px;
                 }
             }
         }

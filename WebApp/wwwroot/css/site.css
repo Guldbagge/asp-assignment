@@ -977,12 +977,12 @@ footer .container .social-media {
 }
 .dontWant .container .headning {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 @media (min-width: 992px) {
   .dontWant .container .headning {
-    margin-right: 90px;
+    /* margin-right: 90px;*/
     justify-content: flex-start;
   }
 }
@@ -1017,7 +1017,7 @@ footer .container .social-media {
 @media (min-width: 992px) {
   .dontWant .container .contentSignUp .contentSign {
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
   }
 }
@@ -1026,8 +1026,14 @@ footer .container .social-media {
 }
 @media (min-width: 992px) {
   .dontWant .container .contentSignUp .contentSign .column {
-    margin-left: 100px;
+    margin-left: 50px;
   }
+}
+.dontWant .container .contentSignUp .contentSign .column .input-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
 }
 .dontWant .container .contentEmail .email {
   margin-top: 40px;
@@ -1041,7 +1047,7 @@ footer .container .social-media {
     margin-left: 20px;
   }
 }
-.dontWant .container .contentEmail .email .email-input {
+.dontWant .container .contentEmail .email .input-group {
   display: block;
   width: 100%;
   /*                    border: 0px;
@@ -1052,16 +1058,16 @@ footer .container .social-media {
   background-position: 5px center;*/
 }
 @media (min-width: 992px) {
-  .dontWant .container .contentEmail .email .email-input {
+  .dontWant .container .contentEmail .email .input-group {
     display: block;
     /*    width: 650px;*/
     padding: 13px;
-    padding-left: 70px;
+    padding-left: 30px;
     border: 0px;
     border-radius: 5px;
   }
 }
-.dontWant .container .contentEmail .email .email-input input {
+.dontWant .container .contentEmail .email .input-group input {
   width: 100%;
 }
 .dontWant .container .contentEmail .email .btn-theme-s {
@@ -1081,7 +1087,7 @@ footer .container .social-media {
 }
 @media (min-width: 992px) {
   .dontWant .container .contentEmail p {
-    margin-left: 90px;
+    margin-left: 50px;
   }
 }
 
