@@ -4,6 +4,7 @@ namespace WebApp.Models;
 
 public class AccountDetailsAddressInfoModel
 {
+    [DataType(DataType.Text)]
     [Display(Name = "Adress line 1", Prompt = "Enter your adress line", Order = 0)]
     [Required(ErrorMessage = "Adress line is required")]
     public string Adressline_1 { get; set; } = null!;
@@ -17,7 +18,7 @@ public class AccountDetailsAddressInfoModel
     [DataType(DataType.PostalCode)]
     public string PostalCode { get; set; } = null!;
 
-
+    [DataType(DataType.Text)]
     [Display(Name = "City", Prompt = "Enter your city", Order = 3)]
     [Required(ErrorMessage = "City is required")]
    

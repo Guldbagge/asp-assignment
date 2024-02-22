@@ -27,7 +27,7 @@ namespace WebApp.Controllers
                 return View(viewModel);
            
  
-            return RedirectToAction("SignIn", "Auth");
+            return RedirectToAction("Index", "Home");
         }
 
         [Route("/signin")]

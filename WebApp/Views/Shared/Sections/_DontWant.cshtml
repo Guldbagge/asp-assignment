@@ -7,6 +7,7 @@
 
 <div class="dontWant">
     <div class="container">
+       
         <div class="headning">
             <h1>Don't Want to Miss Anything?</h1>
             <img src="/images/Group.svg" alt="symbol of arrow">
@@ -18,47 +19,52 @@
                     <div class="column">
                         <h6>Sign up for <br> Newsletters</h6>
                     </div>
-                    <div class="column">
-                        <div>
-                            <input asp-for="Form.NewsletterCheckbox1" />
-                            <label asp-for="Form.NewsletterCheckbox1">Daily Roundup</label>
+                        <div class="column">
+                        <div class="input-group">
+                                <input asp-for="Form.NewsletterCheckbox1" />
+                                <label asp-for="Form.NewsletterCheckbox1">Daily Roundup</label>
+                            </div>
+                                <span asp-validation-for="Form.NewsletterCheckbox1"> </span>
+
+                            <div class="input-group">
+                                <input asp-for="Form.NewsletterCheckbox2" />
+                                <label asp-for="Form.NewsletterCheckbox2">Weekly Roundup</label>
+                            </div>
+                                <span asp-validation-for="Form.NewsletterCheckbox2"> </span>
                         </div>
-  
-                        <div>
-                            <input asp-for="Form.NewsletterCheckbox2" />
-                            <label asp-for="Form.NewsletterCheckbox2">Weekly Roundup</label>
-                        </div>
-                    </div>
                         
                         <div class="column">
-                            <div>
+                        <div class="input-group">
                                 <input asp-for="Form.NewsletterCheckbox3" />
                                 <label asp-for="Form.NewsletterCheckbox3">Monthly Roundup</label>
                             </div>
-
-                            <div>
+                                <span asp-validation-for="Form.NewsletterCheckbox3"> </span>
+                            <div class="input-group">
                                 <input asp-for="Form.NewsletterCheckbox4" />
                                 <label asp-for="Form.NewsletterCheckbox4">Special Offers</label>
                             </div>
+                                <span asp-validation-for="Form.NewsletterCheckbox4"> </span>
                         </div>
 
                         <div class="column">
-                            <div>
+                            <div class="input-group">
                                 <input asp-for="Form.NewsletterCheckbox5" />
                                 <label asp-for="Form.NewsletterCheckbox5">New Products</label>
-                            </div>
-
-                            <div>
+                            </div class="input-group">
+                                <span asp-validation-for="Form.NewsletterCheckbox5"> </span>
+                            <div class="input-group">
                                 <input asp-for="Form.NewsletterCheckbox6" />
                                 <label asp-for="Form.NewsletterCheckbox6">Events</label>
                             </div>
+                                <span asp-validation-for="Form.NewsletterCheckbox6"> </span>
+
 
                         </div>
                 </div>
 
                 <div class="contentEmail">
                     <div class="email">
-                        <div class="email-input">
+                        <div id="form-email" class="input-group">
                             <label asp-for="Form.Email"></label>
                             <span asp-validation-for="Form.Email"> </span>
                             <input asp-for="Form.Email" />
@@ -78,3 +84,4 @@
 
     </div>
 </div>
+<script defer src="~/js/validation.js"></script>
