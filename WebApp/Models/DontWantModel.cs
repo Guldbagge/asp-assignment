@@ -23,7 +23,7 @@ public class DontWantModel
     [Display(Name = "Podcasts", Order = 5)]
     public bool NewsletterCheckbox6 { get; set; } = false;
 
-    [Display(Name = "", Prompt = "Enter your email", Order = 6)]
+    [Display(Prompt = "Enter your email", Order = 6)]
     [DataType(DataType.EmailAddress)]
     [Required(ErrorMessage = "Email is required")]
     public string Email { get; set; } = null!;

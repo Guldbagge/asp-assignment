@@ -31,7 +31,7 @@ public class HomeController : Controller
             return View(viewModel);
 
 
-        return RedirectToAction("Home");
+        return RedirectToAction("Index");
     }
 }
 
