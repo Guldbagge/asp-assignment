@@ -18,7 +18,7 @@ public class UserEntity
     public DateTime? Modified { get; set; }
 
     // Adress can be null
-    public int? AdressId { get; set; }
-    public AdressEntity? Adress { get; set; }
+    public int? AddressId { get; set; }
+    public AddressEntity? Address { get; set; }
 
 }
