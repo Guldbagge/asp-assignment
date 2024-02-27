@@ -2,69 +2,63 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApp.ViewModels;
 
-namespace WebApp.Controllers
+namespace WebApp.Controllers;
+
+public class AuthController(UserService userService) : Controller
 {
-    public class AuthController(UserService userService) : Controller
+    private readonly UserService _userService = userService;
+
+    public IActionResult Index()
     {
-        private readonly UserService _userService = userService;
+        ViewData["Title"] = "Profile";
+        return View();
+    }
 
-        public IActionResult Index()
+    [Route("/signup")]
+    [HttpGet]
+    public IActionResult SignUp()
+    {
+       var viewModel = new SignUpViewModel();
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    [Route("/signup")]
+   
+    public async Task<IActionResult> SignUp(SignUpViewModel viewModel)
+    {
+        if (ModelState.IsValid)
         {
-            ViewData["Title"] = "Profile";
-            return View();
+            var result = await _userService.CreateUserAsync(viewModel.Form);
+            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                return RedirectToAction("SignIn", "Auth");
         }
-
-        [Route("/signup")]
-        [HttpGet]
-        public IActionResult SignUp()
-        {
-           var viewModel = new SignUpViewModel();
             return View(viewModel);
-        }
+    }
 
-        [HttpPost]
-        [Route("/signup")]
-       
-        public async Task<IActionResult> SignUp(SignUpViewModel viewModel)
+    [HttpGet]
+    [Route("/signin")]
+  
+    public IActionResult SignIn() => View(new SignInViewModel());
+ 
+
+
+
+    [Route("/signin")]
+    [HttpPost]
+    public async Task<IActionResult> SignIn(SignInViewModel viewModel)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _userService.CreateUserAsync(viewModel.Form);
-                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
-                    return RedirectToAction("SignIn", "Auth");
-            }
-                return View(viewModel);
+            var result = await _userService.SignInUserAsync(viewModel.Form);
+            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                return RedirectToAction("Details", "Account");
         }
+        
+        viewModel.ErrorMessage = "Incorrect email or password";
+        return View(viewModel);
 
-        [Route("/signin")]
-        [HttpGet]
-        public IActionResult SignIn()
-        {
-            var viewModel = new SignInViewModel();
-            return View(viewModel);
-        }
-
-        public new IActionResult SignOut()
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
-        [Route("/signin")]
-        [HttpPost]
-        public IActionResult SignIn(SignInViewModel viewModel)
-        {
-            if (!ModelState.IsValid)
-                 return View(viewModel);
-
-            // var result = _authService.SignIn(viewModel.Form);
-            // if (result)
-            //     return RedirectToAction("Index", "Account");
-
-
-            viewModel.ErrorMessage = "Invalid email or password";
-                return View(viewModel); 
-            
-        }
 
     }
+
 }

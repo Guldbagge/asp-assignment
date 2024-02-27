@@ -22,9 +22,11 @@ public class PasswordHasher
         using var hmac = new HMACSHA512(Convert.FromBase64String(securityKey));
         var hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
 
+        var userPassword = Convert.FromBase64String(hash);
+
         for(var i = 0; i < hashedPassword.Length; i++)
         {
-            if (hashedPassword[i] != hash[i])
+            if (hashedPassword[i] != userPassword[i])
                 return false;
         }
         return true;
