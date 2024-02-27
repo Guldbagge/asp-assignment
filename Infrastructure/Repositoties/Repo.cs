@@ -28,7 +28,7 @@ public abstract class Repo<TEntity>(DbContext context) where TEntity : class
 
     public virtual async Task<ResponseResult> GetAllAsync()
     {
-        try
+         try
         {
             IEnumerable<TEntity> result = await _context.Set<TEntity>().ToListAsync();
             return ResponseFactory.Ok(result);

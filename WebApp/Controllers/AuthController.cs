@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController(UserService userService) : Controller
     {
+        private readonly UserService _userService = userService;
+
         public IActionResult Index()
         {
             ViewData["Title"] = "Profile";
@@ -19,15 +22,18 @@ namespace WebApp.Controllers
             return View(viewModel);
         }
 
-        [Route("/signup")]
         [HttpPost]
-        public IActionResult SignUp(SignUpViewModel viewModel)
+        [Route("/signup")]
+       
+        public async Task<IActionResult> SignUp(SignUpViewModel viewModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                var result = await _userService.CreateUserAsync(viewModel.Form);
+                if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+                    return RedirectToAction("SignIn", "Auth");
+            }
                 return View(viewModel);
-           
- 
-            return RedirectToAction("Index", "Home");
         }
 
         [Route("/signin")]
