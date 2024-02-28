@@ -8,8 +8,9 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
-       
-       return View();
+        var viewModel = new HomeIndexViewModel();
+
+        return View(viewModel);
     }
 
     [Route("/dontwant")]
