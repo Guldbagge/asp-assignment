@@ -10,5 +10,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     public DbSet<AddressEntity> Addresses { get; set; } = null!;
     public DbSet<UserEntity> Users { get; set; } = null!;
 
+    public DbSet<FeatureEntity> Features { get; set; }
+    public DbSet<FeatureItemEntity> FeaturesItems { get; set; }
 
 }
