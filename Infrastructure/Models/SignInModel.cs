@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Infrastructure.Models;
 
 public class SignInModel
-{
+{   
     [Display(Name = "Email", Prompt = "Enter your email", Order = 0)]
     [DataType(DataType.EmailAddress)]
     [Required(ErrorMessage = "Email is required")]

@@ -1,4 +1,5 @@
 using Infrastructure.Contexts;
+using Infrastructure.Models;
 using Infrastructure.Repositoties;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,14 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
+builder.Services.AddDefaultIdentity<ApplicationUser>(x =>
+{
+    x.User.RequireUniqueEmail = true;
+    x.SignIn.RequireConfirmedAccount = false;
+    x.Password.RequiredLength = 8;
+}).AddEntityFrameworkStores<DataContext>();
+
+
 builder.Services.AddScoped<AddressRepository>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<FeatureReposotory>();
