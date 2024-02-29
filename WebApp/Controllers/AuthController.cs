@@ -3,6 +3,7 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using WebApp.ViewModels;
 namespace WebApp.Controllers;
 
@@ -74,17 +75,23 @@ public class AuthController(UserManager<ApplicationUser> userManager, SignInMana
     [Route("/signin")]
   
     public IActionResult SignIn() => View(new SignInViewModel());
- 
+
 
 
 
     [Route("/signin")]
     [HttpPost]
-    public async Task<IActionResult> SignIn(SignInModel model)
+    public async Task<IActionResult> SignIn(SignInViewModel viewModel)
     {
         if (ModelState.IsValid)
         {
-            var signInResult = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            var signInResult = await _signInManager.PasswordSignInAsync(
+    viewModel.Email,
+    viewModel.Password,
+    viewModel.RememberMe,
+    false
+);
+
             if (signInResult.Succeeded)
             {
                 return RedirectToAction("Details", "Account");
@@ -92,10 +99,9 @@ public class AuthController(UserManager<ApplicationUser> userManager, SignInMana
 
         }
         ViewData["ErrorMessage"] = "Invalid Email or Password";
-        return View(model);
-
-
+        return View(viewModel);
     }
+
 
     //[Route("/signin")]
     //[HttpPost]
