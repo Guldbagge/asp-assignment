@@ -25,6 +25,8 @@ builder.Services.AddScoped<FeatureItemRepository>();
 builder.Services.AddScoped<FeatureService>();
 builder.Services.AddScoped<AddressService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<AccountService>();
+
 
 
 var app = builder.Build();

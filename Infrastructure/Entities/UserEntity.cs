@@ -17,7 +17,6 @@ public class UserEntity
     public DateTime? Created { get; set; }
     public DateTime? Modified { get; set; }
 
-    // Adress can be null
     public int? AddressId { get; set; }
     public AddressEntity? Address { get; set; }
 

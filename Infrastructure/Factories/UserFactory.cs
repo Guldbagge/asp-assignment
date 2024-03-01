@@ -3,6 +3,7 @@
 using Infrastructure.Entities;
 using Infrastructure.Helpers;
 using Infrastructure.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Factories;
 
@@ -47,5 +48,6 @@ public class UserFactory
         catch { }
         return null!;
     }
+
 }
 

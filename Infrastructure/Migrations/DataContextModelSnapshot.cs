@@ -142,7 +142,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Users");
+                    b.ToTable("UserAccounts");
                 });
 
             modelBuilder.Entity("Infrastructure.Models.ApplicationUser", b =>
