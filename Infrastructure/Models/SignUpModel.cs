@@ -26,6 +26,7 @@ public class SignUpModel
                           ErrorMessage = "The email format is not valid.")]
     public string Email { get; set; } = null!;
 
+
     [Display(Name = "Password", Prompt = "Enter your password", Order = 3)]
     [DataType(DataType.Password)]
     [Required(ErrorMessage = "Password is required")]

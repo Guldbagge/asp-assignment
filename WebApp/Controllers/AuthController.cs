@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Models;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +50,8 @@ public class AuthController(UserManager<ApplicationUser> userManager, SignInMana
                     var signInResult = await _signInManager.PasswordSignInAsync(applicationUser, viewModel.Form.Password, false, false);
                     if (signInResult.Succeeded)
                     {
-                        return RedirectToAction("SignIn", "Auth");
+                        //return RedirectToAction("SignIn", "Auth");
+                        return RedirectToAction("Details", "Account");
                     }
                 }
             }
@@ -119,5 +121,11 @@ public class AuthController(UserManager<ApplicationUser> userManager, SignInMana
 
 
     //}
+
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+    }
 
 }

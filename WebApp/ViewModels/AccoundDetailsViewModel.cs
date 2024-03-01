@@ -18,3 +18,17 @@ public class AccoundDetailsViewModel
 
     public AccountDetailsAddressInfoModel AddressInfo { get; set; } = new AccountDetailsAddressInfoModel();
 }
+
+
+//using Infrastructure.Models;
+//using WebApp.Models;
+
+//namespace WebApp.ViewModels
+//{
+//    public class AccoundDetailsViewModel
+//    {
+//        public string Title { get; set; } = "Account Details";
+//        public AccountDetailsBasicInfoModel BasicInfo { get; set; } = null!;
+//        public AccountDetailsAddressInfoModel AddressInfo { get; set; } = null!;
+//    }
+//}
