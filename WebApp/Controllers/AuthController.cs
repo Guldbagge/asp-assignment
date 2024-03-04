@@ -7,10 +7,11 @@ using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
 
-public class AuthController(UserManager<UserEntity> userManager, UserService userService) : Controller
+public class AuthController(UserManager<UserEntity> userManager, UserService userService, SignInManager<UserEntity> signInManager) : Controller
 {
     private readonly UserService _userService = userService;
     private readonly UserManager<UserEntity> _userManager = userManager;
+    private readonly SignInManager<UserEntity> _signInManager = signInManager;
 
 
     public IActionResult Index()
@@ -21,11 +22,18 @@ public class AuthController(UserManager<UserEntity> userManager, UserService use
 
     [Route("/signup")]
     [HttpGet]
+
     public IActionResult SignUp()
     {
-       var viewModel = new SignUpViewModel();
-        return View(viewModel);
+        if (_signInManager.IsSignedIn(User))
+            return RedirectToAction("Details", "Account");
+        return View(new SignUpViewModel());
     }
+    //public IActionResult SignUp()
+    //{
+    //   var viewModel = new SignUpViewModel();
+    //    return View(viewModel);
+    //}
 
     [HttpPost]
     [Route("/signup")]
@@ -46,7 +54,8 @@ public class AuthController(UserManager<UserEntity> userManager, UserService use
                 FirstName = viewModel.Form.FirstName,
                 LastName = viewModel.Form.LastName,
                 Email = viewModel.Form.Email,
-                UserName = viewModel.Form.Email
+                UserName = viewModel.Form.Email,
+                Created = DateTime.Now
             };
 
             var result = await _userManager.CreateAsync(userEntity, viewModel.Form.Password);
@@ -63,8 +72,14 @@ public class AuthController(UserManager<UserEntity> userManager, UserService use
     [HttpGet]
     [Route("/signin")]
   
-    public IActionResult SignIn() => View(new SignInViewModel());
- 
+    //public IActionResult SignIn() => View(new SignInViewModel());
+
+ public IActionResult SignIn()
+    {
+        if (_signInManager.IsSignedIn(User))
+            return RedirectToAction("Details", "Account");
+        return View(new SignInViewModel());
+    }
 
 
 
@@ -74,16 +89,45 @@ public class AuthController(UserManager<UserEntity> userManager, UserService use
     {
         if (ModelState.IsValid)
         {
-            var result = await _userService.SignInUserAsync(viewModel.Form);
-            if (result.StatusCode == Infrastructure.Models.StatusCode.OK)
+            var result = await _signInManager.PasswordSignInAsync(viewModel.Form.Email, viewModel.Form.Password, viewModel.Form.RememberMe, false);
+            if (result.Succeeded)
                 return RedirectToAction("Details", "Account");
         }
-        
+
+        ModelState.AddModelError("Email", "Incorrect email or password");
         viewModel.ErrorMessage = "Incorrect email or password";
         return View(viewModel);
 
 
     }
+
+    [HttpGet]
+    [Route("/signout")]
+     public new async Task<IActionResult> SignOut()
+     {
+        await _signInManager.SignOutAsync();
+        return RedirectToAction("Index", "Home");
+     }
+
+    //[HttpGet]
+    //[Route("/account/details")]
+    //public async Task<IActionResult> Details()
+    //{
+    //    if(!_signInManager.IsSignedIn(User))
+    //        return RedirectToAction("SignIn", "Account");
+
+    //    var userEntity = await _userManager.GetUserAsync(User);
+
+    //    var viewModel = new AccoundDetailsViewModel()
+    //    {
+    //        User = userEntity
+    //    };
+
+    //    return View(viewModel);
+
+    //}
+
+
 
 }
 
