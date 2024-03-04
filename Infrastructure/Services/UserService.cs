@@ -44,7 +44,7 @@ public class UserService(UserRepository repository, AddressService addressServic
             if (result.StatusCode == StatusCode.OK && result.ContentResult != null)
             { 
                 var userEntity = (UserEntity)result.ContentResult;
-                if (PasswordHasher.ValidateSecurePassword(model.Password, userEntity.Password, userEntity.SecurityKey))
+                if ((model.Password == userEntity.PasswordHash)) //Test if it works
                     return ResponseFactory.Ok();
             }
             
@@ -58,3 +58,6 @@ public class UserService(UserRepository repository, AddressService addressServic
     }
 
 }
+
+
+                //if (PasswordHasher.ValidateSecurePassword(model.Password, userEntity.Password, userEntity.SecurityKey))
