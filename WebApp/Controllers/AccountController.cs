@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
@@ -6,6 +7,7 @@ using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
 
+[Authorize]
 public class AccountController(UserManager<UserEntity> userManager) : Controller
 {
     private readonly UserManager<UserEntity> _userManager = userManager;
@@ -16,53 +18,68 @@ public class AccountController(UserManager<UserEntity> userManager) : Controller
     {
         var viewModel = new AccountDetailsViewModel
         {
-            BasicInfo = await PopulateAccountDetailsBasicInfoAsync()
+            ProfileInfo = await PopulateProfileInfoAsync()
         };
+        viewModel.BasicInfo ??= await PopulateAccountDetailsBasicInfoAsync();
+        viewModel.AddressInfo ??= new AccountDetailsAddressInfoModel();
+        
         return View(viewModel);
     }
 
     [HttpPost]
-    public IActionResult SaveBasicInfo(AccountDetailsViewModel viewModel)
+    [Route("/account/details")]
+    public async Task<IActionResult> Details(AccountDetailsViewModel viewModel)
     {
-        if (TryValidateModel(viewModel.BasicInfo))
-        {
-            return RedirectToAction("Home", "Default");
+        if (ModelState.IsValid)
+        { 
+            if (viewModel.BasicInfo!=null) { }
+            if (viewModel.AddressInfo!=null) { }
         }
+        viewModel.ProfileInfo = await PopulateProfileInfoAsync();
+        viewModel.BasicInfo ??= await PopulateAccountDetailsBasicInfoAsync();
+        viewModel.AddressInfo ??= new AccountDetailsAddressInfoModel();
+        return View(viewModel);
 
-
-        return View("Details", viewModel);
     }
 
-    [HttpPost]
-    public IActionResult SaveAddressInfo(AccountDetailsViewModel viewModel)
+    //[HttpPost]
+    //public IActionResult SaveAddressInfo(AccountDetailsViewModel viewModel)
+    //{
+    //    if (TryValidateModel(viewModel.AddressInfo))
+    //    {
+    //        return RedirectToAction("Home", "Default");
+    //    }
+
+
+    //    return View("Details", viewModel);
+    //}
+
+
+    private async Task<ProfileInfoViewModel> PopulateProfileInfoAsync()
     {
-        if (TryValidateModel(viewModel.AddressInfo))
+        var user = await _userManager.GetUserAsync(User);
+
+        return new ProfileInfoViewModel()
         {
-            return RedirectToAction("Home", "Default");
-        }
-
-
-        return View("Details", viewModel);
+            FirstName = user!.FirstName,
+            LastName = user.LastName,
+            Email = user.Email!,
+        };
     }
-
 
     private async Task<AccountDetailsBasicInfoModel> PopulateAccountDetailsBasicInfoAsync()
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user != null)
+        return new AccountDetailsBasicInfoModel()
         {
-            return new AccountDetailsBasicInfoModel()
-            {   
-                UserId = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email!,
-                PhoneNumber = user.PhoneNumber,
-                Biography = user.Bio,
-            };
-        }
+            UserId = user!.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email!,
+            PhoneNumber = user.PhoneNumber,
+            Biography = user.Bio,
+        };
 
-        return null!;
     }
 
     ////private readonly AccountService _accountService;
