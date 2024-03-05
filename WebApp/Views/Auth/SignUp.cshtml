@@ -1,6 +1,4 @@
-﻿
-
-@model SignUpViewModel
+﻿@model SignUpViewModel
 
 @{
     ViewData["Title"] = "Model.Title";
@@ -18,31 +16,31 @@
                 <div id="form-firstname" class="input-group">
                     <label asp-for="Form.FirstName"></label>
                     <span asp-validation-for="Form.FirstName"> </span>
-                    <input asp-for="Form.FirstName"/>
+                    <input asp-for="Form.FirstName" />
                 </div>
 
                 <div id="form-lastname" class="input-group">
                     <label asp-for="Form.LastName"></label>
                     <span asp-validation-for="Form.LastName"> </span>
-                    <input asp-for="Form.LastName"/>
+                    <input asp-for="Form.LastName" />
                 </div>
 
                 <div id="form-email" class="input-group">
                     <label asp-for="Form.Email"></label>
                     <span asp-validation-for="Form.Email"> </span>
-                    <input asp-for="Form.Email"/>
+                    <input asp-for="Form.Email" />
                 </div>
 
                 <div id="form-password" class="input-group">
                     <label asp-for="Form.Password"></label>
                     <span asp-validation-for="Form.Password"> </span>
-                    <input asp-for="Form.Password"/>
+                    <input asp-for="Form.Password" />
                 </div>
 
                 <div id="form-confirm" class="input-group">
                     <label asp-for="Form.ConfirmPassword"></label>
                     <span asp-validation-for="Form.ConfirmPassword"> </span>
-                    <input asp-for="Form.ConfirmPassword"/>
+                    <input asp-for="Form.ConfirmPassword" />
                 </div>
 
                 <div id="form-terms" class="checkbox">
@@ -50,17 +48,17 @@
                         <input asp-for="Form.TermsAndConditions" />
                         <label asp-for="Form.TermsAndConditions">I agree to the <a asp-controller="About" asp-action="Terms">Terms</a> & <a asp-controller="About" asp-action="Conditions">Conditions</a>.</label>
                     </div>
-                    
+
                     <span asp-validation-for="Form.TermsAndConditions"> </span>
                 </div>
 
             </div>
 
-        <button id="form-submit" type="submit" class="btn-theme-s">@Model.Title</button>
+            <button id="form-submit" type="submit" class="btn-theme-s">@Model.Title</button>
         </form>
-    
-    </div>  
-                
+
+    </div>
+
 </section>
 
 @await Html.PartialAsync("_ValidationScriptPartial")

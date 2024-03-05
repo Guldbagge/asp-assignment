@@ -15,7 +15,7 @@ public class UserFactory
             var date = DateTime.Now;
             return new UserEntity()
 
-            { 
+            {
                 Id = Guid.NewGuid().ToString(),
                 Created = date,
                 Modified = date
@@ -30,7 +30,7 @@ public class UserFactory
         try
         {
             var date = DateTime.Now;
-            var (password, securityKey) = PasswordHasher.GenerateSecurePassword(model.Password);
+            //var (password, securityKey) = PasswordHasher.GenerateSecurePassword(model.Password);
 
             return new UserEntity
             {
@@ -38,8 +38,9 @@ public class UserFactory
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
-                Password = password,
-                SecurityKey = securityKey,
+                PasswordHash = model.Password,
+                //PasswordHash = model.Password,
+                //SecurityKey = securityKey,
                 Created = date,
                 Modified = date
             };

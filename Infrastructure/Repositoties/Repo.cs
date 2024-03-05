@@ -28,7 +28,7 @@ public abstract class Repo<TEntity>(DbContext context) where TEntity : class
 
     public virtual async Task<ResponseResult> GetAllAsync()
     {
-         try
+        try
         {
             IEnumerable<TEntity> result = await _context.Set<TEntity>().ToListAsync();
             return ResponseFactory.Ok(result);
@@ -71,7 +71,7 @@ public abstract class Repo<TEntity>(DbContext context) where TEntity : class
             }
 
             return ResponseFactory.NotFound();
-           
+
         }
 
         catch (Exception ex)
@@ -109,7 +109,7 @@ public abstract class Repo<TEntity>(DbContext context) where TEntity : class
             var result = await _context.Set<TEntity>().AnyAsync(predicate);
             if (result)
             {
- 
+
                 return ResponseFactory.Exists();
             }
 

@@ -4,8 +4,8 @@ namespace WebApp.Models;
 
 public class AccountDetailsBasicInfoModel
 {
-    [DataType(DataType.ImageUrl)]
-    public string? ProfileImage { get; set; } /*= "https://ui-avatars.com/api/?name=John+Doe&size=300";*/
+    //[DataType(DataType.ImageUrl)]
+    //public string? ProfileImage { get; set; } /*= "https://ui-avatars.com/api/?name=John+Doe&size=300";*/
 
     [Display(Name = "First Name", Prompt = "Enter your frist name", Order = 0)]
     [Required(ErrorMessage = "First name is required")]
@@ -23,13 +23,12 @@ public class AccountDetailsBasicInfoModel
     ErrorMessage = "The email format is not valid.")]
     public string Email { get; set; } = null!;
 
-    [Display(Name = "Phone", Prompt = "Enter your phone", Order = 3)]
+    [Display(Name = "Phone (optional)", Prompt = "Enter your phone", Order = 3)]
     [DataType(DataType.PhoneNumber)]
-    [Required(ErrorMessage = "Phone is required")]
-    public string Phone { get; set; } = null!;
+    public string? PhoneNumber { get; set; } = null!;
 
-    [Display(Name = "Bio", Prompt = "Add a short bio...", Order = 4)]
+    [Display(Name = "Bio (optional)", Prompt = "Add a short bio...", Order = 4)]
     [DataType(DataType.MultilineText)]
     public string? Biography { get; set; }
-    }
-  
+}
+
