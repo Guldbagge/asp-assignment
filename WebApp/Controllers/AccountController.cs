@@ -1,17 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using WebApp.Models;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
 
-public class AccountController : Controller
+public class AccountController(UserManager<UserEntity> userManager) : Controller
 {
-
+    private readonly UserManager<UserEntity> _userManager = userManager;
 
     [HttpGet]
     [Route("/account/details")]
-    public IActionResult Details()
+    public async Task<IActionResult> Details()
     {
-        var viewModel = new AccountDetailsViewModel();
+        var viewModel = new AccountDetailsViewModel
+        {
+            BasicInfo = await PopulateAccountDetailsBasicInfoAsync()
+        };
         return View(viewModel);
     }
 
@@ -37,6 +43,26 @@ public class AccountController : Controller
 
 
         return View("Details", viewModel);
+    }
+
+
+    private async Task<AccountDetailsBasicInfoModel> PopulateAccountDetailsBasicInfoAsync()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        if (user != null)
+        {
+            return new AccountDetailsBasicInfoModel()
+            {   
+                UserId = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email!,
+                PhoneNumber = user.PhoneNumber,
+                Biography = user.Bio,
+            };
+        }
+
+        return null!;
     }
 
     ////private readonly AccountService _accountService;
