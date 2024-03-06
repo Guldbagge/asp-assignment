@@ -8,10 +8,10 @@ using Infrastructure.Repositoties;
 
 namespace Infrastructure.Services;
 
-public class UserService(UserRepository repository, AddressService addressService)
+public class UserService(UserRepository repository, AddressManager addressService)
 {
     private readonly UserRepository _repository = repository;
-    private readonly AddressService _addressService = addressService;
+    private readonly AddressManager _addressService = addressService;
 
     public async Task<ResponseResult> CreateUserAsync(SignUpModel model)
     {

@@ -25,8 +25,10 @@ builder.Services.AddScoped<FeatureReposotory>();
 builder.Services.AddScoped<FeatureItemRepository>();
 
 builder.Services.AddScoped<FeatureService>();
-builder.Services.AddScoped<AddressService>();
+builder.Services.AddScoped<AddressManager>();
 builder.Services.AddScoped<UserService>();
+
+builder.Services.AddScoped<AddressManager>();
 
 
 

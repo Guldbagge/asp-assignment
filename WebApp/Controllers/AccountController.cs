@@ -1,16 +1,18 @@
 ﻿
 using Infrastructure.Entities;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.ViewModels;
+using WebApp.ViewModels.Account;
 
 namespace WebApp.Controllers;
 
 [Authorize]
-public class AccountController(UserManager<UserEntity> userManager) : Controller
+public class AccountController(UserManager<UserEntity> userManager, AddressManager addressManager) : Controller
 {
     private readonly UserManager<UserEntity> _userManager = userManager;
+    private readonly AddressManager _addressManager = addressManager;
 
     [HttpGet]
     [Route("/account/details")]
@@ -22,7 +24,7 @@ public class AccountController(UserManager<UserEntity> userManager) : Controller
         };
         viewModel.BasicInfoForm ??= await PopulateBasicInfoAsync();
         viewModel.AddressInfoForm ??= await PopulateAddressInfoAsync();
-        
+
         return View(viewModel);
     }
 
@@ -49,8 +51,57 @@ public class AccountController(UserManager<UserEntity> userManager) : Controller
 
                     if (!result.Succeeded)
                     {
-                        ModelState.AddModelError("IncorrectValues", "Failed to update user information");
+                        ModelState.AddModelError("IncorrectValues", "Failed to update basic information");
                         ViewData["ErrorMessage"] = "Failed to update user information";
+                    }
+                }
+            }
+        }
+
+        if (viewModel.AddressInfoForm != null)
+        {
+            if (viewModel.AddressInfoForm.Addressline_1 != null && viewModel.AddressInfoForm.PostalCode != null && viewModel.AddressInfoForm.City != null)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                if (user != null)
+                {
+                    var address = await _addressManager.GetAddressAsync(user.Id);
+                    if (address != null)
+                    {
+                        address.Addressline_1 = viewModel.AddressInfoForm.Addressline_1;
+                        address.Addressline_2 = viewModel.AddressInfoForm.Addressline_2;
+                        address.PostalCode = viewModel.AddressInfoForm.PostalCode;
+                        address.City = viewModel.AddressInfoForm.City;
+
+                        var result = await _addressManager.UpdateAddressAsync(address);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("IncorrectValues", "Failed to update user information");
+                            ViewData["ErrorMessage"] = "Failed to update address information";
+                        }
+
+                    }
+
+                    else
+                    {
+                        address = new AddressEntity
+                        {
+                            UserId = user.Id,
+                            Addressline_1 = viewModel.AddressInfoForm.Addressline_1,
+                            Addressline_2 = viewModel.AddressInfoForm.Addressline_2,
+                            PostalCode = viewModel.AddressInfoForm.PostalCode,
+                            City = viewModel.AddressInfoForm.City,
+                        };
+
+                        var result = await _addressManager.CreateAddressAsync(address);
+                        if (!result)
+                        {
+                            ModelState.AddModelError("IncorrectValues", "Failed to update user information");
+                            ViewData["ErrorMessage"] = "Failed to update address information";
+                        }
+
+
                     }
                 }
             }
@@ -60,7 +111,7 @@ public class AccountController(UserManager<UserEntity> userManager) : Controller
         viewModel.BasicInfoForm ??= await PopulateBasicInfoAsync();
         viewModel.AddressInfoForm ??= await PopulateAddressInfoAsync();
 
-        
+
 
         return View(viewModel);
     }
@@ -96,6 +147,23 @@ public class AccountController(UserManager<UserEntity> userManager) : Controller
 
     private async Task<AddressInfoFormViewModel> PopulateAddressInfoAsync()
     {
+
+        var user = await _userManager.GetUserAsync(User);
+        if (user != null)
+        {
+            var address = await _addressManager.GetAddressAsync(user.Id);
+            if (address != null)
+            {
+                return new AddressInfoFormViewModel()
+                {
+                   
+                    Addressline_1 = address.Addressline_1,
+                    Addressline_2 = address.Addressline_2,
+                    PostalCode = address.PostalCode,
+                    City = address.City,
+                };
+            }
+        }
 
         return new AddressInfoFormViewModel();
 
