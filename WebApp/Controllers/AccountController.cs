@@ -1,4 +1,5 @@
 ﻿
+
 using Infrastructure.Entities;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -156,7 +157,7 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
             {
                 return new AddressInfoFormViewModel()
                 {
-                   
+
                     Addressline_1 = address.Addressline_1,
                     Addressline_2 = address.Addressline_2,
                     PostalCode = address.PostalCode,
@@ -169,33 +170,4 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
 
     }
 
-    ////private readonly AccountService _accountService;
-
-    ////public AccountController(AccountService accountService)
-    ////{
-    ////    _accountService = accountService;
-    ////}
-
-    //[Route("/account")]
-    //public IActionResult Details()
-    //{
-    //    var viewModel = new AccoundDetailsViewModel();
-    //    //viewModel.BasicInfo = _accountService.GetBasicInfo();
-    //    //viewModel.AddressInfo = _accountService.GetAddressInfo();
-    //    return View(viewModel);
-    //}
-
-    //[HttpPost]
-    //public IActionResult BasicInfo(AccoundDetailsViewModel viewModel)
-    //{
-    //    //_accountService.SaveBasicInfo(viewModel.BasicInfo);
-    //    return RedirectToAction(nameof(Details));
-    //}
-
-    //[HttpPost]
-    //public IActionResult AddressInfo(AccoundDetailsViewModel viewModel)
-    //{
-    //    //_accountService.SaveAdressInfo(viewModel.AdressInfo);
-    //    return RedirectToAction(nameof(Details));
-    //}
 }

@@ -29,7 +29,7 @@ builder.Services.AddScoped<AddressManager>();
 builder.Services.AddScoped<UserService>();
 
 builder.Services.AddScoped<AddressManager>();
-
+//builder.Services.AddScoped<BasicManager>();
 
 
 var app = builder.Build();
