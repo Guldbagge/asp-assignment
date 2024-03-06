@@ -5,6 +5,14 @@
 
 <div class="container">
     <section id="account-details">
+
+        @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+        {
+            <div class="alert">
+                @ViewData["ErrorMessage"]
+            </div>
+        }
+
         <aside>
             <div class=" profile-info">
 
@@ -21,33 +29,33 @@
 
         <div class="details">
             <section class="basic-info">
-                <form method="post" asp-controller="Account" asp-action="Details">
+                <form method="post" asp-controller="Account" asp-action="Details" novalidate>
                     <h2>Account Details</h2>
                     <h5>Basic Info</h5>
 
                     <div class="content">
                         <div id="form-firstname" class="input-group">
-                            <label asp-for="BasicInfo.FirstName"></label>
-                            <span asp-validation-for="BasicInfo.FirstName"></span>
-                            <input asp-for="BasicInfo.FirstName" />
+                            <label asp-for="BasicInfoForm.FirstName"></label>
+                            <span asp-validation-for="BasicInfoForm.FirstName"></span>
+                            <input asp-for="BasicInfoForm.FirstName" />
                         </div>
 
                         <div id="form-lastname" class="input-group">
-                            <label asp-for="BasicInfo.LastName"></label>
-                            <span asp-validation-for="BasicInfo.LastName"></span>
-                            <input asp-for="BasicInfo.LastName" />
+                            <label asp-for="BasicInfoForm.LastName"></label>
+                            <span asp-validation-for="BasicInfoForm.LastName"></span>
+                            <input asp-for="BasicInfoForm.LastName" />
                         </div>
 
                         <div id="form-email" class="input-group">
-                            <label asp-for="BasicInfo.Email"></label>
-                            <span asp-validation-for="BasicInfo.Email"></span>
-                            <input asp-for="BasicInfo.Email" />
+                            <label asp-for="BasicInfoForm.Email"></label>
+                            <span asp-validation-for="BasicInfoForm.Email"></span>
+                            <input asp-for="BasicInfoForm.Email" />
                         </div>
 
                         <div id="form-phone" class="input-group">
-                            <label asp-for="BasicInfo.PhoneNumber"></label>
-                            <span asp-validation-for="BasicInfo.PhoneNumber"></span>
-                            <input asp-for="BasicInfo.PhoneNumber" />
+                            <label asp-for="BasicInfoForm.PhoneNumber"></label>
+                            <span asp-validation-for="BasicInfoForm.PhoneNumber"></span>
+                            <input asp-for="BasicInfoForm.PhoneNumber" />
                         </div>
 
                         <div id="form-bio" class="input-group">
@@ -68,27 +76,27 @@
                     <h5>Address</h5>
                     <div class="content">
                         <div id="form-addressline-1" class="input-group">
-                            <label asp-for="AddressInfo.StreetName"></label>
-                            <span asp-validation-for="AddressInfo.StreetName"></span>
-                            <input asp-for="AddressInfo.StreetName" />
+                            <label asp-for="AddressInfoForm.StreetName"></label>
+                            <span asp-validation-for="AddressInfoForm.StreetName"></span>
+                            <input asp-for="AddressInfoForm.StreetName" />
                         </div>
 
                         <div id="form-addressline-2" class="input-group">
-                            <label asp-for="AddressInfo.StreetNameOptional">Adress line 2 <span>(optional)</span></label>
-                            <span asp-validation-for="AddressInfo.StreetNameOptional"></span>
-                            <input asp-for="AddressInfo.StreetNameOptional" />
+                            <label asp-for="AddressInfoForm.StreetNameOptional">Adress line 2 <span>(optional)</span></label>
+                            <span asp-validation-for="AddressInfoForm.StreetNameOptional"></span>
+                            <input asp-for="AddressInfoForm.StreetNameOptional" />
                         </div>
 
                         <div id="form-postalcode" class="input-group">
-                            <label asp-for="AddressInfo.PostalCode"></label>
-                            <span asp-validation-for="AddressInfo.PostalCode"></span>
-                            <input asp-for="AddressInfo.PostalCode" />
+                            <label asp-for="AddressInfoForm.PostalCode"></label>
+                            <span asp-validation-for="AddressInfoForm.PostalCode"></span>
+                            <input asp-for="AddressInfoForm.PostalCode" />
                         </div>
 
                         <div id="form-city" class="input-group">
-                            <label asp-for="AddressInfo.City"></label>
-                            <span asp-validation-for="AddressInfo.City"></span>
-                            <input asp-for="AddressInfo.City" />
+                            <label asp-for="AddressInfoForm.City"></label>
+                            <span asp-validation-for="AddressInfoForm.City"></span>
+                            <input asp-for="AddressInfoForm.City" />
                         </div>
 
                         <div class="form-buttons">

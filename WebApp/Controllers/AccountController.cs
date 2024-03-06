@@ -1,8 +1,8 @@
-﻿using Infrastructure.Entities;
+﻿
+using Infrastructure.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Models;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
@@ -20,39 +20,51 @@ public class AccountController(UserManager<UserEntity> userManager) : Controller
         {
             ProfileInfo = await PopulateProfileInfoAsync()
         };
-        viewModel.BasicInfo ??= await PopulateAccountDetailsBasicInfoAsync();
-        viewModel.AddressInfo ??= new AccountDetailsAddressInfoModel();
+        viewModel.BasicInfoForm ??= await PopulateBasicInfoAsync();
+        viewModel.AddressInfoForm ??= await PopulateAddressInfoAsync();
         
         return View(viewModel);
     }
 
+    #region [HttpPost] Details
     [HttpPost]
     [Route("/account/details")]
     public async Task<IActionResult> Details(AccountDetailsViewModel viewModel)
     {
-        if (ModelState.IsValid)
-        { 
-            if (viewModel.BasicInfo!=null) { }
-            if (viewModel.AddressInfo!=null) { }
+        if (viewModel.BasicInfoForm != null)
+        {
+            if (viewModel.BasicInfoForm.FirstName != null && viewModel.BasicInfoForm.LastName != null && viewModel.BasicInfoForm.Email != null)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                if (user != null)
+                {
+                    user.FirstName = viewModel.BasicInfoForm.FirstName;
+                    user.LastName = viewModel.BasicInfoForm.LastName;
+                    user.Email = viewModel.BasicInfoForm.Email;
+                    user.PhoneNumber = viewModel.BasicInfoForm.PhoneNumber;
+                    user.Bio = viewModel.BasicInfoForm.Biography;
+
+                    var result = await _userManager.UpdateAsync(user);
+
+                    if (!result.Succeeded)
+                    {
+                        ModelState.AddModelError("IncorrectValues", "Failed to update user information");
+                        ViewData["ErrorMessage"] = "Failed to update user information";
+                    }
+                }
+            }
         }
+
         viewModel.ProfileInfo = await PopulateProfileInfoAsync();
-        viewModel.BasicInfo ??= await PopulateAccountDetailsBasicInfoAsync();
-        viewModel.AddressInfo ??= new AccountDetailsAddressInfoModel();
+        viewModel.BasicInfoForm ??= await PopulateBasicInfoAsync();
+        viewModel.AddressInfoForm ??= await PopulateAddressInfoAsync();
+
+        
+
         return View(viewModel);
-
     }
-
-    //[HttpPost]
-    //public IActionResult SaveAddressInfo(AccountDetailsViewModel viewModel)
-    //{
-    //    if (TryValidateModel(viewModel.AddressInfo))
-    //    {
-    //        return RedirectToAction("Home", "Default");
-    //    }
-
-
-    //    return View("Details", viewModel);
-    //}
+    #endregion
 
 
     private async Task<ProfileInfoViewModel> PopulateProfileInfoAsync()
@@ -67,10 +79,10 @@ public class AccountController(UserManager<UserEntity> userManager) : Controller
         };
     }
 
-    private async Task<AccountDetailsBasicInfoModel> PopulateAccountDetailsBasicInfoAsync()
+    private async Task<BasicInfoFormViewModel> PopulateBasicInfoAsync()
     {
         var user = await _userManager.GetUserAsync(User);
-        return new AccountDetailsBasicInfoModel()
+        return new BasicInfoFormViewModel()
         {
             UserId = user!.Id,
             FirstName = user.FirstName,
@@ -79,6 +91,13 @@ public class AccountController(UserManager<UserEntity> userManager) : Controller
             PhoneNumber = user.PhoneNumber,
             Biography = user.Bio,
         };
+
+    }
+
+    private async Task<AddressInfoFormViewModel> PopulateAddressInfoAsync()
+    {
+
+        return new AddressInfoFormViewModel();
 
     }
 

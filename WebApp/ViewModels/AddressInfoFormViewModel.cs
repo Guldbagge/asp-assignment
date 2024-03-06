@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Models;
+namespace WebApp.ViewModels;
 
-public class AccountDetailsAddressInfoModel
+public class AddressInfoFormViewModel
 {
     [DataType(DataType.Text)]
     [Display(Name = "Adress line 1", Prompt = "Enter your adress line", Order = 0)]
