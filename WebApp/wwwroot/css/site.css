@@ -546,6 +546,15 @@ header .container .account-buttons {
     display: flex;
   }
 }
+header .container .profile-img {
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+}
+header .container .profile-img img {
+  width: 100%;
+  height: 100%;
+}
 header .container .btn-mobile {
   grid-area: mobile;
   display: block;
