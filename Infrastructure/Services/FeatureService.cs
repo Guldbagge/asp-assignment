@@ -11,17 +11,17 @@ namespace Infrastructure.Services;
 
 public class FeatureService(FeatureReposotory featureReposotory, FeatureItemRepository featureItemRepository)
 {
-    
+
     private readonly FeatureReposotory _featureReposotory = featureReposotory;
     private readonly FeatureItemRepository _featureItemRepository = featureItemRepository;
 
     public async Task<ResponseResult> GetAllFeaturesAsync()
     {
-        try 
-        { 
+        try
+        {
             var result = await _featureReposotory.GetAllAsync();
             return result;
-        
+
         }
 
         catch (Exception ex)

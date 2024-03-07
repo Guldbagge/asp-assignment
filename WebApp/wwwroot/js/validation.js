@@ -107,16 +107,16 @@ function checkFields() {
         }
     });
 
-    const submitButton = document.querySelector('button[type="submit"]');
-    if (allFieldsFilled) {
-        submitButton.disabled = false;
-    } else {
-        submitButton.disabled = true;
-    }
+    //const submitButton = document.querySelector('button[type="submit"]');
+    //if (allFieldsFilled) {
+    //    submitButton.disabled = false;
+    //} else {
+    //    submitButton.disabled = true;
+    //}
 }
 
 inputs.forEach(input => {
     input.addEventListener('keyup', checkFields);
 });
 
-checkFields();
+//checkFields();

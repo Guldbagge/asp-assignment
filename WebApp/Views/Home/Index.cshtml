@@ -5,7 +5,7 @@
 
 @{
     ViewData["Title"] = "Overview";
- 
+
     var dontWantModel = new WebApp.ViewModels.DontWantViewModel();
 
 }
@@ -19,8 +19,8 @@
 @await Html.PartialAsync("~/Views/Sections/_Showcase.cshtml", Model.Showcase)
 
 
-<section id="features"> 
-@await Html.PartialAsync("~/Views/Sections/_Features.cshtml")
+<section id="features">
+    @await Html.PartialAsync("~/Views/Sections/_Features.cshtml")
 </section>
 
 <section id="manage">

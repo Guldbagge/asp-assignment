@@ -8,10 +8,10 @@ using Infrastructure.Repositoties;
 
 namespace Infrastructure.Services;
 
-public class UserService(UserRepository repository, AddressService addressService)
+public class UserService(UserRepository repository, AddressManager addressService)
 {
     private readonly UserRepository _repository = repository;
-    private readonly AddressService _addressService = addressService;
+    private readonly AddressManager _addressService = addressService;
 
     public async Task<ResponseResult> CreateUserAsync(SignUpModel model)
     {
@@ -42,14 +42,14 @@ public class UserService(UserRepository repository, AddressService addressServic
         {
             var result = await _repository.GetOneAsync(x => x.Email == model.Email);
             if (result.StatusCode == StatusCode.OK && result.ContentResult != null)
-            { 
+            {
                 var userEntity = (UserEntity)result.ContentResult;
-                if (PasswordHasher.ValidateSecurePassword(model.Password, userEntity.Password, userEntity.SecurityKey))
+                if ((model.Password == userEntity.PasswordHash)) //Test if it works
                     return ResponseFactory.Ok();
             }
-            
+
             return ResponseFactory.Error("Incorrect email or password.");
-            
+
         }
         catch (Exception ex)
         {
@@ -58,3 +58,6 @@ public class UserService(UserRepository repository, AddressService addressServic
     }
 
 }
+
+
+//if (PasswordHasher.ValidateSecurePassword(model.Password, userEntity.Password, userEntity.SecurityKey))
