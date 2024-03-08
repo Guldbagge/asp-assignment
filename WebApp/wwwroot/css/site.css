@@ -183,7 +183,7 @@ h6, .h6 {
 }
 
 .dark-mode {
-  background-color: #565973;
+  background-color: #0B0F19;
   color: #FFFFFF;
 }
 .dark-mode .btn-switch {
@@ -732,7 +732,7 @@ footer .container .social-media {
   padding: 80px 0;
 }
 .dark-mode .features {
-  background-color: #565973;
+  background-color: #0B0F19;
   color: #FFFFFF;
 }
 .features .container {
@@ -812,7 +812,7 @@ footer .container .social-media {
   padding: 80px 0;
 }
 .dark-mode .download {
-  background-color: #565973;
+  background-color: #0B0F19;
   color: #FFFFFF;
 }
 @media (min-width: 992px) {
@@ -1003,7 +1003,7 @@ footer .container .social-media {
   padding: 80px 0;
 }
 .dark-mode .dontWant {
-  background-color: #565973;
+  background-color: #0B0F19;
   color: #FFFFFF;
 }
 .dontWant .container {
@@ -1107,16 +1107,18 @@ footer .container .social-media {
 .dontWant .container .contentEmail .email .input-group input {
   width: 100%;
 }
-.dontWant .container .contentEmail .email .btn-theme-s {
+.dontWant .container .contentEmail .email .btn-theme {
   margin: 20px 0;
 }
 @media (min-width: 992px) {
-  .dontWant .container .contentEmail .email .btn-theme-s {
+  .dontWant .container .contentEmail .email .btn-theme {
     margin: 0px;
     margin-left: 20px;
-    margin-top: 23px;
+    /*margin-top: 23px;*/
     padding-left: 50px;
     padding-right: 50px;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 }
 .dontWant .container .contentEmail p {
@@ -1642,5 +1644,135 @@ footer .container .social-media {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.dark-light {
+  position: relative;
+}
+
+.dark-light-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 0;
+}
+.dark-light-box .dark {
+  background-color: #0B0F19;
+  flex: 1;
+}
+.dark-light-box .light {
+  background-color: white;
+  flex: 1;
+}
+
+.black-box {
+  position: relative;
+  z-index: 1;
+  padding-top: 50px;
+}
+.black-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background-color: #6366F1;
+  z-index: 2;
+  transform: translateX(-1px);
+}
+.black-box .text-h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.black-box .text-h1 .dark {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 20px !important;
+  color: #FFFFFF;
+  margin-left: 1rem;
+}
+@media (min-width: 992px) {
+  .black-box .text-h1 .dark {
+    line-height: 160%;
+    font-weight: 400;
+    color: #565973;
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    color: #0B0F19;
+    font-size: 40px !important;
+    color: #FFFFFF;
+  }
+}
+.black-box .text-h1 .light {
+  color: #000000;
+  margin-left: 1rem;
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: #0B0F19;
+  font-size: 20px !important;
+}
+@media (min-width: 992px) {
+  .black-box .text-h1 .light {
+    line-height: 160%;
+    font-weight: 400;
+    color: #565973;
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    color: #0B0F19;
+    font-size: 40px !important;
+  }
+}
+.black-box .img-dark-light {
+  position: relative;
+}
+.black-box .img-dark-light img {
+  width: 100%;
+  height: auto;
+}
+.black-box .img-dark-light .round-button {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #6366F1;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 4;
+  width: 20px;
+  height: 20px;
+}
+@media (min-width: 992px) {
+  .black-box .img-dark-light .round-button {
+    width: 30px;
+    height: 30px;
+  }
+}
+.black-box .img-dark-light .round-button i {
+  color: #FFFFFF;
+  font-size: 0.5rem;
+}
+@media (min-width: 992px) {
+  .black-box .img-dark-light .round-button i {
+    font-size: 1rem;
   }
 }
