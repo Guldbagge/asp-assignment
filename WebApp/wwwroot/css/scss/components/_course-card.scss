@@ -1,0 +1,15 @@
+﻿.course-card {
+    @include shadow-s;
+    border-radius: 10px;
+    overflow: hidden;
+
+    &__image {
+    }
+
+    &__body {
+        padding: 1rem;
+    }
+
+    &__footer {
+    }
+}

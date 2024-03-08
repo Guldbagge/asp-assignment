@@ -2,6 +2,11 @@
     background-color: $gray-100;
     padding: 80px 0;
 
+    .dark-mode & {
+        background-color: $gray-900;
+        color: $white;
+    }
+
 
     .container {
         display: flex;
@@ -101,17 +106,27 @@
                     input {
                         width: 100%;
                     }
+
+                    span {
+                        margin-top: -25px;
+
+                        @include lg {
+                            margin-top: -15px;
+                        }
+                    }
                 }
 
-                .btn-theme-s {
+                .btn-theme {
                     margin: 20px 0;
 
                     @include lg {
                         margin: 0px;
                         margin-left: 20px;
-                        margin-top: 23px;
+                        /*margin-top: 23px;*/
                         padding-left: 50px;
                         padding-right: 50px;
+                        padding-top: 15px;
+                        padding-bottom: 15px;
                     }
                 }
             }
