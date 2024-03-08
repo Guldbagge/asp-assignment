@@ -1,87 +1,98 @@
-.showcase{
+.showcase {
     position: relative;
     margin-bottom: 80px;
 
-    @include lg{
+    @include lg {
         display: flex;
         justify-content: flex-end;
-        margin-bottom: 0px  ;
+        margin-bottom: 0px;
     }
-   
+
     img {
         position: relative;
         z-index: -1;
         width: 100%;
-       
-        @include lg{
+
+        @include lg {
             width: 45%;
         }
     }
 
-    .container{
+    .container {
         height: 100%;
-   
 
-        @include lg{
-        position: absolute;
-        left: 0;
-        right: 0;
+
+        @include lg {
+            position: absolute;
+            left: 0;
+            right: 0;
         }
 
-        .content{
-            margin-top: 0px;
+        .content {
+            margin-top: 20px;
             width: 100%;
             text-align: center;
 
-            @include lg{
-                margin-top: 100px;
+            @include lg {
+                margin-top: 10px;
                 width: 40%;
                 text-align: left;
             }
 
-            h1 {
-                @include h2;
+            @include xl {
+                margin-top: 20px;
+            }
 
-                @include lg{
+            @include xxl {
+                margin-top: 100px;
+            }
+
+            h1 {
+                @include h4;
+
+                @include lg {
+                    @include d6;
+                }
+
+                @include xxl {
                     @include d4;
                 }
             }
 
-            p{
+            p {
                 margin: 20px 0 40px 0;
                 @include text-m;
-                
-                @include lg{
+
+                @include lg {
                     margin: 40px 0 50px 0;
                     @include text-lg;
-                }   
+                }
             }
 
-            .btn-theme-s{
+            .btn-theme-s {
                 display: inline-block;
             }
 
-            h6{
-                margin: 150px 0 30px 0;
+            h6 {
+                margin: 0px 0 30px 0;
                 display: none;
 
-                @include lg{
+                @media (min-width: 1600px) {
                     margin: 100px 0 30px 0;
                     display: flex;
-                
                 }
             }
 
-            .brands{
+            .brands {
                 display: none;
                 gap: 30px;
 
-                @include lg{
+                @media (min-width: 1600px) {
                     display: flex;
                 }
-            
 
-                img{
+
+                img {
                     width: 120px;
                 }
             }
