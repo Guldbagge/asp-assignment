@@ -1,74 +1,80 @@
-.features{
+.features {
     background-color: $gray-100;
-   padding: 80px 0;
+    padding: 80px 0;
 
-   .container{
-    display: grid;
-    justify-content: center;
-    text-align: center;
-    
+    .dark-mode & {
+        background-color: $gray-700;
+        color: $white;
+    }
 
-        .tool-features{
+    .container {
+        display: grid;
+        justify-content: center;
+        text-align: center;
+
+
+        .tool-features {
             margin-top: 20px;
             display: grid;
-        
-            @include lg{
+
+            @include lg {
                 grid-template-columns: 1fr 1fr 1fr;
             }
-            
-            .box{
+
+            .box {
                 padding: 20px;
                 border: 1px solid $gray-300;
                 transition: all 0.15s ease-in-out;
 
-                @include lg{
-                    &:nth-child(1){
+                @include lg {
+                    &:nth-child(1) {
                         border-top: 0px solid $gray-300;
                         border-left: 0px solid $gray-300;
                     }
-                    &:nth-child(2){
-                        border-top: 0px solid $gray-300;
-                    }   
 
-                    &:nth-child(3){
+                    &:nth-child(2) {
+                        border-top: 0px solid $gray-300;
+                    }
+
+                    &:nth-child(3) {
                         border-top: 0px solid $gray-300;
                         border-right: 0px solid $gray-300;
                     }
 
-                    &:nth-child(4){
+                    &:nth-child(4) {
                         border-bottom: 0px solid $gray-300;
                         border-left: 0px solid $gray-300;
                     }
 
-                    &:nth-child(5){
+                    &:nth-child(5) {
                         border-bottom: 0px solid $gray-300;
                     }
 
-                    &:nth-child(6){
+                    &:nth-child(6) {
                         border-bottom: 0px solid $gray-300;
                         border-right: 0px solid $gray-300;
                     }
                 }
 
-                &:hover{
-                   transition: all 0.15s ease-in-out;
-                   cursor: pointer;
-                   background: $white;
-                   @include shadow-m;
+                &:hover {
+                    transition: all 0.15s ease-in-out;
+                    cursor: pointer;
+                    background: $white;
+                    @include shadow-m;
                 }
 
-                img{
+                img {
                     padding: 10px;
                     background-color: $gray-100;
                     margin: 20px;
                     border-radius: 8px;
                 }
 
-                h5{
+                h5 {
                     @include h5;
                 }
 
-                p{
+                p {
                     @include text-m;
                 }
             }

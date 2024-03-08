@@ -34,7 +34,9 @@
             {
                 <a class="btn-gray" asp-controller="Auth" asp-action="SignOut"><i class="fa-light fa-right-to-bracket"></i><span>Sign Out</span></a>
                 <div class="profile-img">
-                    <img src="~/images/profile-image.svg" alt="Profile image">
+                    <a asp-controller="Account" asp-action="Details">
+                        <img src="~/images/profile-image.svg" alt="Profile image">
+                    </a>
                     @*  <img src="~/images/@Model.ProfileInfo.ProfileImageUrl" alt="Profile image"> *@
                 </div>
             }

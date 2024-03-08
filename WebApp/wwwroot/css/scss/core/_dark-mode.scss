@@ -1,0 +1,8 @@
+﻿.dark-mode {
+    background-color: $gray-700;
+    color: $white;
+
+    .btn-switch {
+        filter: invert(1);
+    }
+}

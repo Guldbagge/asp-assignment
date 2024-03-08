@@ -182,6 +182,14 @@ h6, .h6 {
   grid-template-rows: auto 1fr auto;
 }
 
+.dark-mode {
+  background-color: #565973;
+  color: #FFFFFF;
+}
+.dark-mode .btn-switch {
+  filter: invert(1);
+}
+
 a {
   line-height: 160%;
   font-weight: 400;
@@ -495,6 +503,14 @@ form span.field-validation-error::after {
   content: "⮿";
 }
 
+.course-card {
+  box-shadow: 0px 2px 6.4px -1px rgba(19, 16, 34, 0.03), 0px 4.4px 12px -1px rgba(19, 16, 34, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.course-card__body {
+  padding: 1rem;
+}
 header {
   padding: 15px 0;
 }
@@ -715,6 +731,10 @@ footer .container .social-media {
   background-color: #F3F6FF;
   padding: 80px 0;
 }
+.dark-mode .features {
+  background-color: #565973;
+  color: #FFFFFF;
+}
 .features .container {
   display: grid;
   justify-content: center;
@@ -790,6 +810,10 @@ footer .container .social-media {
 .download {
   background-color: #F3F6FF;
   padding: 80px 0;
+}
+.dark-mode .download {
+  background-color: #565973;
+  color: #FFFFFF;
 }
 @media (min-width: 992px) {
   .download .container {
@@ -977,6 +1001,10 @@ footer .container .social-media {
 .dontWant {
   background-color: #F3F6FF;
   padding: 80px 0;
+}
+.dark-mode .dontWant {
+  background-color: #565973;
+  color: #FFFFFF;
 }
 .dontWant .container {
   display: flex;
