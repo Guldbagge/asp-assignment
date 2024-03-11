@@ -55,6 +55,10 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
                         ModelState.AddModelError("IncorrectValues", "Failed to update basic information");
                         ViewData["ErrorMessage"] = "Failed to update user information";
                     }
+                    else
+                    {
+                        ViewData["SuccessMessage"] = "Basic information updated successfully!";
+                    }
                 }
             }
         }
@@ -81,9 +85,12 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
                             ModelState.AddModelError("IncorrectValues", "Failed to update user information");
                             ViewData["ErrorMessage"] = "Failed to update address information";
                         }
+                        else
+                        {
+                            ViewData["SuccessMessage"] = "Address information updated successfully!";
+                        }
 
                     }
-
                     else
                     {
                         address = new AddressEntity
@@ -101,8 +108,10 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
                             ModelState.AddModelError("IncorrectValues", "Failed to update user information");
                             ViewData["ErrorMessage"] = "Failed to update address information";
                         }
-
-
+                        else
+                        {
+                            ViewData["SuccessMessage"] = "Address information updated successfully!";
+                        }
                     }
                 }
             }
@@ -112,10 +121,9 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
         viewModel.BasicInfoForm ??= await PopulateBasicInfoAsync();
         viewModel.AddressInfoForm ??= await PopulateAddressInfoAsync();
 
-
-
         return View(viewModel);
     }
+
     #endregion
 
 

@@ -621,9 +621,16 @@ header #mobil-menu {
   flex-direction: column;
   gap: 15px;
   align-items: center;
-  background-color: #fff;
+  background-color: #FFFFFF;
+}
+.dark-mode header #mobil-menu {
+  background-color: #0B0F19;
 }
 header #mobil-menu .account-buttons .btn-gray {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+header #mobil-menu .account-buttons .btn-theme {
   margin-bottom: 15px;
 }
 header #mobil-menu nav {

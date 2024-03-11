@@ -1,21 +1,12 @@
-﻿ @model AccountDetailsViewModel
- @{
- ViewData["Title"] = $"{Model.ProfileInfo!.FirstName} {Model.ProfileInfo!.LastName}'s profile";
- }
+﻿@model AccountDetailsViewModel
+@{
+    ViewData["Title"] = $"{Model.ProfileInfo!.FirstName} {Model.ProfileInfo!.LastName}'s profile";
+}
 
 <div class="container">
     <section id="account-details">
-
-        @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
-        {
-            <div class="alert">
-                @ViewData["ErrorMessage"]
-            </div>
-        }
-
         <aside>
-            <div class=" profile-info">
-
+            <div class="profile-info">
                 <img src="~/images/@Model.ProfileInfo.ProfileImageUrl" alt="@Model.ProfileInfo.FirstName @Model.ProfileInfo.LastName" />
                 <h5>@Model.ProfileInfo.FirstName @Model.ProfileInfo.LastName</h5>
                 <p>@Model.ProfileInfo.Email</p>
@@ -29,6 +20,20 @@
 
         <div class="details">
             <section class="basic-info">
+                @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+                {
+                    <span class="alert alert-danger">
+                        @ViewData["ErrorMessage"]
+                    </span>
+                }
+
+                @if (!string.IsNullOrEmpty(ViewData["SuccessMessage"]?.ToString()))
+                {
+                    <span class="alert alert-success">
+                        @ViewData["SuccessMessage"]
+                    </span>
+                }
+
                 <form method="post" asp-controller="Account" asp-action="Details" novalidate>
                     <h2>Account Details</h2>
                     <h5>Basic Info</h5>
@@ -64,7 +69,7 @@
                         </div>
 
                         <div class="form-buttons">
-                            <button class="btn-gray" type="reset">Cansel</button>
+                            <button class="btn-gray" type="reset">Cancel</button>
                             <button class="btn-theme" type="submit">Save changes</button>
                         </div>
                     </div>
@@ -100,7 +105,7 @@
                         </div>
 
                         <div class="form-buttons">
-                            <button class="btn-gray" type="reset">Cansel</button>
+                            <button class="btn-gray" type="reset">Cancel</button>
                             <button class="btn-theme" type="submit">Save changes</button>
                         </div>
                     </div>
@@ -108,5 +113,4 @@
             </section>
         </div>
     </section>
-
 </div>

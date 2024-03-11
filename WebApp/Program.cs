@@ -18,6 +18,14 @@ builder.Services.AddDefaultIdentity<UserEntity>(x =>
     x.Password.RequiredLength = 8;
 }).AddEntityFrameworkStores<DataContext>();
 
+builder.Services.AddAuthentication().AddFacebook(x =>
+{
+    x.AppId = "275363742281466";
+    x.AppSecret = "6c8a21c909aff171b1fd9fd93857f013";
+    x.Fields.Add("first_name");
+    x.Fields.Add("last_name");
+});
+
 
 builder.Services.AddScoped<AddressRepository>();
 builder.Services.AddScoped<UserRepository>();
@@ -37,6 +45,7 @@ app.UseHsts();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
