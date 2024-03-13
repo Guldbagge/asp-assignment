@@ -41,11 +41,23 @@
                 }
 
                 #form-forgot-password {
-                    width:auto;
+                    width: auto;
                     grid-area: forgot;
                     margin: 1rem 0 0 0;
                     text-align: center;
-                }   
+                }
+            }
+        }
+
+        .extearnal-provider {
+            .provider{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                margin: 1rem 0;
+
+  
             }
         }
     }

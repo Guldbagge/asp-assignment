@@ -1,21 +1,12 @@
-﻿ @model AccountDetailsViewModel
- @{
- ViewData["Title"] = $"{Model.ProfileInfo!.FirstName} {Model.ProfileInfo!.LastName}'s profile";
- }
+﻿@model AccountDetailsViewModel
+@{
+    ViewData["Title"] = $"{Model.ProfileInfo!.FirstName} {Model.ProfileInfo!.LastName}'s profile";
+}
 
 <div class="container">
     <section id="account-details">
-
-        @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
-        {
-            <div class="alert">
-                @ViewData["ErrorMessage"]
-            </div>
-        }
-
         <aside>
-            <div class=" profile-info">
-
+            <div class="profile-info">
                 <img src="~/images/@Model.ProfileInfo.ProfileImageUrl" alt="@Model.ProfileInfo.FirstName @Model.ProfileInfo.LastName" />
                 <h5>@Model.ProfileInfo.FirstName @Model.ProfileInfo.LastName</h5>
                 <p>@Model.ProfileInfo.Email</p>
@@ -29,6 +20,20 @@
 
         <div class="details">
             <section class="basic-info">
+                @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+                {
+                    <span class="alert alert-danger">
+                        @ViewData["ErrorMessage"]
+                    </span>
+                }
+
+                @if (!string.IsNullOrEmpty(ViewData["SuccessMessage"]?.ToString()))
+                {
+                    <span class="alert alert-success">
+                        @ViewData["SuccessMessage"]
+                    </span>
+                }
+
                 <form method="post" asp-controller="Account" asp-action="Details" novalidate>
                     <h2>Account Details</h2>
                     <h5>Basic Info</h5>
@@ -36,20 +41,44 @@
                     <div class="content">
                         <div id="form-firstname" class="input-group">
                             <label asp-for="BasicInfoForm!.FirstName"></label>
-                            <span asp-validation-for="BasicInfoForm!.FirstName"></span>
-                            <input asp-for="BasicInfoForm!.FirstName" />
+                            @if (Model.ProfileInfo.IsExternalAccount)
+                            {
+                                <input asp-for="BasicInfoForm!.FirstName" disabled/>
+                            }
+                            else
+                            {
+                                <span asp-validation-for="BasicInfoForm!.FirstName"></span>
+                                <input asp-for="BasicInfoForm!.FirstName" />
+                            }
+                            
                         </div>
 
                         <div id="form-lastname" class="input-group">
                             <label asp-for="BasicInfoForm!.LastName"></label>
-                            <span asp-validation-for="BasicInfoForm!.LastName"></span>
-                            <input asp-for="BasicInfoForm!.LastName" />
+                            @if (Model.ProfileInfo.IsExternalAccount)
+                            {
+                                <input asp-for="BasicInfoForm!.LastName" disabled/>
+                            }
+                            else
+                            {
+                                <span asp-validation-for="BasicInfoForm!.LastName"></span>
+                                <input asp-for="BasicInfoForm!.LastName" />
+                            }
+
                         </div>
 
                         <div id="form-email" class="input-group">
                             <label asp-for="BasicInfoForm!.Email"></label>
-                            <span asp-validation-for="BasicInfoForm!.Email"></span>
-                            <input asp-for="BasicInfoForm!.Email" />
+                            @if (Model.ProfileInfo.IsExternalAccount)
+                            {
+                                <input asp-for="BasicInfoForm!.Email" disabled/>
+                            }
+                            else
+                            {
+                                <span asp-validation-for="BasicInfoForm!.Email"></span>
+                                <input asp-for="BasicInfoForm!.Email" />
+                            }
+
                         </div>
 
                         <div id="form-phone" class="input-group">
@@ -64,7 +93,7 @@
                         </div>
 
                         <div class="form-buttons">
-                            <button class="btn-gray" type="reset">Cansel</button>
+                            <button class="btn-gray" type="reset">Cancel</button>
                             <button class="btn-theme" type="submit">Save changes</button>
                         </div>
                     </div>
@@ -100,7 +129,7 @@
                         </div>
 
                         <div class="form-buttons">
-                            <button class="btn-gray" type="reset">Cansel</button>
+                            <button class="btn-gray" type="reset">Cancel</button>
                             <button class="btn-theme" type="submit">Save changes</button>
                         </div>
                     </div>
@@ -108,5 +137,4 @@
             </section>
         </div>
     </section>
-
 </div>

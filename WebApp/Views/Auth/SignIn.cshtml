@@ -44,9 +44,17 @@
                     </div>
                 </div>
 
-                <button id="form-submit" type="submit" class="btn-theme-s">@Model.Title</button>
+                <button id="form-submit" type="submit" class="btn-theme">@Model.Title</button>
 
                 <a id="form-forgot-password" asp-controller="Account" asp-action="Forgot">Forgot your password?</a>
+
+                <div class="extearnal-provider">
+                    <h6>Or sign in with your social network </h6>
+                    <div class="provider">
+                        <a class="btn-gray" asp-action="Facebook" asp-controller="Auth"> <i class="fa-brands fa-facebook"></i>Facebook</a>
+                        <a class="btn-gray" asp-action="Google" asp-controller="Auth"> <i class="fa-brands fa-google"></i>Google</a>
+                    </div>
+                </div>
 
             </div>
         </form>
