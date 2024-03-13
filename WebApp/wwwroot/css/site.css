@@ -1386,16 +1386,28 @@ footer .container p span {
   font-size: 16px !important;
 }
 #account-details aside nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 50px;
   text-align: center;
 }
 #account-details aside nav a {
+  display: block;
   margin-top: 10px;
   text-align: left;
 }
+#account-details aside nav a i {
+  color: #565973;
+  padding-right: 10px;
+}
 #account-details aside nav .btn-theme-s {
-  text-align: center;
-  justify-content: flex-start;
+  display: block;
+  text-align: left;
+}
+#account-details aside nav .btn-theme-s i {
+  color: #FFFFFF;
+  padding-right: 10px;
 }
 #account-details .details {
   margin-top: 50px;

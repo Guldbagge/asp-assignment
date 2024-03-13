@@ -179,4 +179,12 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
 
     }
 
+    [HttpGet]
+    [Route("/account/security")]
+    public async Task<IActionResult> Security()
+    {
+        // Implementera logiken för säkerhetssidan här
+        return View();
+    }
+
 }
