@@ -3,7 +3,9 @@ using Infrastructure.Entities;
 using Infrastructure.Models;
 using Infrastructure.Repositoties;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -25,6 +27,16 @@ builder.Services.AddAuthentication().AddFacebook(x =>
     x.Fields.Add("first_name");
     x.Fields.Add("last_name");
 });
+
+builder.Services.AddAuthentication().AddGoogle(options =>
+{
+    options.ClientId = "806272839932-ugmlohevjcgqcsa7cj6kkgucjtpeu663.apps.googleusercontent.com";
+    options.ClientSecret = "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";
+    options.ClaimActions.MapJsonKey(ClaimTypes.GivenName, "given_name");
+    options.ClaimActions.MapJsonKey(ClaimTypes.Surname, "family_name");
+    options.SaveTokens = true;
+});
+
 
 
 builder.Services.AddScoped<AddressRepository>();
@@ -50,5 +62,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "defaultWithCatchAll",
+    pattern: "{*url}",
+    defaults: new { controller = "Default", action = "Index" });
 
 app.Run();

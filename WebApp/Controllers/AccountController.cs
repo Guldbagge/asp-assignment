@@ -136,6 +136,7 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
             FirstName = user!.FirstName,
             LastName = user.LastName,
             Email = user.Email!,
+            IsExternalAccount = user.IsExternalAccount,
         };
     }
 
