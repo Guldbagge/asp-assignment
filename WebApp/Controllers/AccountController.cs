@@ -241,20 +241,6 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
     }
 
 
-
-    [HttpPost]
-
-    public IActionResult DeleteAccount(AccountSecurityViewModel viewModel)
-    {
-        if (TryValidateModel(viewModel.SecurityDeleteForm))
-        {
-            return RedirectToAction("Home", "default");
-        }
-
-
-        return View("Security", viewModel);
-    }
-
     private async Task<SecurityPasswordFormViewModel> PopulateSecurityPasswordFormAsync()
     {
         var user = await _userManager.GetUserAsync(User);
@@ -288,20 +274,24 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
             if (result.Succeeded)
             {
                 await HttpContext.SignOutAsync();
+                ViewData["SuccessMessage"] = "Account deleted successfully!";
+                await Task.Delay(1000);
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ModelState.AddModelError("DeleteError", "Failed to delete the account");
+                ViewData["ErrorMessage"] = "Failed to delete the account";
             }
         }
         else
         {
-            ModelState.AddModelError("UserNotFound", "User not found");
+            ViewData["ErrorMessage"] = "User not found";
         }
 
         return View("AccountDeletedConfirmation");
     }
+
+
 
 
     #endregion
