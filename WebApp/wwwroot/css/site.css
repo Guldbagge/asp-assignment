@@ -364,6 +364,27 @@ a:hover {
   color: #FFFFFF;
 }
 
+.btn-delete {
+  border-radius: 6px;
+  text-align: center;
+  font-size: 14px;
+  padding: 8px 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: #EF4444;
+  color: #FFFFFF;
+  border: none;
+  margin-top: 1rem;
+}
+.btn-delete:hover {
+  text-decoration: none;
+  background: #EF4444;
+  opacity: 0.8;
+  color: #FFFFFF;
+}
+
 .btn-switch {
   display: flex;
   align-items: center;
@@ -1386,16 +1407,28 @@ footer .container p span {
   font-size: 16px !important;
 }
 #account-details aside nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 50px;
   text-align: center;
 }
 #account-details aside nav a {
+  display: block;
   margin-top: 10px;
   text-align: left;
 }
+#account-details aside nav a i {
+  color: #565973;
+  padding-right: 10px;
+}
 #account-details aside nav .btn-theme-s {
-  text-align: center;
-  justify-content: flex-start;
+  display: block;
+  text-align: left;
+}
+#account-details aside nav .btn-theme-s i {
+  color: #FFFFFF;
+  padding-right: 10px;
 }
 #account-details .details {
   margin-top: 50px;
@@ -1921,4 +1954,117 @@ footer .container p span {
 }
 .container .div-404 .div-img {
   padding: 1rem;
+}
+
+#account-security {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 992px) {
+  #account-security {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 150px;
+    margin-bottom: 70px;
+    flex-direction: row;
+    justify-content: normal;
+    align-items: normal;
+  }
+}
+@media (min-width: 992px) {
+  #account-security aside {
+    border-right: 1px solid #E2E5F1;
+    padding-right: 20px;
+  }
+}
+#account-security aside .profile-info {
+  margin: 20px;
+  text-align: center;
+}
+#account-security aside .profile-info h5 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+#account-security aside .profile-info p {
+  line-height: 160%;
+  font-weight: 400;
+  color: #565973;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px !important;
+}
+#account-security aside nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 50px;
+  text-align: center;
+}
+#account-security aside nav a {
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+}
+#account-security aside nav a i {
+  color: #565973;
+  padding-right: 10px;
+}
+#account-security aside nav .btn-theme-s {
+  display: block;
+  text-align: left;
+}
+#account-security aside nav .btn-theme-s i {
+  color: #FFFFFF;
+  padding-right: 10px;
+}
+#account-security .security {
+  margin-top: 50px;
+  width: 100%;
+}
+#account-security .security .security-info form {
+  padding: 1rem;
+}
+#account-security .security .security-info form h5 {
+  color: #6366F1;
+}
+#account-security .security .security-info form .content {
+  display: grid;
+  gap: 1rem 2rem;
+  grid-template-columns: 1fr;
+  grid-template-areas: "current-password" "new-password" "confirm-new-password" "buttons";
+}
+@media (min-width: 992px) {
+  #account-security .security .security-info form .content {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "current-password current-password" "new-password confirm-new-password" "buttons buttons";
+  }
+}
+#account-security .security .security-info form .content #current-password {
+  grid-area: current-password;
+}
+#account-security .security .security-info form .content #new-password {
+  grid-area: new-password;
+}
+#account-security .security .security-info form .content #confirm-new-passwordl {
+  grid-area: confirm-new-password;
+}
+#account-security .security .security-info form .content .form-buttons {
+  grid-area: buttons;
+  margin: 20px 0;
+  display: flex;
+  gap: 20px;
+}
+#account-security .security .delete-account {
+  margin-top: 30px;
+}
+#account-security .security .delete-account form {
+  padding: 1rem;
+}
+#account-security .security .delete-account form h5 {
+  color: #6366F1;
+}
+#account-security .security .delete-account form .content {
+  display: grid;
+  gap: 1rem;
 }
