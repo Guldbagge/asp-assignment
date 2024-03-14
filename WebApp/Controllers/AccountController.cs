@@ -2,6 +2,7 @@
 
 using Infrastructure.Entities;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -274,6 +275,33 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
     }
 
 
+    [HttpPost]
+    [Route("/account/delete")]
+    public async Task<IActionResult> DeleteAccount()
+    {
+        var user = await _userManager.GetUserAsync(User);
+
+        if (user != null)
+        {
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                await HttpContext.SignOutAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("DeleteError", "Failed to delete the account");
+            }
+        }
+        else
+        {
+            ModelState.AddModelError("UserNotFound", "User not found");
+        }
+
+        return View("AccountDeletedConfirmation");
+    }
 
 
     #endregion
