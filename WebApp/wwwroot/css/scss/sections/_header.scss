@@ -1,6 +1,9 @@
 header {
     padding: 15px 0;
 
+    &.gray-background {
+        background-color: $gray-100;
+    }
 
     .container {
         display: grid;

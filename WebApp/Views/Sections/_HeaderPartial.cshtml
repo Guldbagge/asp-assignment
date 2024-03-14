@@ -1,7 +1,14 @@
 ﻿@inject SignInManager<UserEntity> _signInManager
 @*  @model AccountDetailsViewModel *@
 
-<header>
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<header class="header @if (currentController == "Contact" && currentAction == "Index") {
+ <text>gray-background</text>
+ }">
     <div class="container">
         <a id="logo" asp-controller="Home" asp-action="Index"><img src="~/images/Silicon-Logotype -Light-Mode.svg" alt=""></a>
 
