@@ -571,6 +571,9 @@ form span.field-validation-error::after {
 header {
   padding: 15px 0;
 }
+header.gray-background {
+  background-color: #F3F6FF;
+}
 header .container {
   display: grid;
   align-items: center;
@@ -2067,4 +2070,159 @@ footer .container p span {
 #account-security .security .delete-account form .content {
   display: grid;
   gap: 1rem;
+}
+
+.contact {
+  background-color: #F3F6FF;
+}
+.contact .container {
+  position: relative;
+}
+.contact .container .home-contact {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+}
+.contact .container .home-contact .home-and-contact {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+}
+.contact .container .home-contact .home-and-contact .fa-house {
+  color: #9397AD;
+}
+.contact .container .home-contact .home-and-contact .home {
+  color: #9397AD;
+  margin-bottom: 0;
+}
+.contact .container .home-contact .home-and-contact:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+.contact .container .home-contact .home-and-contact:hover .home,
+.contact .container .home-contact .home-and-contact:hover .fa-house {
+  color: #000000;
+}
+.contact .container .home-contact .fa-angles-right {
+  color: #9397AD;
+}
+.contact .container .home-contact .contact {
+  color: #6366F1;
+  margin-bottom: 0;
+}
+.contact .container .contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+@media (min-width: 1200px) {
+  .contact .container .contact-info {
+    max-width: 30%;
+  }
+}
+.contact .container .contact-info h1 {
+  margin-bottom: 2rem;
+}
+.contact .container .contact-info .email-us {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.contact .container .contact-info .email-us .round {
+  background-color: #FFFFFF;
+  color: #6366F1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.contact .container .contact-info .email-us .email-text a .fa-arrow-right {
+  margin-left: 1rem;
+}
+.contact .container .contact-info .careers {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+.contact .container .contact-info .careers .round {
+  background-color: #FFFFFF;
+  color: #6366F1;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.contact .container .contact-info .careers .careers-text a .fa-arrow-right {
+  margin-left: 1rem;
+}
+.contact .container .get-in-contact {
+  position: relative;
+}
+@media (min-width: 1200px) {
+  .contact .container .get-in-contact {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #FFFFFF;
+    padding: 2rem;
+    width: 40%;
+    height: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+}
+.contact .container .get-in-contact h2 {
+  margin-left: 1rem;
+}
+.contact .container .get-in-contact .fa-angle-down {
+  position: absolute;
+  right: 4rem;
+  top: 22rem;
+}
+@media (min-width: 1200px) {
+  .contact .container .get-in-contact .fa-angle-down {
+    top: 24rem;
+  }
+}
+.contact .container .get-in-contact .contact-form {
+  padding: 1rem;
+}
+.contact .container .get-in-contact .contact-form .form-group label {
+  font-weight: 600;
+  color: #0B0F19;
+  margin-bottom: 0, 5rem;
+  margin-top: 2rem;
+}
+.contact .container .get-in-contact .contact-form .form-group #message {
+  height: 250px;
+}
+.contact .container .get-in-contact .contact-form .form-group .btn-theme {
+  margin-top: 2rem;
+}
+.contact .map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+}
+.contact .map img {
+  width: 100vw;
+}
+@media (min-width: 992px) {
+  .contact .map img {
+    margin-top: 120px;
+  }
 }
