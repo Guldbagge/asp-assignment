@@ -21,7 +21,6 @@ public class SecurityPasswordFormViewModel
     [Display(Name = "Confirm new password", Prompt = "Confirm your new password", Order = 3)]
     [DataType(DataType.Password)]
     [Required(ErrorMessage = "Password must be comfirmd")]
-    [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
     public string ConfirmNewPassword { get; set; } = null!;
 
 
