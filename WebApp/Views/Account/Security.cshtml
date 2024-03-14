@@ -1,15 +1,16 @@
-﻿@* @model AccountDetailsViewModel
+﻿@model AccountSecurityViewModel
+
 @{
-    ViewData["Title"] = $"{Model.ProfileInfo!.FirstName} {Model.ProfileInfo!.LastName}'s profile";
+    ViewData["Title"] = $"{Model.BasicInfoForm?.FirstName} {Model.BasicInfoForm?.LastName}'s profile";
 }
 
 <div class="container">
     <section id="account-security">
         <aside>
             <div class="profile-info">
-                <img src="~/images/@Model.ProfileInfo.ProfileImageUrl" alt="@Model.ProfileInfo.FirstName @Model.ProfileInfo.LastName" />
-                <h5>@Model.ProfileInfo.FirstName @Model.ProfileInfo.LastName</h5>
-                <p>@Model.ProfileInfo.Email</p>
+                <img src="~/images/@Model.ProfileInfo?.ProfileImageUrl" alt="@Model.ProfileInfo?.FirstName @Model.ProfileInfo?.LastName" />
+                <h5>@Model.BasicInfoForm?.FirstName @Model.BasicInfoForm?.LastName</h5>
+                <p>@Model.BasicInfoForm?.Email</p>
             </div>
 
             <nav>
@@ -38,27 +39,27 @@
                     </span>
                 }
 
-                <form method="post" asp-controller="Account" asp-action="Security" novalidate>
+                <form id="securityPasswordForm" method="post" asp-controller="Account" asp-action="Security" novalidate>
                     <h2>Security</h2>
                     <h5>Password</h5>
 
                     <div class="content">
                         <div id="current-password" class="input-group">
-                            <label asp-for="SecurityInfoForm!.CurrentPassword"></label> 
-                            <span asp-validation-for="SecurityInfoForm!.CurrentPassword"></span>
-                            <input asp-for="SecurityInfoForm!.CurrentPassword" />
+                            <label asp-for="SecurityPasswordForm.CurrentPassword"></label>
+                            <span asp-validation-for="SecurityPasswordForm.CurrentPassword"></span>
+                            <input asp-for="SecurityPasswordForm.CurrentPassword" />
                         </div>
 
                         <div id="new-password" class="input-group">
-                            <label asp-for="SecurityInfoForm!.NewPassword"></label>
-                            <span asp-validation-for="SecurityInfoForm!.NewPassword"></span>
-                            <input asp-for="SecurityInfoForm!.NewPassword" />
+                            <label asp-for="SecurityPasswordForm.NewPassword"></label>
+                            <span asp-validation-for="SecurityPasswordForm.NewPassword"></span>
+                            <input asp-for="SecurityPasswordForm.NewPassword" />
                         </div>
 
-                        <div id="confirm--new-password" class="input-group">
-                            <label asp-for="SecurityInfoForm!.ConfirmNewPassword"></label>
-                            <span asp-validation-for="SecurityInfoForm!.ConfirmNewPassword"></span>
-                            <input asp-for="SecurityInfoForm!.ConfirmNewPassword" />
+                        <div id="confirm-new-password" class="input-group">
+                            <label asp-for="SecurityPasswordForm.ConfirmNewPassword"></label>
+                            <span asp-validation-for="SecurityPasswordForm.ConfirmNewPassword"></span>
+                            <input asp-for="SecurityPasswordForm.ConfirmNewPassword" />
      
                         </div>
 
@@ -71,27 +72,26 @@
             </section>
             <hr />
             <section class="delete-account">
-                <form method="post" asp-controller="Account" asp-action="Delete" novalidate>
+                <form method="post" asp-controller="Account" asp-action="DeleteAccount" novalidate>
                     <h5>Delete account</h5>
                     <p>When you delete your account, your public profile will be deactivated immediately. If you change your mind before the 14 days are up, sign in with your email and password, and we’ll send you a link to reactivate your account.</p>
                     
                     <div class="content">
                         <div id="form-terms" class="checkbox">
                             <div class="checkbox-group">
-                                <input asp-for="DeleteForm.YesDelete" />
-                                <label asp-for="DeleteForm.YesDelete"><a asp-controller="Account" asp-action="Security">Yes, I want to delete my account. </a>.</label>
+                                <input asp-for="SecurityDeleteForm.IsDeleted" />
+                                <label asp-for="SecurityDeleteForm.IsDeleted"><a asp-controller="Account" asp-action="Security">Yes, I want to delete my account. </a>.</label>
                             </div>
 
-                            <span asp-validation-for="DeleteForm.YesDelete"> </span>
+                            <span asp-validation-for="SecurityDeleteForm.IsDeleted"> </span>
                         </div>
                     </div>
 
                     <div class="form-buttons">
-                        <button class="btn-delete" type="button">Delete</button>
+                        <button class="btn-delete" type="submit">Delete</button>
                     </div>
                 </form>
             </section>
         </div>
     </section>
 </div>
- *@

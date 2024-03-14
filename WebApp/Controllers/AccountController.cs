@@ -179,12 +179,164 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
 
     }
 
+    #region Security
+
     [HttpGet]
     [Route("/account/security")]
     public async Task<IActionResult> Security()
     {
-        // Implementera logiken för säkerhetssidan här
-        return View();
+        var viewModel = new AccountSecurityViewModel
+        {
+            SecurityPasswordForm = await PopulateSecurityPasswordFormAsync()
+        };
+
+        viewModel.BasicInfoForm ??= await PopulateBasicInfoAsync();
+        viewModel.ProfileInfo ??= await PopulateProfileInfoAsync();
+        return View(viewModel);
     }
+
+    [HttpPost]
+    [Route("/account/security")]
+    public async Task<IActionResult> Security(AccountSecurityViewModel viewModel)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user != null)
+            {
+                var result = await _userManager.ChangePasswordAsync(user, viewModel.SecurityPasswordForm.CurrentPassword, viewModel.SecurityPasswordForm.NewPassword);
+
+                if (result.Succeeded)
+                {
+                    ViewData["SuccessMessage"] = "Password updated successfully!";
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("PasswordChangeError", error.Description);
+                    }
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("UserNotFound", "User not found");
+            }
+        }
+        else
+        {
+            ModelState.AddModelError("InvalidInput", "Invalid input data");
+        }
+
+        viewModel.BasicInfoForm = await PopulateBasicInfoAsync();
+        viewModel.ProfileInfo = await PopulateProfileInfoAsync();
+        viewModel.SecurityPasswordForm = await PopulateSecurityPasswordFormAsync();
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+
+    public IActionResult DeleteAccount(AccountSecurityViewModel viewModel)
+    {
+        if (TryValidateModel(viewModel.SecurityDeleteForm))
+        {
+            return RedirectToAction("Home", "default");
+        }
+
+
+        return View("Security", viewModel);
+    }
+
+    private async Task<SecurityPasswordFormViewModel> PopulateSecurityPasswordFormAsync()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        
+        if (user != null)
+        {
+            return new SecurityPasswordFormViewModel()
+            {
+                UserId = user!.Id,
+                ConfirmNewPassword = user.PasswordHash!,
+                CurrentPassword = user.PasswordHash!,
+                NewPassword = user.PasswordHash!,
+            };
+        }
+       
+        return null!;
+
+    }
+
+
+
+
+    #endregion
+
+    //#region Security
+
+    //[HttpGet]
+    //[Route("/account/security")]
+    //public async Task<IActionResult> Security()
+    //{
+    //    var viewModel = new AccountSecurityViewModel
+    //    {
+    //        SecurityPasswordForm = await PopulateSecurityPasswordFormAsync()
+    //    };
+
+    //    viewModel.BasicInfoForm ??= await PopulateBasicInfoAsync();
+    //    viewModel.ProfileInfo ??= await PopulateProfileInfoAsync();
+    //    return View(viewModel);
+    //}
+
+    //[HttpPost]
+    //[Route("/account/security")]
+    //public async Task<IActionResult> UpdateSecurityPassword(AccountSecurityViewModel viewModel)
+    //{
+    //    if (TryValidateModel(viewModel.SecurityPasswordForm))
+    //    {
+    //        return RedirectToAction("Home", "default");
+    //    }
+
+
+    //    return View("Security", viewModel);
+    //}
+
+    //[HttpPost]
+
+    //public IActionResult DeleteAccount(AccountSecurityViewModel viewModel)
+    //{
+    //    if (TryValidateModel(viewModel.SecurityDeleteForm))
+    //    {
+    //        return RedirectToAction("Home", "default");
+    //    }
+
+
+    //    return View("Security", viewModel);
+    //}
+
+    //private async Task<SecurityPasswordFormViewModel> PopulateSecurityPasswordFormAsync()
+    //{
+    //    var user = await _userManager.GetUserAsync(User);
+
+    //    if (user != null)
+    //    {
+    //        return new SecurityPasswordFormViewModel()
+    //        {
+    //            UserId = user!.Id,
+    //            ConfirmNewPassword = user.PasswordHash!,
+    //            CurrentPassword = user.PasswordHash!,
+    //            NewPassword = user.PasswordHash!,
+    //        };
+    //    }
+
+    //    return null!;
+
+    //}
+
+
+
+
+    //#endregion
 
 }
