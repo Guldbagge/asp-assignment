@@ -48,6 +48,7 @@
                             @if (Model.ProfileInfo.IsExternalAccount)
                             {
                                 <input asp-for="BasicInfoForm!.FirstName" disabled/>
+                                <input asp-for="BasicInfoForm!.FirstName" hidden />
                             }
                             else
                             {
@@ -62,6 +63,7 @@
                             @if (Model.ProfileInfo.IsExternalAccount)
                             {
                                 <input asp-for="BasicInfoForm!.LastName" disabled/>
+                                <input asp-for="BasicInfoForm!.LastName" hidden />
                             }
                             else
                             {
@@ -76,6 +78,7 @@
                             @if (Model.ProfileInfo.IsExternalAccount)
                             {
                                 <input asp-for="BasicInfoForm!.Email" disabled/>
+                                <input asp-for="BasicInfoForm!.Email" hidden />
                             }
                             else
                             {

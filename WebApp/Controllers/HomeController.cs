@@ -31,6 +31,11 @@ public class HomeController : Controller
 
         return RedirectToAction("Index");
     }
+
+    public IActionResult AccountDeletedConfirmation()
+    {
+        return View();
+    }
 }
 
 
