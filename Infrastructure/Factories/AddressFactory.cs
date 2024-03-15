@@ -1,13 +1,10 @@
-﻿
-
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Infrastructure.Models;
 
 namespace Infrastructure.Factories;
 
 public class AddressFactory
 {
-
     public static AddressEntity Create()
     {
         try
@@ -17,7 +14,6 @@ public class AddressFactory
         }
         catch { }
         return null!;
-
     }
 
     public static AddressEntity Create(string Addressline_1, string postalCode, string city)
@@ -33,7 +29,6 @@ public class AddressFactory
         }
         catch { }
         return null!;
-
     }
 
     public static AddressModel Create(AddressEntity entity)
@@ -47,12 +42,8 @@ public class AddressFactory
                 PostalCode = entity.PostalCode,
                 City = entity.City
             };
-
         }
         catch { }
         return null!;
-
     }
-
-
 }

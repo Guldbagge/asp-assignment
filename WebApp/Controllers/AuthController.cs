@@ -210,7 +210,5 @@ public class AuthController(UserManager<UserEntity> userManager, UserService use
         return RedirectToAction("SignIn", "Auth");
     }
 
-
     #endregion
-
 }

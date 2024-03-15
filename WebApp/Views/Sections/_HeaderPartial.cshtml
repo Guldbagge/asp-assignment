@@ -1,5 +1,4 @@
 ﻿@inject SignInManager<UserEntity> _signInManager
-@*  @model AccountDetailsViewModel *@
 
 @{
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
@@ -44,7 +43,6 @@
                     <a asp-controller="Account" asp-action="Details">
                         <img src="~/images/profile-image.svg" alt="Profile image">
                     </a>
-                    @*  <img src="~/images/@Model.ProfileInfo.ProfileImageUrl" alt="Profile image"> *@
                 </div>
             }
             else

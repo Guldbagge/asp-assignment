@@ -1,6 +1,4 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Models;
 
@@ -19,7 +17,6 @@ public class SignInModel
     public string Password { get; set; } = null!;
 
     [Display(Name = "Remember me", Order = 2)]
-
 
     public bool RememberMe { get; set; }
 }
