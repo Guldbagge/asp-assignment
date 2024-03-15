@@ -256,6 +256,9 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
 
     }
 
+
+
+
     //[HttpPost]
     //[Route("/account/delete")]
     //public async Task<IActionResult> DeleteAccount(AccountSecurityViewModel viewModel)
@@ -285,81 +288,47 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
     //            ViewData["ErrorMessage"] = "User not found";
     //        }
     //    }
+    //    else
+    //    {
+    //        // Om modellen inte är giltig, återvänd till vyn med valideringsmeddelanden
+    //        return View("Security", viewModel);
+    //    }
 
     //    return View("Security", viewModel);
     //}
 
 
+
+
     [HttpPost]
     [Route("/account/delete")]
-    public async Task<IActionResult> DeleteAccount(AccountSecurityViewModel viewModel)
+    public async Task<IActionResult> DeleteAccount()
     {
-        if (ModelState.IsValid)
+        var user = await _userManager.GetUserAsync(User);
+
+        if (user != null)
         {
-            var user = await _userManager.GetUserAsync(User);
+            var result = await _userManager.DeleteAsync(user);
 
-            if (user != null)
+            if (result.Succeeded)
             {
-                var result = await _userManager.DeleteAsync(user);
-
-                if (result.Succeeded)
-                {
-                    await HttpContext.SignOutAsync();
-                    ViewData["SuccessMessage"] = "Account deleted successfully!";
-                    await Task.Delay(1000);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ViewData["ErrorMessage"] = "Failed to delete the account";
-                }
+                await HttpContext.SignOutAsync();
+                ViewData["SuccessMessage"] = "Account deleted successfully!";
+                await Task.Delay(1000);
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewData["ErrorMessage"] = "User not found";
+                ViewData["ErrorMessage"] = "Failed to delete the account";
             }
         }
         else
         {
-            // Om modellen inte är giltig, återvänd till vyn med valideringsmeddelanden
-            return View("Security", viewModel);
+            ViewData["ErrorMessage"] = "User not found";
         }
 
-        return View("Security", viewModel);
+        return View("AccountDeletedConfirmation");
     }
-
-
-
-
-    //[HttpPost]
-    //[Route("/account/delete")]
-    //public async Task<IActionResult> DeleteAccount()
-    //{
-    //    var user = await _userManager.GetUserAsync(User);
-
-    //    if (user != null)
-    //    {
-    //        var result = await _userManager.DeleteAsync(user);
-
-    //        if (result.Succeeded)
-    //        {
-    //            await HttpContext.SignOutAsync();
-    //            ViewData["SuccessMessage"] = "Account deleted successfully!";
-    //            await Task.Delay(1000);
-    //            return RedirectToAction("Index", "Home");
-    //        }
-    //        else
-    //        {
-    //            ViewData["ErrorMessage"] = "Failed to delete the account";
-    //        }
-    //    }
-    //    else
-    //    {
-    //        ViewData["ErrorMessage"] = "User not found";
-    //    }
-
-    //    return View("AccountDeletedConfirmation");
-    //}
 
     #endregion
 }
