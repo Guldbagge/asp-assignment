@@ -1,6 +1,4 @@
-﻿
-
-using Infrastructure.Factories;
+﻿using Infrastructure.Factories;
 using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -56,7 +54,6 @@ public abstract class Repo<TEntity>(DbContext context) where TEntity : class
             return ResponseFactory.Error(ex.Message);
         }
     }
-
 
     public virtual async Task<ResponseResult> UpdateAsync(Expression<Func<TEntity, bool>> predicate, TEntity updatedEntity)
     {

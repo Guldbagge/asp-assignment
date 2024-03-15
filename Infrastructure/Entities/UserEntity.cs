@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace Infrastructure.Entities;
@@ -19,7 +18,6 @@ public class UserEntity : IdentityUser
     public bool IsExternalAccount { get; set; } = false;
     public DateTime? Created { get; set; }
     public DateTime? Modified { get; set; }
-
 
 
     public int? AddressId { get; set; }

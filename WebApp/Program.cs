@@ -37,8 +37,6 @@ builder.Services.AddAuthentication().AddGoogle(options =>
     options.SaveTokens = true;
 });
 
-
-
 builder.Services.AddScoped<AddressRepository>();
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<FeatureReposotory>();
@@ -49,8 +47,6 @@ builder.Services.AddScoped<AddressManager>();
 builder.Services.AddScoped<UserService>();
 
 builder.Services.AddScoped<AddressManager>();
-//builder.Services.AddScoped<BasicManager>();
-
 
 var app = builder.Build();
 app.UseHsts();

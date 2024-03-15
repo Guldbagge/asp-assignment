@@ -1,6 +1,4 @@
-﻿
-
-using Infrastructure.Models;
+﻿using Infrastructure.Models;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Factories;

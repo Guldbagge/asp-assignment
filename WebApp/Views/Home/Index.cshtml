@@ -1,19 +1,11 @@
 ﻿@model HomeIndexViewModel
 
-
-
-
 @{
     ViewData["Title"] = "Overview";
 
     var dontWantModel = new WebApp.ViewModels.DontWantViewModel();
 
 }
-
-
-@* <header>
-    @await Html.PartialAsync("~/Views/Shared/Sections/_HeaderPartial.cshtml")
-</header> *@
 
 
 @await Html.PartialAsync("~/Views/Sections/_Showcase.cshtml", Model.Showcase)
@@ -43,13 +35,6 @@
     @await Html.PartialAsync("~/Views/Sections/_DontWant.cshtml", dontWantModel)
 </section>
 
-@* <section id="dontWant">
-    @await Html.PartialAsync("~/Views/Shared/Sections/_DontWant.cshtml")
-</section> *@
-
-@* <footer>
-    @await Html.PartialAsync("~/Views/Shared/Sections/_FooterPartial.cshtml")
-</footer> *@
 
 
 

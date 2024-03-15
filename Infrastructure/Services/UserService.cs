@@ -1,6 +1,4 @@
-﻿
-
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Infrastructure.Factories;
 using Infrastructure.Helpers;
 using Infrastructure.Models;
@@ -26,10 +24,8 @@ public class UserService(UserRepository repository, AddressManager addressServic
                 return result;
 
             return ResponseFactory.Ok("User was crated succssfully.");
-
-
-
         }
+        
         catch (Exception ex)
         {
             return ResponseFactory.Error(ex.Message);
@@ -56,8 +52,4 @@ public class UserService(UserRepository repository, AddressManager addressServic
             return ResponseFactory.Error(ex.Message);
         }
     }
-
 }
-
-
-//if (PasswordHasher.ValidateSecurePassword(model.Password, userEntity.Password, userEntity.SecurityKey))

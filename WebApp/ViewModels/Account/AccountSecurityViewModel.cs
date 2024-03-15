@@ -1,7 +1,4 @@
-﻿using Infrastructure.Models;
-using System.ComponentModel.DataAnnotations;
-
-namespace WebApp.ViewModels.Account
+﻿namespace WebApp.ViewModels.Account
 {
     public class AccountSecurityViewModel
     {

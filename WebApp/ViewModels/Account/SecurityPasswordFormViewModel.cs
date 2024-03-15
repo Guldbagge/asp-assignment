@@ -23,5 +23,4 @@ public class SecurityPasswordFormViewModel
     [Required(ErrorMessage = "Password must be comfirmd")]
     public string ConfirmNewPassword { get; set; } = null!;
 
-
 }

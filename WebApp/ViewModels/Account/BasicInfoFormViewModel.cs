@@ -4,9 +4,6 @@ namespace WebApp.ViewModels.Account;
 
 public class BasicInfoFormViewModel
 {
-    //[DataType(DataType.ImageUrl)]
-    //public string? ProfileImage { get; set; } /*= "https://ui-avatars.com/api/?name=John+Doe&size=300";*/
-
     public string UserId { get; set; } = null!;
 
     [Display(Name = "First Name", Prompt = "Enter your frist name", Order = 0)]

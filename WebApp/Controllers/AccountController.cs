@@ -1,6 +1,4 @@
-﻿
-
-using Infrastructure.Entities;
+﻿using Infrastructure.Entities;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -167,7 +165,6 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
             {
                 return new AddressInfoFormViewModel()
                 {
-
                     Addressline_1 = address.Addressline_1,
                     Addressline_2 = address.Addressline_2,
                     PostalCode = address.PostalCode,
@@ -177,7 +174,6 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
         }
 
         return new AddressInfoFormViewModel();
-
     }
 
     #region Security
@@ -291,10 +287,5 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
         return View("AccountDeletedConfirmation");
     }
 
-
-
-
     #endregion
-
-
 }
