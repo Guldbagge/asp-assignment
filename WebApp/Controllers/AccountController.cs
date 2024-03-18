@@ -257,78 +257,85 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
     }
 
 
-
-
-    //[HttpPost]
-    //[Route("/account/delete")]
-    //public async Task<IActionResult> DeleteAccount(AccountSecurityViewModel viewModel)
-    //{
-    //    if (ModelState.IsValid)
-    //    {
-    //        var user = await _userManager.GetUserAsync(User);
-
-    //        if (user != null)
-    //        {
-    //            var result = await _userManager.DeleteAsync(user);
-
-    //            if (result.Succeeded)
-    //            {
-    //                await HttpContext.SignOutAsync();
-    //                ViewData["SuccessMessage"] = "Account deleted successfully!";
-    //                await Task.Delay(1000);
-    //                return RedirectToAction("Index", "Home");
-    //            }
-    //            else
-    //            {
-    //                ViewData["ErrorMessage"] = "Failed to delete the account";
-    //            }
-    //        }
-    //        else
-    //        {
-    //            ViewData["ErrorMessage"] = "User not found";
-    //        }
-    //    }
-    //    else
-    //    {
-    //        // Om modellen inte är giltig, återvänd till vyn med valideringsmeddelanden
-    //        return View("Security", viewModel);
-    //    }
-
-    //    return View("Security", viewModel);
-    //}
-
-
-
+    //add message and log out coretly
 
     [HttpPost]
     [Route("/account/delete")]
-    public async Task<IActionResult> DeleteAccount()
+    public async Task<IActionResult> DeleteAccount(AccountSecurityViewModel viewModel)
     {
-        var user = await _userManager.GetUserAsync(User);
+        if (ModelState.IsValid || viewModel.SecurityDeleteForm.IsDeleted)
 
-        if (user != null)
         {
-            var result = await _userManager.DeleteAsync(user);
+            var user = await _userManager.GetUserAsync(User);
 
-            if (result.Succeeded)
+            if (user != null)
             {
-                await HttpContext.SignOutAsync();
-                ViewData["SuccessMessage"] = "Account deleted successfully!";
-                await Task.Delay(1000);
-                return RedirectToAction("Index", "Home");
+                var result = await _userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    await HttpContext.SignOutAsync();
+                    ViewData["SuccessMessage"] = "Account deleted successfully!";
+                    await Task.Delay(1000);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewData["ErrorMessage"] = "Failed to delete the account";
+                }
             }
             else
             {
-                ViewData["ErrorMessage"] = "Failed to delete the account";
+                ViewData["ErrorMessage"] = "User not found";
             }
         }
         else
         {
-            ViewData["ErrorMessage"] = "User not found";
+            if (!viewModel.SecurityDeleteForm.IsDeleted)
+            {
+                ModelState.AddModelError("SecurityDeleteForm.IsDeleted", "Please check the box before deleting the account.");
+            }
+            return View("Security", viewModel);
         }
 
-        return View("AccountDeletedConfirmation");
+        return View("Security", viewModel);
     }
+
+
+
+
+
+
+
+    //[HttpPost]
+    //[Route("/account/delete")]
+    //public async Task<IActionResult> DeleteAccount()
+    //{
+    //    var user = await _userManager.GetUserAsync(User);
+
+    //    if (user != null)
+    //    {
+    //        var result = await _userManager.DeleteAsync(user);
+
+    //        if (result.Succeeded)
+    //        {
+    //            await HttpContext.SignOutAsync();
+    //            ViewData["SuccessMessage"] = "Account deleted successfully!";
+    //            await Task.Delay(1000);
+    //            return RedirectToAction("Index", "Home");
+    //        }
+    //        else
+    //        {
+    //            ViewData["ErrorMessage"] = "Failed to delete the account";
+    //        }
+    //    }
+    //    else
+    //    {
+    //        ViewData["ErrorMessage"] = "User not found";
+    //    }
+
+    //    return View("AccountDeletedConfirmation");
+    //}
 
     #endregion
 }
