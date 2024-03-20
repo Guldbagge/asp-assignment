@@ -15,3 +15,34 @@
     <button type="submit">Subscribe</button>
 </form>
  *@
+<span class="information">
+    @if (ViewData["Status"]?.ToString() == "Success")
+    {
+        <span class="alert alert-success">
+            Thank you for subscribing!
+        </span>
+    }
+    else if (ViewData["Status"]?.ToString() == "AlreadyExist")
+    {
+        <span class="alert alert-warning">
+            You have already subscribe!
+        </span>
+    }
+
+    else if (ViewData["Status"]?.ToString() == "Invalid")
+    {
+        <span class="alert alert-danger">
+            You must enter a vaild email address!
+        </span>
+    }
+
+    else if (ViewData["Status"]?.ToString() == "ConnectionFaild")
+    {
+        <span class="alert alert-danger">
+            Unable to contact the server. Please try again later.
+        </span>
+    }
+
+
+
+</span>
