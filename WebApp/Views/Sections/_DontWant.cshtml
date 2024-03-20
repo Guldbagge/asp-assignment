@@ -1,5 +1,26 @@
 ﻿
-@model DontWantViewModel
+
+
+@* @model DontWantViewModel *@
+
+@using WebApp.Models
+@model SubscribeViewModel
+
+@{
+    ViewData["Title"] = "Subscribe";
+}
+
+@if (Model.IsSubscribed)
+{
+    <div>Thank you for subscribing!</div>
+}
+
+@* <form asp-action="Index" asp-controller="Subscribers" method="post">
+    <input asp-for="@Model.Email" />
+    <button type="submit">Subscribe</button>
+</form> *@
+
+
 
 <div class="dontWant">
     <div class="container">
@@ -10,49 +31,50 @@
         </div>
 
         <div class="contentSignUp">
-            <form method="post" asp-controller="Home" asp-action="DontWant" novalidate>
+            <form method="post" asp-controller="Subscribers" asp-action="Index" novalidate>
+                 @*  <form method="post" asp-controller="Home" asp-action="Index" novalidate> *@
                 <div class="contentSign">
                     <div class="column">
                         <h6>Sign up for <br> Newsletters</h6>
                     </div>
                         <div class="column">
                         <div class="input-group">
-                                <input asp-for="Form.NewsletterCheckbox1" />
-                                <label asp-for="Form.NewsletterCheckbox1">Daily Roundup</label>
+                                <input asp-for="NewsletterCheckbox1" />
+                                <label asp-for="NewsletterCheckbox1">Daily Roundup</label>
                             </div>
-                                <span asp-validation-for="Form.NewsletterCheckbox1"> </span>
+                                <span asp-validation-for="NewsletterCheckbox1"> </span>
 
                             <div class="input-group">
-                                <input asp-for="Form.NewsletterCheckbox2" />
-                                <label asp-for="Form.NewsletterCheckbox2">Weekly Roundup</label>
+                                <input asp-for="NewsletterCheckbox2" />
+                                <label asp-for="NewsletterCheckbox2">Weekly Roundup</label>
                             </div>
-                                <span asp-validation-for="Form.NewsletterCheckbox2"> </span>
+                                <span asp-validation-for="NewsletterCheckbox2"> </span>
                         </div>
                         
                         <div class="column">
                         <div class="input-group">
-                                <input asp-for="Form.NewsletterCheckbox3" />
-                                <label asp-for="Form.NewsletterCheckbox3">Monthly Roundup</label>
+                                <input asp-for="NewsletterCheckbox3" />
+                                <label asp-for="NewsletterCheckbox3">Monthly Roundup</label>
                             </div>
-                                <span asp-validation-for="Form.NewsletterCheckbox3"> </span>
+                                <span asp-validation-for="NewsletterCheckbox3"> </span>
                             <div class="input-group">
-                                <input asp-for="Form.NewsletterCheckbox4" />
-                                <label asp-for="Form.NewsletterCheckbox4">Special Offers</label>
+                                <input asp-for="NewsletterCheckbox4" />
+                                <label asp-for="NewsletterCheckbox4">Special Offers</label>
                             </div>
-                                <span asp-validation-for="Form.NewsletterCheckbox4"> </span>
+                                <span asp-validation-for="NewsletterCheckbox4"> </span>
                         </div>
 
                         <div class="column">
                             <div class="input-group">
-                                <input asp-for="Form.NewsletterCheckbox5" />
-                                <label asp-for="Form.NewsletterCheckbox5">New Products</label>
+                                <input asp-for="NewsletterCheckbox5" />
+                                <label asp-for="NewsletterCheckbox5">New Products</label>
                             </div class="input-group">
-                                <span asp-validation-for="Form.NewsletterCheckbox5"> </span>
+                                <span asp-validation-for="NewsletterCheckbox5"> </span>
                             <div class="input-group">
-                                <input asp-for="Form.NewsletterCheckbox6" />
-                                <label asp-for="Form.NewsletterCheckbox6">Events</label>
+                                <input asp-for="NewsletterCheckbox6" />
+                                <label asp-for="NewsletterCheckbox6">Events</label>
                             </div>
-                                <span asp-validation-for="Form.NewsletterCheckbox6"> </span>
+                                <span asp-validation-for="NewsletterCheckbox6"> </span>
 
 
                         </div>
@@ -62,10 +84,10 @@
                     <div class="email">
                         <div id="form-email" class="input-group">
                             @* <label asp-for="Form.Email"></label> *@
-                            <span asp-validation-for="Form.Email"> </span>
-                            <input asp-for="Form.Email" />
+                            <span asp-validation-for="Email"> </span>
+                            <input asp-for="Email" />
                         </div>
-                        <button id="form-submit" type="submit" class="btn-theme">@Model.Title </button>
+                        <button id="form-submit" type="submit" class="btn-theme">Subscribe@* @Model.Title *@ </button>
                     </div>
                     
                     <div class="terms">
