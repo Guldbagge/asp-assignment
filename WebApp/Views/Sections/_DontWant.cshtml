@@ -10,10 +10,10 @@
     ViewData["Title"] = "Subscribe";
 }
 
-@if (Model.IsSubscribed)
+@* @if (Model.IsSubscribed)
 {
     <div>Thank you for subscribing!</div>
-}
+} *@
 
 @* <form asp-action="Index" asp-controller="Subscribers" method="post">
     <input asp-for="@Model.Email" />
@@ -38,41 +38,41 @@
                         <h6>Sign up for <br> Newsletters</h6>
                     </div>
                         <div class="column">
-                        <div class="input-group">
-                                <input asp-for="NewsletterCheckbox1" />
-                                <label asp-for="NewsletterCheckbox1">Daily Roundup</label>
+                            <div class="input-group">
+                                <input type = "checkbox" asp-for="NewsletterCheckbox1" />
+                                <label asp-for="NewsletterCheckbox1">Daily Newsletter</label>
                             </div>
                                 <span asp-validation-for="NewsletterCheckbox1"> </span>
 
                             <div class="input-group">
-                                <input asp-for="NewsletterCheckbox2" />
-                                <label asp-for="NewsletterCheckbox2">Weekly Roundup</label>
+                                <input type="checkbox" asp-for="NewsletterCheckbox2" />
+                                <label asp-for="NewsletterCheckbox2">Event Updates</label>
                             </div>
                                 <span asp-validation-for="NewsletterCheckbox2"> </span>
                         </div>
                         
                         <div class="column">
-                        <div class="input-group">
-                                <input asp-for="NewsletterCheckbox3" />
-                                <label asp-for="NewsletterCheckbox3">Monthly Roundup</label>
+                            <div class="input-group">
+                                <input type="checkbox" asp-for="NewsletterCheckbox3" />
+                                <label asp-for="NewsletterCheckbox3">Advertising Updates</label>
                             </div>
                                 <span asp-validation-for="NewsletterCheckbox3"> </span>
                             <div class="input-group">
-                                <input asp-for="NewsletterCheckbox4" />
-                                <label asp-for="NewsletterCheckbox4">Special Offers</label>
+                                <input type="checkbox" asp-for="NewsletterCheckbox4" />
+                                <label asp-for="NewsletterCheckbox4">Startups Weekly</label>
                             </div>
                                 <span asp-validation-for="NewsletterCheckbox4"> </span>
                         </div>
 
                         <div class="column">
                             <div class="input-group">
-                                <input asp-for="NewsletterCheckbox5" />
-                                <label asp-for="NewsletterCheckbox5">New Products</label>
+                                <input type="checkbox" asp-for="NewsletterCheckbox5" />
+                                <label asp-for="NewsletterCheckbox5">Week in Review</label>
                             </div class="input-group">
                                 <span asp-validation-for="NewsletterCheckbox5"> </span>
                             <div class="input-group">
-                                <input asp-for="NewsletterCheckbox6" />
-                                <label asp-for="NewsletterCheckbox6">Events</label>
+                                <input type="checkbox" asp-for="NewsletterCheckbox6" />
+                                <label asp-for="NewsletterCheckbox6">Podcasts</label>
                             </div>
                                 <span asp-validation-for="NewsletterCheckbox6"> </span>
 
