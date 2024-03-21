@@ -1,0 +1,21 @@
+﻿@using WebApp.Models
+@model UnsubscribeViewModel
+
+@{
+    ViewData["Title"] = "Unsubscribe";
+}
+<div class="container">
+    <h1>Unsubscribe from Newsletters</h1>
+
+    <form method="post" asp-action="Index" asp-controller="Unsubscribe" novalidate>
+        <div class="content-email">
+            <div class="email">
+                <div id="form-email" class="input-group">
+                    <span asp-validation-for="Email"></span>
+                    <input asp-for="Email" />
+                </div>
+                <button id="form-submit" type="submit" class="btn-theme">Unsubscribe</button>
+            </div>
+        </div>
+    </form>
+</div>

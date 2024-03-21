@@ -25,9 +25,8 @@ public class SubscribersController : Controller
             {
 
                 using var http = new HttpClient();
-                //var url = $"https://localhost:7026/api/subscribers?email={viewModel.Email}";
-                var url = $"https://localhost:7026/api/subscribers?email={viewModel.Email}&newsletterCheckbox1={viewModel.NewsletterCheckbox1}&newsletterCheckbox2={viewModel.NewsletterCheckbox2}&newsletterCheckbox3={viewModel.NewsletterCheckbox3}&newsletterCheckbox4={viewModel.NewsletterCheckbox4}&newsletterCheckbox5={viewModel.NewsletterCheckbox5}&newsletterCheckbox6={viewModel.NewsletterCheckbox6}&isSubscribed={viewModel.IsSubscribed}";
-
+                var apiKey = "5e29b885-1414-4046-bb3c-33ac9c611b01";
+                var url = $"https://localhost:7026/api/subscribers?key={apiKey}&email={viewModel.Email}&newsletterCheckbox1={viewModel.NewsletterCheckbox1}&newsletterCheckbox2={viewModel.NewsletterCheckbox2}&newsletterCheckbox3={viewModel.NewsletterCheckbox3}&newsletterCheckbox4={viewModel.NewsletterCheckbox4}&newsletterCheckbox5={viewModel.NewsletterCheckbox5}&newsletterCheckbox6={viewModel.NewsletterCheckbox6}&isSubscribed={viewModel.IsSubscribed}";
 
                 var request = new HttpRequestMessage(HttpMethod.Post, url);
                 var response = await http.SendAsync(request);
@@ -42,8 +41,14 @@ public class SubscribersController : Controller
                 else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
                 {
                     ViewData["Status"] = "AlreadyExist";
-                    viewModel.IsSubscribed = false;
                 }
+
+
+                else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    ViewData["Status"] = "Unauthorized";
+                }
+
             }
 
             catch
