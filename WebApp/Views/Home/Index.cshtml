@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Overview";
 
-    var dontWantModel = new WebApp.ViewModels.DontWantViewModel();
+    // var dontWantModel = new WebApp.ViewModels.DontWantViewModel();
+
+    var subscribeViewModel = new WebApp.Models.Sections.SubscribeViewModel();
 
 }
 
@@ -32,7 +34,8 @@
 </section>
 
 <section id="dontWant">
-    @await Html.PartialAsync("~/Views/Sections/_DontWant.cshtml", dontWantModel)
+    @await Html.PartialAsync("~/Views/Sections/_DontWant.cshtml", subscribeViewModel)
+
 </section>
 
 

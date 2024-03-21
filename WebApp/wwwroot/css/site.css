@@ -1703,6 +1703,7 @@ footer .container p span {
 .courses .course-card .price .original-price {
   color: #6366F1;
   font-weight: 700;
+  margin-right: 1rem;
 }
 .courses .course-card .price .discounted-price {
   color: #EF4444;
