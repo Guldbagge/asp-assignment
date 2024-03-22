@@ -53,7 +53,7 @@ public class SubscribersController : Controller
 
             catch
             {
-                ViewData["Status"] = "ConnectionFaild";
+                ViewData["Status"] = "ConnectionFailed";
             }
 
         }
