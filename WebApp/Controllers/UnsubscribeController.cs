@@ -12,7 +12,7 @@ public class UnsubscribeController : Controller
         return View();
     }
 
-    [HttpPost]
+    [HttpPut]
     public async Task<IActionResult> Index(UnsubscribeViewModel viewModel)
     {
         if (ModelState.IsValid)
