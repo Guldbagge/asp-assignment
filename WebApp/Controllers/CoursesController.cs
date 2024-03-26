@@ -46,4 +46,32 @@ public class CoursesController : Controller
 
         return View(viewModel);
     }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var viewModel = new CoursesIndexViewModel();
+
+        try
+        {
+            //var response = await _http.GetAsync("https://localhost:7026/api/courses");
+            var response = await _http.GetAsync($"https://localhost:7026/api/courses/{id}?key=5e29b885-1414-4046-bb3c-33ac9c611b01");
+
+            if (response.IsSuccessStatusCode)
+            {
+                //viewModel.Courses = JsonConvert.DeserializeObject<IEnumerable<CourseModel>>(await response.Content.ReadAsStringAsync())!;
+               var course = JsonConvert.DeserializeObject<CourseModel>(await response.Content.ReadAsStringAsync())!;
+               return View(course);
+            }
+            else
+            {
+                ViewData["Status"] = "ConnectionFailed";
+            }
+        }
+        catch
+        {
+            ViewData["Status"] = "ConnectionFailed";
+        }
+
+        return View(viewModel);
+    }
 }

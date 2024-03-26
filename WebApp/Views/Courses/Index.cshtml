@@ -57,52 +57,55 @@
 
             @foreach (var item in Model.Courses)
             {
-                <div class="course-card">
-                    <div class="course-card_img">
-                        <img class="img-card" src="~/images/courses/@item.ImageName" alt="Course card">
-                        @if (item.IsBestseller)
-                        {
-                            <div class="bestseller">
-                                <p>Bestseller</p>
-                            </div>
-                        }
-                        <img class="bookmark" src="images/courses/bookmark.svg" alt="bookmark">
-                    </div>
-                    <div class="course-card_body">
-                        <h2 class="h5">@item.Title</h2>
-                        <p class="text-s">@item.Author</p>
-                        <div class="price">
+                <a asp-action="Details" asp-controller="Courses" asp-route-id="@item.Id">
+  
+                    <div class="course-card">
+                        <div class="course-card_img">
+                            <img class="img-card" src="~/images/courses/@item.ImageName" alt="Course card">
+                            @if (item.IsBestseller)
+                            {
+                                <div class="bestseller">
+                                    <p>Bestseller</p>
+                                </div>
+                            }
+                            <img class="bookmark" src="images/courses/bookmark.svg" alt="bookmark">
+                        </div>
+                        <div class="course-card_body">
+                            <h2 class="h5">@item.Title</h2>
+                            <p class="text-s">@item.Author</p>
+                            <div class="price">
                             
-                            @if (item.DiscountPrice <= 0)
-                            {
-                                <p class="original-price">$@item.Price</p>
-                            }
+                                @if (item.DiscountPrice <= 0)
+                                {
+                                    <p class="original-price">$@item.Price</p>
+                                }
                            
-                            @if (item.DiscountPrice > 0)
-                            {
+                                @if (item.DiscountPrice > 0)
+                                {
  
-                                <p class="original-price"></p>
-                                <p class="discounted-price">$@item.DiscountPrice</p>
-                                <p class="discounted-price-line-through">$@item.Price</p>
-                            }
-                        </div>
+                                    <p class="original-price"></p>
+                                    <p class="discounted-price">$@item.DiscountPrice</p>
+                                    <p class="discounted-price-line-through">$@item.Price</p>
+                                }
+                            </div>
 
-                    </div>
-                    <div class="line"></div>
-                    <div class="course-card__footer">
-                        <div>
-                            <i class="fa-regular fa-clock"></i>
-                            <p>@item.Hours hours</p>
                         </div>
-                        <div>
-                            <i class="fa-regular fa-thumbs-up"></i>
-                            <p>
-                                @($"{item.LikesInProcent * 100:0}%")
-                                @($"{item.LikesInNumbers / 1000:N1}K")
-                            </p>
+                        <div class="line"></div>
+                        <div class="course-card__footer">
+                            <div>
+                                <i class="fa-regular fa-clock"></i>
+                                <p>@item.Hours hours</p>
+                            </div>
+                            <div>
+                                <i class="fa-regular fa-thumbs-up"></i>
+                                <p>
+                                    @($"{item.LikesInProcent * 100:0}%")
+                                    @($"{item.LikesInNumbers / 1000:N1}K")
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
             }
 
