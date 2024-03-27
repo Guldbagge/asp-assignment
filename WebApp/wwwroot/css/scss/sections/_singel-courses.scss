@@ -31,6 +31,7 @@
                     align-items: center;
                     gap: 0.5rem;
 
+
                     .fa-house {
                         color: var(--gray-400);
                     }
@@ -56,8 +57,9 @@
                 }
 
                 .courses {
-                    color: var(--theme);
+                    color: var(--gray-300);
                     margin-bottom: 0;
+                    background-color: var(--transparent);
                 }
             }
         }
@@ -420,17 +422,17 @@
                 }
 
                 h2 {
-                    color: #fff;
+                    color: var(--gray-000);
                     margin-bottom: 1rem;
                 }
 
                 h5 {
-                    color: #fff;
+                    color: var(--gray-000);
                     margin-bottom: 1rem;
                 }
 
                 p {
-                    color: #fff;
+                    color: var(--gray-000);
                     margin-bottom: 1rem;
                 }
 

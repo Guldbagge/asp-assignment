@@ -3883,8 +3883,9 @@ background-position: 5px center;*/
   color: var(--gray-300);
 }
 .singel-courses .singel-courses-box .container .home-course .courses {
-  color: var(--theme);
+  color: var(--gray-300);
   margin-bottom: 0;
+  background-color: var(--transparent);
 }
 .singel-courses .singel-courses-box .content {
   display: none;
@@ -4191,15 +4192,15 @@ background-position: 5px center;*/
   }
 }
 .singel-courses .albert-flores .container .albert-flores-text h2 {
-  color: #fff;
+  color: var(--gray-000);
   margin-bottom: 1rem;
 }
 .singel-courses .albert-flores .container .albert-flores-text h5 {
-  color: #fff;
+  color: var(--gray-000);
   margin-bottom: 1rem;
 }
 .singel-courses .albert-flores .container .albert-flores-text p {
-  color: #fff;
+  color: var(--gray-000);
   margin-bottom: 1rem;
 }
 .singel-courses .albert-flores .container .albert-flores-text .wave {
