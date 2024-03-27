@@ -1,8 +1,121 @@
 header {
     padding: 15px 0;
+    background-color: var(--gray-000);
 
     &.gray-background {
-        background-color: $gray-100;
+    }
+
+    .container {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr auto;
+        grid-template-areas: "logo mobile";
+        gap: 40px;
+
+        @include lg {
+            grid-template-columns: auto 1fr auto auto;
+            grid-template-areas: "logo menu switch buttons";
+        }
+
+        #logo {
+            grid-area: logo;
+        }
+
+        #menu {
+            grid-area: menu;
+            display: none;
+
+            @include lg {
+                display: block;
+            }
+
+            nav {
+                display: flex;
+                gap: 15px;
+            }
+        }
+
+        .btn-switch {
+            grid-area: switch;
+            display: none;
+
+            @include lg {
+                display: block;
+            }
+        }
+
+        .account-buttons {
+            grid-area: buttons;
+            display: none;
+            gap: 15px;
+
+            @include lg {
+                display: flex;
+            }
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            margin-left: 15px;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .btn-mobile {
+            grid-area: mobile;
+            display: block;
+
+            @include lg {
+                display: none;
+            }
+        }
+    }
+
+    #mobil-menu {
+        display: none;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        background-color: var(--white);
+
+        .dark-mode & {
+            background-color: var(--gray-900);
+        }
+
+
+        .account-buttons {
+            .btn-gray {
+                margin-bottom: 15px;
+                margin-top: 15px;
+            }
+
+            .btn-theme {
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    #mobil-menu nav {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    #mobil-menu[aria-expanded="true"] {
+        display: flex;
+    }
+}
+
+/*header {
+    padding: 15px 0;
+       background-color: $gray-100;
+
+    &.gray-background {
     }
 
     .container {
@@ -110,3 +223,4 @@ header {
         display: flex;
     }
 }
+*/
