@@ -1,5 +1,6 @@
 ﻿#signin {
     height: 100%;
+    background-color: var(--gray-000);
 
     .container {
         display: flex;
@@ -50,14 +51,12 @@
         }
 
         .extearnal-provider {
-            .provider{
+            .provider {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 gap: 1rem;
                 margin: 1rem 0;
-
-  
             }
         }
     }
