@@ -1,18 +1,36 @@
-﻿ using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System;
 
-namespace WebApp.Controllers;
-
-public class SiteSettings : Controller
+namespace WebApp.Controllers
 {
-    public IActionResult ChangeTheme(string mode)
+    public class SiteSettingsController : Controller
     {
-        var option = new CookieOptions
+        public IActionResult ChangeTheme(string mode)
         {
-            Expires = DateTime.Now.AddYears(1),
-        };
+            var option = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(60),
+            };
 
-        Response.Cookies.Append("ThemeMode", mode, option);
+            Response.Cookies.Append("ThemeMode", mode, option);
 
-        return Ok();
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult CookieConsent()
+        {
+            var option = new CookieOptions
+            {
+                Expires = DateTime.Now.AddYears(1),
+                HttpOnly = true,
+                Secure = true,
+            };
+
+            Response.Cookies.Append("CookieConsent", "true", option);
+
+            return Ok();
+        }
     }
 }
