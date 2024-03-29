@@ -2,14 +2,14 @@
     let spanElement = document.querySelector(`[data-valmsg-for="${element.name}"]`)
 
     if (validationResult) {
-        element.classList.remove('input-valitation-error')
+        element.classList.remove('input-validation-error')
         spanElement.classList.remove('field-validation-error')
         spanElement.classList.add('field-validation-valid')
         spanElement.innerHTML = ''
     }
 
     else {
-        element.classList.add('input-valitation-error')
+        element.classList.add('input-validation-error')
         spanElement.classList.add('field-validation-error')
         spanElement.classList.remove('field-validation-valid')
         spanElement.innerHTML = element.dataset.valRequired
