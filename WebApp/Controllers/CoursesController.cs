@@ -72,4 +72,73 @@ public class CoursesController : Controller
 
         return View(viewModel);
     }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    //[HttpPost]
+    //public async Task<IActionResult> Create(CourseRegistrationFormViewModel viewModel)
+    //{
+    //    try
+    //    {
+    //        if (ModelState.IsValid)
+    //        {
+    //            using var http = new HttpClient();
+
+    //            var json = JsonConvert.SerializeObject(viewModel);
+    //            using var content = new StringContent(json, Encoding.UTF8, "application/json");
+    //            var response = await http.PostAsync($"https://localhost:7026/api/courses", content);
+
+    //            if (response.IsSuccessStatusCode)
+    //            {
+    //                ViewData["Status"] = "CourseCreated";
+    //            }
+    //            else
+    //            {
+    //                ViewData["Status"] = "ConnectionFailed"; 
+    //            }
+    //        }
+    //    }
+
+    //    catch
+    //    {
+    //        ViewData["Status"] = "ConnectionFailed";
+    //    }
+
+    //    return View();
+    //}
+    [HttpPost]
+    public async Task<IActionResult> Create(CourseRegistrationFormViewModel viewModel)
+    {
+        try
+        {
+            if (ModelState.IsValid)
+            {
+                using var http = new HttpClient();
+
+                var json = JsonConvert.SerializeObject(viewModel);
+                using var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await http.PostAsync($"https://localhost:7026/api/courses", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    ViewData["Status"] = "Success";
+                }
+                else
+                {
+                    ViewData["Status"] = "ConnectionFailed";
+                    ViewData["StatusCode"] = (int)response.StatusCode; // Store status code
+                }
+            }
+        }
+        catch
+        {
+            ViewData["Status"] = "ConnectionFailed";
+        }
+
+        return View();
+    }
+
 }
