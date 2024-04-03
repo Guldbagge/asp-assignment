@@ -112,6 +112,7 @@ public class CoursesController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CourseRegistrationFormViewModel viewModel)
     {
+
         try
         {
             if (ModelState.IsValid)
@@ -129,7 +130,7 @@ public class CoursesController : Controller
                 else
                 {
                     ViewData["Status"] = "ConnectionFailed";
-                    ViewData["StatusCode"] = (int)response.StatusCode; // Store status code
+                    ViewData["StatusCode"] = (int)response.StatusCode;
                 }
             }
         }
