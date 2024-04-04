@@ -34,90 +34,78 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 document.addEventListener('DOMContentLoaded', function () {
-    const dropdownBtn = document.querySelector('.dropbtn');
-    const courseSelect = document.getElementById('courseSearchInput');
-    const courseSearchButton = document.getElementById('courseSearchButton');
-    const filterDropdown = document.querySelector('.dropdown-content');
-
-    dropdownBtn.addEventListener('click', function () {
-        this.nextElementSibling.classList.toggle('show');
-    });
-
-    window.DomContentLoaded = function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const category = urlParams.get('category');
-
-        if (category !== null) {
-            CategorySelect.value = category;
-        }
-    };
-
-    dropdownBtn.addEventListener('change', function () {
-        localStorage.setItem('selectedCategory', this.value);
-    });
-
-    const savedCategory = localStorage.getItem('selectedCategory');
-    if (savedCategory !== null) {
-        CategorySelect.value = savedCategory;
-    }
-
-    courseSearchButton.addEventListener('click', searchCourses);
-    courseSelect.addEventListener('keypress', function (event) {
-        if (event.key === 'Enter') {
-            searchCourses();
-        }
-    });
-
-    function searchCourses() {
-        const searchTerm = courseSelect.value.trim().toLowerCase();
-        const courseCards = document.querySelectorAll('.course-card');
-
-        courseCards.forEach(function (card) {
-            const title = card.querySelector('.course-card_body h2').innerText.toLowerCase();
-            const author = card.querySelector('.course-card_body p').innerText.toLowerCase();
-
-            if (title.includes(searchTerm) || author.includes(searchTerm)) {
-                card.style.display = 'block'; // Visa kurskortet om söktermen matchar titeln eller författaren
-            } else {
-                card.style.display = 'none'; // Dölj kurskortet om söktermen inte matchar titeln eller författaren
-            }
-        });
-    }
-
-
-
-    filterDropdown.addEventListener('click', function (event) {
-        const filterOption = event.target.dataset.filter;
-        if (filterOption) {
-            filterCourses(filterOption);
-        }
-    });
-
-    function filterCourses(filterOption) {
-        const courseCards = document.querySelectorAll('.course-card');
-        courseCards.forEach(function (card) {
-            if (filterOption === 'bestsellers' && card.querySelector('.bestseller')) {
-                card.style.display = 'block';
-            } else if (filterOption === 'non-bestsellers' && !card.querySelector('.bestseller')) {
-                card.style.display = 'block';
-            } else if (filterOption === 'all') {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
+    select();
+    searchQuery();
 });
 
+function select() {
+    let selectContainer = document.querySelector('.select');
+    let selected = selectContainer.querySelector('.selected');
+    let selectOptions = selectContainer.querySelector('.select-options');
+
+    try {
+        selectContainer.addEventListener('click', function () {
+            selectOptions.style.display = (selectOptions.style.display === 'block' ? 'none' : 'block');
+        });
+
+        let options = selectOptions.querySelectorAll('.option');
+        options.forEach(function (option) {
+            option.addEventListener('click', function () {
+                selected.innerHTML = this.textContent;
+                selectOptions.style.display = 'none';
+                let category = this.getAttribute('data-value');
+                selected.setAttribute('data-value', category);
+                upddateCourseByFilters();
+            });
+        });
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function searchQuery() {
+    try
+    {
+        document.querySelector('#searchQuery').addEventListener('keyup', function () {
+            upddateCourseByFilters()
+        })
+
+    }
+    catch
+    {
+        console.error(error);
+    }
+}
+
+function upddateCourseByFilters() {
+
+    const category = document.querySelector('.select .selected').getAttribute('data-value') || 'all';
+    const searchQuery = document.querySelector('#searchQuery').value
+
+    const url = (`/courses/index?category=${encodeURIComponent(category)}&searchQuery=${encodeURIComponent(searchQuery)}`);
+
+        
+    fetch(url)
+    .then(res => res.text())
+        .then(data => {
+            const parser = new DOMParser();
+            const dom = parser.parseFromString(data, 'text/html');
+            document.querySelector('.grid').innerHTML = dom.querySelector('.grid').innerHTML;
+        })
+        .catch(err => console.error(err));
+}
 
 
 
 //document.addEventListener('DOMContentLoaded', function () {
-//    const CategorySelect = document.getElementById('CategorySelect');
+//    const dropdownBtn = document.querySelector('.dropbtn');
+//    const courseSelect = document.getElementById('courseSearchInput');
+//    const courseSearchButton = document.getElementById('courseSearchButton');
+//    const filterDropdown = document.querySelector('.dropdown-content');
 
-//    CategorySelect.addEventListener('change', function () {
-//        this.form.submit();
-
+//    dropdownBtn.addEventListener('click', function () {
+//        this.nextElementSibling.classList.toggle('show');
 //    });
 
 //    window.DomContentLoaded = function () {
@@ -125,42 +113,63 @@ document.addEventListener('DOMContentLoaded', function () {
 //        const category = urlParams.get('category');
 
 //        if (category !== null) {
-//            categorySelect.value = category;
+//            CategorySelect.value = category;
 //        }
 //    };
 
-//    categorySelect.addEventListener('change', function () {
+//    dropdownBtn.addEventListener('change', function () {
 //        localStorage.setItem('selectedCategory', this.value);
-
-//        });
+//    });
 
 //    const savedCategory = localStorage.getItem('selectedCategory');
 //    if (savedCategory !== null) {
-//        categorySelect.value = savedCategory;
+//        CategorySelect.value = savedCategory;
 //    }
 
- 
-//const switchMode = document.getElementById('switch-mode');
-//const body = document.body;
+//    courseSearchButton.addEventListener('click', searchCourses);
+//    courseSelect.addEventListener('keypress', function (event) {
+//        if (event.key === 'Enter') {
+//            searchCourses();
+//        }
+//    });
 
-//const isDarkMode = localStorage.getItem('darkMode') === 'true';
+//    function searchCourses() {
+//        const searchTerm = courseSelect.value.trim().toLowerCase();
+//        const courseCards = document.querySelectorAll('.course-card');
 
-//switchMode.checked = isDarkMode;
+//        courseCards.forEach(function (card) {
+//            const title = card.querySelector('.course-card_body h2').innerText.toLowerCase();
+//            const author = card.querySelector('.course-card_body p').innerText.toLowerCase();
 
-//if (isDarkMode) {
-//    body.classList.add('dark-mode');
-//} else {
-//    body.classList.remove('dark-mode');
-//}
-
-//switchMode.addEventListener('change', toggleDarkMode);
-
-//function toggleDarkMode() {
-//    if (switchMode.checked) {
-//        body.classList.add('dark-mode');
-//        localStorage.setItem('darkMode', 'true'); 
-//    } else {
-//        body.classList.remove('dark-mode');
-//        localStorage.setItem('darkMode', 'false'); 
+//            if (title.includes(searchTerm) || author.includes(searchTerm)) {
+//                card.style.display = 'block'; // Visa kurskortet om söktermen matchar titeln eller författaren
+//            } else {
+//                card.style.display = 'none'; // Dölj kurskortet om söktermen inte matchar titeln eller författaren
+//            }
+//        });
 //    }
-//}
+
+
+
+//    filterDropdown.addEventListener('click', function (event) {
+//        const filterOption = event.target.dataset.filter;
+//        if (filterOption) {
+//            filterCourses(filterOption);
+//        }
+//    });
+
+//    function filterCourses(filterOption) {
+//        const courseCards = document.querySelectorAll('.course-card');
+//        courseCards.forEach(function (card) {
+//            if (filterOption === 'bestsellers' && card.querySelector('.bestseller')) {
+//                card.style.display = 'block';
+//            } else if (filterOption === 'non-bestsellers' && !card.querySelector('.bestseller')) {
+//                card.style.display = 'block';
+//            } else if (filterOption === 'all') {
+//                card.style.display = 'block';
+//            } else {
+//                card.style.display = 'none';
+//            }
+//        });
+//    }
+//});
