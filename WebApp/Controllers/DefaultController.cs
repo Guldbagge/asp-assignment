@@ -6,6 +6,8 @@ namespace WebApp.Controllers
     {
         public IActionResult Index()
         {
+            //if (HttpContext.Request.Cookies.TryGetValue("Access Tooken", out var token))
+            //{ }
             return View();
         }
     }
