@@ -1,5 +1,6 @@
 ﻿
 using Infrastructure.Entities;
+using Infrastructure.Models;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +23,20 @@ public class CoursesController(CategoryService categoryService, CourseService co
     private readonly CategoryService _categoryService = categoryService;
     private readonly CourseService _courseService = courseService;
 
-    public async Task<IActionResult> Index(string category = "", string searchQuery ="")
+    public async Task<IActionResult> Index(string category = "", string searchQuery ="", int pageNumber = 1, int pageSize = 6)
     {
+        var coursesResult = await _courseService.GetCoursesAsync(category, searchQuery, pageNumber, pageSize);
         var viewModel = new CoursesIndexViewModel
         {
             Categories = await _categoryService.GetCategoriesAsync(),
-            Courses = await _courseService.GetCoursesAsync(category, searchQuery),
+            Courses = coursesResult.Courses,
+            Pagination = new Pagination
+            {
+                PageSize = pageSize,
+                CurrentPage = pageNumber,
+                TotalPages = coursesResult.TotalPages,
+                TotalItems = coursesResult.TotlaItems
+            }
         };
 
         return View(viewModel);
