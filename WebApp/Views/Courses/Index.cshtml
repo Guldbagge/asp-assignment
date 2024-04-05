@@ -142,14 +142,35 @@
             </div>
         }
 
-        <div class="pagination">
+        @if (Model.Pagination != null && Model.Pagination.TotalPages > 1)
+        {
+            <div class="pagination">
+                <a class="btn-transparent"><i class="fa-light fa-chevron-left"></i></a>
+                @for (int i = 1; i <= Model.Pagination.TotalPages; i++)
+                {
+                    if (i == Model.Pagination.CurrentPage)
+                    {
+                        <a class="btn-theme">@i</a>
+                    }
+                    else
+                    {
+                        <a class="btn-gray" href="@Url.Action("Index", new { pageNumber = i, pageSize = Model.Pagination.PageSize })">@i</a>
+                    }
+                }
+                <a class="btn-transparent"><i class="fa-light fa-chevron-right"></i></a>
+            </div>
+        }
+
+@*         <div class="pagination">
             <a class="btn-transparent" href="#"><i class="fa-light fa-chevron-left"></i></i></a>
             <a class="btn-transparent" href="#">1</a>
             <a class="btn-gray" href="#">2</a>
             <a class="btn-theme" href="#">3</a>
             <a class="btn-transparent" href="#">4</a>
             <a class="btn-transparent" href="#"><i class="fa-light fa-chevron-right"></i></a>
-        </div>
+        </div> *@
+
+
 
         <div class="banner">
             <div class="banner-text">
