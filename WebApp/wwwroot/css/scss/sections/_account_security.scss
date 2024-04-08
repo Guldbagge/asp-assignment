@@ -17,6 +17,7 @@
 
 
     aside {
+
         @include lg {
             border-right: 1px solid var(--gray-300);
             padding-right: 20px;
@@ -25,6 +26,25 @@
         .profile-info {
             margin: 20px;
             text-align: center;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+
+            .profile-info-img {
+                position: relative;
+                z-index: 1;
+                height: 80px;
+                width: 80px;
+
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
 
             h5 {
                 margin-top: 15px;
@@ -130,9 +150,7 @@
         }
     }
 }
-
-
-/*#account-security {
+    /*#account-security {
     display: flex;
     flex-direction: column;
     justify-content: center;

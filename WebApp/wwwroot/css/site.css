@@ -707,6 +707,8 @@ header .container .profile-img {
 header .container .profile-img img {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 header .container .btn-mobile {
   grid-area: mobile;
@@ -2041,6 +2043,32 @@ background-position: 5px center;*/
 #account-details aside .profile-info {
   margin: 20px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+#account-details aside .profile-info .profile-info-img {
+  position: relative;
+  z-index: 1;
+  height: 80px;
+  width: 80px;
+}
+#account-details aside .profile-info .profile-info-img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+#account-details aside .profile-info .profile-info-img .fa-refresh {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--gray-700);
+  color: var(--white);
+  z-index: 2;
+  border-radius: 50%;
+  padding: 0.5rem;
 }
 #account-details aside .profile-info h5 {
   margin-top: 15px;
@@ -3359,6 +3387,22 @@ background-position: 5px center;*/
 #account-security aside .profile-info {
   margin: 20px;
   text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+#account-security aside .profile-info .profile-info-img {
+  position: relative;
+  z-index: 1;
+  height: 80px;
+  width: 80px;
+}
+#account-security aside .profile-info .profile-info-img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
 }
 #account-security aside .profile-info h5 {
   margin-top: 15px;

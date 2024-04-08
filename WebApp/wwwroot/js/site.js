@@ -99,6 +99,26 @@ function upddateCourseByFilters() {
         .catch(err => console.error(err));
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    handleProfileImageUpload();
+})
+
+function handleProfileImageUpload() {
+    try {
+        let fileUploader = document.querySelector('#fileUploader');
+        if (fileUploader != undefined) {
+            fileUploader.addEventListener('change', function () {
+                if (this.files.length > 0) {
+                    this.form.submit();
+                }
+            })
+        }
+
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
 
 
 //document.addEventListener('DOMContentLoaded', function () {

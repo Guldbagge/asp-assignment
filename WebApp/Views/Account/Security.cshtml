@@ -1,5 +1,13 @@
 ﻿@model AccountSecurityViewModel
 
+@inject SignInManager<UserEntity> _signInManager
+@inject UserManager<UserEntity> _userManager
+
+@{
+    var user = await _signInManager.UserManager.GetUserAsync(User);
+    var ProfileImageUrl = user != null ? user.ProfileImageUrl : null;
+}
+
 @{
     ViewData["Title"] = $"{Model.BasicInfoForm?.FirstName} {Model.BasicInfoForm?.LastName}'s profile";
 }
@@ -8,7 +16,9 @@
     <section id="account-security">
         <aside>
             <div class="profile-info">
-                <img src="~/images/@Model.ProfileInfo?.ProfileImageUrl" alt="@Model.ProfileInfo?.FirstName @Model.ProfileInfo?.LastName" />
+                <div class=" profile-info-img">
+                    <img src="~/images/uploads/profiles/@user.ProfileImageUrl" alt="">
+                </div>
                 <h5>@Model.BasicInfoForm?.FirstName @Model.BasicInfoForm?.LastName</h5>
                 <p>@Model.BasicInfoForm?.Email</p>
             </div>

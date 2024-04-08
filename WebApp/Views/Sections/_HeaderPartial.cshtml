@@ -1,4 +1,10 @@
 ﻿@inject SignInManager<UserEntity> _signInManager
+@inject UserManager<UserEntity> _userManager
+
+@{
+    var user = await _signInManager.UserManager.GetUserAsync(User);
+    var ProfileImageUrl = user != null ? user.ProfileImageUrl : null;
+}
 
 @{
     var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
@@ -46,7 +52,8 @@
                 <a class="btn-gray" asp-controller="Auth" asp-action="SignOut"><i class="fa-light fa-right-to-bracket"></i><span>Sign Out</span></a>
                 <div class="profile-img">
                     <a asp-controller="Account" asp-action="Details">
-                        <img src="~/images/profile-image.svg" alt="Profile image">
+                       <img src="~/images/uploads/profiles/@user.ProfileImageUrl" alt="">
+                        @*  <img src="~/images/profile-image.svg" alt="Profile image"> *@
                     </a>
                 </div>
             }

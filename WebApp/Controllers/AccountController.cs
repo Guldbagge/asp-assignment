@@ -301,11 +301,40 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
         return View("Security", viewModel);
     }
 
+    #endregion
 
+    [HttpPost]
+    public async Task<IActionResult> UploadProfilImage(IFormFile file)
+    {
+        var user = await _userManager.GetUserAsync(User);
 
+        if (user != null && file != null && file.Length != 0)
+        {
+            var fileName = $"p_{user.Id}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/uploads/profiles", fileName);
 
+            using (var fs = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(fs);
+            }
 
+            user.ProfileImageUrl = fileName;
+            var result = await _userManager.UpdateAsync(user);
 
+            if (result.Succeeded)
+            {
+                TempData["SuccessMessage"] = "Image uploaded successfully!";
+            }
+            
+        }
+        else
+        {
+            TempData["ErrorMessage"] = "Failed to upload the image";
+        }
+
+        return RedirectToAction("Details", "Account");
+
+    }
 
     //[HttpPost]
     //[Route("/account/delete")]
@@ -336,6 +365,4 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
 
     //    return View("AccountDeletedConfirmation");
     //}
-
-    #endregion
 }
