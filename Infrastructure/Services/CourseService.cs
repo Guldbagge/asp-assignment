@@ -60,4 +60,63 @@ public class CourseService(HttpClient http, IConfiguration configuration)
         return response;
     }
 
+    public async Task<HttpResponseMessage> AddCourseToSavedAsync(string userId, int courseId)
+    {
+        try
+        {
+            // Skapa en modell för att skicka data till API:et
+            var userCourseModel = new UserCourseModel
+            {
+                UserId = userId,
+                CourseId = courseId
+            };
+
+            // Konvertera modellen till JSON-format
+            var jsonUserCourse = JsonConvert.SerializeObject(userCourseModel);
+
+            // Skapa en HttpContent-objekt med JSON-data
+            var content = new StringContent(jsonUserCourse, Encoding.UTF8, "application/json");
+
+            // Utför en HTTP POST-förfrågan för att lägga till kursen i sparade kurser
+            var response = await _http.PostAsync(_configuration["ApiUris:UserCourses"], content);
+
+            // Returnera svaret från API:et
+            return response;
+        }
+        catch (Exception ex)
+        {
+            // Logga felmeddelandet
+            Console.WriteLine($"Error: {ex.Message}");
+            throw; // Kasta vidare undantaget för att hanteras högre upp i stacken
+        }
+    }
+
+    public async Task<List<CourseModel>> GetSavedCoursesAsync(string userId)
+    {
+        try
+        {
+            // Utför en HTTP GET-förfrågan för att hämta användarens sparade kurser
+            var response = await _http.GetAsync($"{_configuration["ApiUris:UserCourses"]}?userId={userId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Deserialisera svaret till en lista med sparade kurser
+                var savedCourses = JsonConvert.DeserializeObject<List<CourseModel>>(await response.Content.ReadAsStringAsync());
+                return savedCourses;
+            }
+            else
+            {
+                // Om förfrågan misslyckades, returnera null eller kasta ett undantag, beroende på vad som är lämpligt för din applikation
+                return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Logga felmeddelandet
+            Console.WriteLine($"Error: {ex.Message}");
+            throw; // Kasta vidare undantaget för att hanteras högre upp i stacken
+        }
+    }
+
+
 }

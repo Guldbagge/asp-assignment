@@ -1,18 +1,26 @@
 ﻿using Infrastructure.Entities;
+using Infrastructure.Models;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using WebApp.Models.Views;
+using WebApp.Services;
 using WebApp.ViewModels.Account;
+using static System.Net.WebRequestMethods;
 
 namespace WebApp.Controllers;
 
 [Authorize]
-public class AccountController(UserManager<UserEntity> userManager, AddressManager addressManager) : Controller
+public class AccountController(UserManager<UserEntity> userManager, AddressManager addressManager, CategoryService categoryService, CourseService courseService) : Controller
 {
     private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly AddressManager _addressManager = addressManager;
+    private readonly CategoryService _categoryService = categoryService;
+    private readonly CourseService _courseService = courseService;
+
 
     [HttpGet]
     [Route("/account/details")]
@@ -335,6 +343,102 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
         return RedirectToAction("Details", "Account");
 
     }
+
+    [HttpGet]
+    public async Task<IActionResult> SavedCourses()
+    {
+        try
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized(); // Användaren är inte inloggad
+            }
+
+            var savedCourses = await _courseService.GetSavedCoursesAsync(user.Id);
+            var viewModel = new CoursesIndexViewModel
+            {
+                Courses = savedCourses // Antag att du sätter sparade kurser här
+            };
+
+            return View(viewModel); // Skicka listan med sparade kurser till vyn
+        }
+        catch (Exception ex)
+        {
+            // Logga felmeddelandet
+            return StatusCode(500, "Failed to retrieve saved courses. Please try again later.");
+        }
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> SavedCourses(UserCourseModel userCourse)
+    {
+
+
+        try
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return Unauthorized(); // Användaren är inte inloggad
+            }
+
+            var response = await _courseService.AddCourseToSavedAsync(user.Id, userCourse.CourseId);
+            if (response.IsSuccessStatusCode)
+            {
+                return Ok(); // Kursen lades till i användarens sparade kurser
+            }
+            else
+            {
+                return BadRequest(); // Misslyckades med att lägga till kursen
+            }
+        }
+        catch (Exception ex)
+        {
+            // Logga felmeddelandet
+            return StatusCode(500, "Failed to add course to saved courses. Please try again later.");
+        }
+
+    }
+
+
+
+
+
+
+
+    //public async Task<IActionResult> SavedCourses(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 6)
+    //{
+    //    try
+    //    {
+    //        var coursesResult = await _courseService.GetCoursesAsync(category, searchQuery, pageNumber, pageSize);
+    //        var viewModel = new CoursesIndexViewModel
+    //        {
+    //            Categories = await _categoryService.GetCategoriesAsync(),
+    //            Courses = coursesResult.Courses,
+    //            Pagination = new Pagination
+    //            {
+    //                PageSize = pageSize,
+    //                CurrentPage = pageNumber,
+    //                TotalPages = coursesResult.TotalPages,
+    //                TotalItems = coursesResult.TotlaItems
+    //            }
+    //        };
+
+    //        return View(viewModel);
+    //    }
+    //    catch (Exception)
+    //    {
+    //        ViewData["Status"] = "ConnectionFailed";
+
+    //        var viewModel = new CoursesIndexViewModel
+    //        {
+    //        };
+
+    //        return View(viewModel);
+    //    }
+    //}
 
     //[HttpPost]
     //[Route("/account/delete")]
