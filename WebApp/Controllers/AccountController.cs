@@ -352,12 +352,11 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return Unauthorized(); // Användaren är inte inloggad
+                return Unauthorized(); 
             }
 
             var savedCourses = await _courseService.GetSavedCoursesAsync(user.Id);
         
-            // Skapa en lista av UserSavedCourseModel och lägg till varje sparad kurs
             var viewModel = new List<UserSavedCourseModel>();
             foreach(var course in savedCourses)
             {
@@ -377,14 +376,12 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
                 viewModel.Add(userSavedCourse);
             }
 
-            return View(viewModel); // Skicka listan med sparade kurser till vyn
+            return View(viewModel);
         }
         catch (Exception ex)
         {
-            // Logga felmeddelandet
             Console.WriteLine($"Error: {ex.Message}");
     
-            // Returnera vyn med temp data och statuskoden
             var errorMessage = "Failed to retrieve saved courses";
             TempData["ErrorMessage"] = errorMessage;
             return StatusCode(500, errorMessage);
@@ -401,29 +398,29 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return Unauthorized(); // Användaren är inte inloggad
+                return Unauthorized();
             }
 
             var response = await _courseService.AddCourseToSavedAsync(user.Id, userCourse.CourseId);
             if (response.IsSuccessStatusCode)
             {
-                // Kursen lades till i användarens sparade kurser
+
                 TempData["SuccessMessage"] = "Course added to saved courses successfully.";
-                return RedirectToAction(nameof(SavedCourses)); // Redirect till samma action för att visa meddelandet
+                return RedirectToAction(nameof(SavedCourses)); 
             }
             else
             {
-                // Misslyckades med att lägga till kursen
+
                 TempData["ErrorMessage"] = "Failed to add course to saved courses.";
-                return RedirectToAction(nameof(SavedCourses)); // Redirect till samma action för att visa meddelandet
+                return RedirectToAction(nameof(SavedCourses)); 
             }
         }
         catch (Exception ex)
         {
-            // Logga felmeddelandet
+
             Console.WriteLine($"Error: {ex.Message}");
             TempData["ErrorMessage"] = "Failed to add course to saved courses. Please try again later.";
-            return RedirectToAction(nameof(SavedCourses)); // Redirect till samma action för att visa meddelandet
+            return RedirectToAction(nameof(SavedCourses)); 
         }
     }
 

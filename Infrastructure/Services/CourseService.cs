@@ -51,15 +51,15 @@ public class CourseService(HttpClient http, IConfiguration configuration)
 
     public async Task<HttpResponseMessage> CreateCourseAsync(CourseModel course)
     {
-        // Konvertera kursen till JSON-format
+     
         var jsonCourse = JsonConvert.SerializeObject(course);
-        // Skapa en HttpContent-objekt med JSON-data
+        
         var content = new StringContent(jsonCourse, Encoding.UTF8, "application/json");
 
-        // Utför en HTTP POST-förfrågan för att skapa kursen
+        
         var response = await _http.PostAsync(_configuration["ApiUris:Courses"], content);
 
-        // Returnera svaret från API:et
+        
         return response;
     }
 
@@ -67,30 +67,52 @@ public class CourseService(HttpClient http, IConfiguration configuration)
     {
         try
         {
-            // Skapa en modell för att skicka data till API:et
+            
             var userCourseModel = new UserCourseModel
             {
                 UserId = userId,
                 CourseId = courseId
             };
 
-            // Konvertera modellen till JSON-format
+           
             var jsonUserCourse = JsonConvert.SerializeObject(userCourseModel);
 
-            // Skapa en HttpContent-objekt med JSON-data
+            
             var content = new StringContent(jsonUserCourse, Encoding.UTF8, "application/json");
 
-            // Utför en HTTP POST-förfrågan för att lägga till kursen i sparade kurser
+            
             var response = await _http.PostAsync(_configuration["ApiUris:UserCourses"], content);
 
-            // Returnera svaret från API:et
+            
             return response;
         }
         catch (Exception ex)
         {
-            // Logga felmeddelandet
+        
             Console.WriteLine($"Error: {ex.Message}");
-            throw; // Kasta vidare undantaget för att hanteras högre upp i stacken
+            throw; 
+        }
+    }
+
+    public async Task<List<UserSavedCourseModel>> GetSavedCoursesAsync(string userId)
+    {
+        try
+        {
+
+            var response = await _http.GetAsync($"{_configuration["ApiUris:UserCourses"]}?userId={userId}");
+
+            response.EnsureSuccessStatusCode();
+
+            var savedCoursesJson = await response.Content.ReadAsStringAsync();
+            var savedCourses = JsonConvert.DeserializeObject<List<UserSavedCourseModel>>(savedCoursesJson);
+
+            return savedCourses;
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine($"Error: {ex.Message}");
+            throw;
         }
     }
 
@@ -152,28 +174,7 @@ public class CourseService(HttpClient http, IConfiguration configuration)
     //    }
     //}
 
-    public async Task<List<UserSavedCourseModel>> GetSavedCoursesAsync(string userId)
-    {
-        try
-        {
-            // Utför en HTTP GET-förfrågan för att hämta sparade kurser från webapi:et
-            var response = await _http.GetAsync($"{_configuration["ApiUris:UserCourses"]}?userId={userId}");
 
-            response.EnsureSuccessStatusCode(); // Kastar ett undantag om HTTP-statuskoden inte är i 2xx
-
-            // Deserialisera svaret till en lista med sparade kurser
-            var savedCoursesJson = await response.Content.ReadAsStringAsync();
-            var savedCourses = JsonConvert.DeserializeObject<List<UserSavedCourseModel>>(savedCoursesJson);
-
-            return savedCourses;
-        }
-        catch (Exception ex)
-        {
-            // Logga felmeddelandet
-            Console.WriteLine($"Error: {ex.Message}");
-            throw; // Kasta vidare undantaget för att hanteras högre upp i stacken
-        }
-    }
 }
 
 
