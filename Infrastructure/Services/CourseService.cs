@@ -1,9 +1,12 @@
-﻿using Infrastructure.Models;
+﻿using Azure;
+using Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WebApp.Models.Views;
@@ -48,16 +51,131 @@ public class CourseService(HttpClient http, IConfiguration configuration)
 
     public async Task<HttpResponseMessage> CreateCourseAsync(CourseModel course)
     {
-        // Konvertera kursen till JSON-format
+     
         var jsonCourse = JsonConvert.SerializeObject(course);
-        // Skapa en HttpContent-objekt med JSON-data
+        
         var content = new StringContent(jsonCourse, Encoding.UTF8, "application/json");
 
-        // Utför en HTTP POST-förfrågan för att skapa kursen
+        
         var response = await _http.PostAsync(_configuration["ApiUris:Courses"], content);
 
-        // Returnera svaret från API:et
+        
         return response;
     }
 
+    public async Task<HttpResponseMessage> AddCourseToSavedAsync(string userId, int courseId)
+    {
+        try
+        {
+            
+            var userCourseModel = new UserCourseModel
+            {
+                UserId = userId,
+                CourseId = courseId
+            };
+
+           
+            var jsonUserCourse = JsonConvert.SerializeObject(userCourseModel);
+
+            
+            var content = new StringContent(jsonUserCourse, Encoding.UTF8, "application/json");
+
+            
+            var response = await _http.PostAsync(_configuration["ApiUris:UserCourses"], content);
+
+            
+            return response;
+        }
+        catch (Exception ex)
+        {
+        
+            Console.WriteLine($"Error: {ex.Message}");
+            throw; 
+        }
+    }
+
+    public async Task<List<UserSavedCourseModel>> GetSavedCoursesAsync(string userId)
+    {
+        try
+        {
+
+            var response = await _http.GetAsync($"{_configuration["ApiUris:UserCourses"]}?userId={userId}");
+
+            response.EnsureSuccessStatusCode();
+
+            var savedCoursesJson = await response.Content.ReadAsStringAsync();
+            var savedCourses = JsonConvert.DeserializeObject<List<UserSavedCourseModel>>(savedCoursesJson);
+
+            return savedCourses;
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine($"Error: {ex.Message}");
+            throw;
+        }
+    }
+
+    //public async Task<List<CourseModel>> GetSavedCoursesAsync(string userId)
+    //{
+    //    try
+    //    {
+    //        // Utför en HTTP GET-förfrågan för att hämta användarens sparade kurser
+    //        var response = await _http.GetAsync($"{_configuration["ApiUris:UserCourses"]}?key=5e29b885-1414-4046-bb3c-33ac9c611b01?userId={userId}");
+
+    //        if (response.IsSuccessStatusCode)
+    //        {
+    //            // Deserialisera svaret till en lista med sparade kurser
+    //            var savedCourses = JsonConvert.DeserializeObject<List<CourseModel>>(await response.Content.ReadAsStringAsync());
+    //            return savedCourses;
+    //        }
+    //        else
+    //        {
+    //            // Om förfrågan misslyckades, returnera null eller kasta ett undantag, beroende på vad som är lämpligt för din applikation
+    //            return null;
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // Logga felmeddelandet
+    //        Console.WriteLine($"Error: {ex.Message}");
+    //        throw; // Kasta vidare undantaget för att hanteras högre upp i stacken
+    //    }
+    //}
+
+    //public async Task<List<CourseModel>> GetSavedCoursesAsync(string userId)
+    //{
+    //    try
+    //    {
+    //        // Utför en HTTP GET-förfrågan för att hämta användarens sparade kurser
+    //        var response = await _http.GetAsync($"{_configuration["ApiUris:UserCourses"]}?userId={userId}");
+
+    //        if (response.IsSuccessStatusCode)
+    //        {
+    //            // Deserialisera svaret till en lista med sparade kurser
+    //            var savedCourses = JsonConvert.DeserializeObject<List<CourseModel>>(await response.Content.ReadAsStringAsync());
+    //            return savedCourses;
+    //        }
+    //        else
+    //        {
+    //            // Spara statuskoden i en variabel för att använda senare
+    //            var statusCode = (int)response.StatusCode;
+
+    //            // Om förfrågan misslyckades, returnera null eller kasta ett undantag, beroende på vad som är lämpligt för din applikation
+    //            Console.WriteLine($"Error: Failed to retrieve saved courses. Status code: {statusCode}");
+    //            return null;
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        // Logga felmeddelandet
+    //        Console.WriteLine($"Error: {ex.Message}");
+    //        throw; // Kasta vidare undantaget för att hanteras högre upp i stacken
+    //    }
+    //}
+
+
 }
+
+
+

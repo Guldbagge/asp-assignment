@@ -121,6 +121,7 @@ function handleProfileImageUpload() {
 }
 
 
+
 //document.addEventListener('DOMContentLoaded', function () {
 //    const dropdownBtn = document.querySelector('.dropbtn');
 //    const courseSelect = document.getElementById('courseSearchInput');

@@ -3404,6 +3404,16 @@ background-position: 5px center;*/
   border-radius: 50%;
   object-fit: cover;
 }
+#account-security aside .profile-info .profile-info-img .fa-refresh {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--gray-700);
+  color: var(--white);
+  z-index: 2;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
 #account-security aside .profile-info h5 {
   margin-top: 15px;
   margin-bottom: 10px;
@@ -4888,4 +4898,185 @@ background-position: 5px center;*/
 #cookie-consent {
   padding: 1rem 0 !important;
   border-radius: 0;
+}
+
+#saved-courses {
+  background-color: var(--gray-000);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 992px) {
+  #saved-courses {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 150px;
+    margin-bottom: 70px;
+    flex-direction: row;
+    justify-content: normal;
+    align-items: normal;
+  }
+}
+@media (min-width: 992px) {
+  #saved-courses aside {
+    border-right: 1px solid var(--gray-300);
+    padding-right: 20px;
+  }
+}
+#saved-courses aside .profile-info {
+  margin: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+#saved-courses aside .profile-info .profile-info-img {
+  position: relative;
+  z-index: 1;
+  height: 80px;
+  width: 80px;
+}
+#saved-courses aside .profile-info .profile-info-img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+#saved-courses aside .profile-info .profile-info-img .fa-refresh {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--gray-700);
+  color: var(--white);
+  z-index: 2;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+#saved-courses aside .profile-info h5 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+#saved-courses aside .profile-info p {
+  line-height: 160%;
+  font-weight: 400;
+  color: var(--gray-700);
+  font-family: "Manrope", sans-serif;
+  font-size: 16px !important;
+}
+#saved-courses aside nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 50px;
+  text-align: center;
+}
+#saved-courses aside nav a {
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+}
+#saved-courses aside nav a i {
+  color: var(--gray-700);
+  padding-right: 10px;
+}
+#saved-courses aside nav .btn-theme-s {
+  display: block;
+  text-align: left;
+}
+#saved-courses aside nav .btn-theme-s i {
+  color: var(--white);
+  padding-right: 10px;
+}
+#saved-courses .grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+@media (min-width: 768px) {
+  #saved-courses .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  #saved-courses .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+#saved-courses .grid a {
+  text-decoration: none;
+}
+#saved-courses .grid a :hover {
+  background-color: var(--gray-200);
+}
+#saved-courses .grid a .course-card {
+  position: relative;
+}
+#saved-courses .grid a .course-card .img-card {
+  width: 100%;
+}
+#saved-courses .grid a .course-card .bookmark {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--white);
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#saved-courses .grid a .course-card .bookmark:hover {
+  background: var(--theme);
+  color: var(--white);
+}
+#saved-courses .grid a .course-card .bestseller {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--success);
+  color: var(--white);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+#saved-courses .grid a .course-card .bestseller p {
+  margin: 0;
+}
+#saved-courses .grid a .course-card .price {
+  display: flex;
+}
+#saved-courses .grid a .course-card .price .original-price {
+  color: var(--theme);
+  font-weight: 700;
+  margin-right: 1rem;
+}
+#saved-courses .grid a .course-card .price .discounted-price {
+  color: var(--danger);
+  margin-right: 1rem;
+}
+#saved-courses .grid a .course-card .price .discounted-price-line-through {
+  color: var(--gray-600);
+  text-decoration: line-through;
+}
+#saved-courses .grid a .course-card .line {
+  border-top: 1px solid var(--gray-400);
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+#saved-courses .grid a .course-card__footer {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  color: var(--gray-600);
+}
+#saved-courses .grid a .course-card__footer div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+#saved-courses .grid a .course-card__footer p {
+  margin: 0;
+}
+#saved-courses .grid a .course-card .course-card_body {
+  padding-left: 1rem;
 }
