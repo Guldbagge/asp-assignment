@@ -1,21 +1,40 @@
-﻿@* @using WebApp.Models
-@model SubscribeViewModel
+﻿
 
-@{
-    ViewData["Title"] = "Subscribe";
-}
 
-@if (Model.IsSubscribed)
-{
-    <div>Thank you for subscribing!</div>
-}
 
-<form asp-action="Index" asp-controller="Subscribers" method="post">
-    <input asp-for="@Model.Email" />
-    <button type="submit">Subscribe</button>
-</form>
- *@
 <div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-md-6 text-center">
+            <div class="alert alert-success">
+            <h3>
+                Account deleted successfully!
+            </h3>
+
+            </div>
+            <h5>
+                We are sorry to see you go. Please press the Sign Out button before returning to the homepage!
+            </h5>
+            <a asp-action="Index" asp-controller="Home" class="btn-theme">Go to homepage</a>
+
+            @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+            {
+                <span class="alert alert-danger">
+                    @TempData["ErrorMessage"]
+                </span>
+            }
+
+            @if (!string.IsNullOrEmpty(ViewData["SuccessMessage"]?.ToString()))
+            {
+                <span class="alert alert-success">
+                    @TempData["SuccessMessage"]
+                </span>
+            }
+        </div>
+    </div>
+</div>
+
+
+@* <div class="container">
     <div class="row justify-content-center align-items-center vh-100">
         <div class="col-md-6 text-center">
             <!-- Lade till text-center här för att centrera innehållet horisontellt -->
@@ -53,13 +72,9 @@
                         An error occurred. Please contact the web admin.
                     </span>
                 }
-
-@*                 else
-                {
-                    <span class="alert"> *Yes, I agree to the terms and privacy policy. </span>
-                } *@
             </span>
         </div>
     </div>
 </div>
 
+ *@

@@ -13,7 +13,7 @@ public class UserEntity : IdentityUser
     [ProtectedPersonalData]
     public string? Bio { get; set; }
     [ProtectedPersonalData]
-    public string? ProfileImageUrl { get; set; } = "avatar-user.svg";
+    public string? ProfileImageUrl { get; set; } = "avatar.jpg";
 
     public bool IsExternalAccount { get; set; } = false;
     public DateTime? Created { get; set; }
