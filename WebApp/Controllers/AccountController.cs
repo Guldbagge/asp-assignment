@@ -345,7 +345,7 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
     }
 
     [HttpGet]
-    public async Task<IActionResult> SavedCourses()
+    public async Task<IActionResult> GetSavedCourses()
     {
         try
         {
