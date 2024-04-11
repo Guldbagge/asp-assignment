@@ -651,6 +651,9 @@ header {
   padding: 15px 0;
   background-color: var(--gray-000);
 }
+header.gray-background {
+  background-color: var(--gray-100);
+}
 header .container {
   display: grid;
   align-items: center;
@@ -3735,7 +3738,7 @@ background-position: 5px center;*/
   .contact .container .get-in-contact {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 80px;
     background-color: var(--white);
     padding: 2rem;
     width: 40%;
@@ -3747,28 +3750,42 @@ background-position: 5px center;*/
 .contact .container .get-in-contact h2 {
   margin-left: 1rem;
 }
-.contact .container .get-in-contact .fa-angle-down {
-  position: absolute;
-  right: 4rem;
-  top: 22rem;
-}
-@media (min-width: 1200px) {
-  .contact .container .get-in-contact .fa-angle-down {
-    top: 24rem;
-  }
-}
 .contact .container .get-in-contact .contact-form {
   padding: 1rem;
   background-color: var(--gray-000);
 }
-.contact .container .get-in-contact .contact-form .form-group label {
+.contact .container .get-in-contact .contact-form .form-group .input-group {
   font-weight: 600;
   color: var(--gray-900);
-  margin-bottom: 0.5rem; /* Kommatecken ersatt med punkt */
+  margin-bottom: 0.5rem;
   margin-top: 2rem;
 }
-.contact .container .get-in-contact .contact-form .form-group #message {
+.contact .container .get-in-contact .contact-form .form-group .input-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--gray-400);
+  border-radius: 5px;
+}
+.contact .container .get-in-contact .contact-form .form-group .lable {
+  color: var(--gray-900);
+  margin-top: 2rem;
+  position: relative;
+}
+.contact .container .get-in-contact .contact-form .form-group .lable .fa-angle-down {
+  position: absolute;
+  right: 1rem;
+  top: 2.5rem;
+  z-index: 9;
+}
+.contact .container .get-in-contact .contact-form .form-group .form-control {
+  color: var(--gray-600);
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+.contact .container .get-in-contact .contact-form .form-group #contact-message textarea {
   height: 200px;
+  width: 100%;
+  color: var(--gray-900);
 }
 .contact .container .get-in-contact .contact-form .form-group .btn-theme {
   margin-top: 2rem;
