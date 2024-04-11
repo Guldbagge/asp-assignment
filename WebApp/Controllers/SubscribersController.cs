@@ -35,7 +35,6 @@ public class SubscribersController : Controller
                 {
                     TempData["Status"] = "Success";
                     viewModel.IsSubscribed = true;
-                    //return RedirectToAction("Index", "Home");
                 }
 
                 else if (response.StatusCode == System.Net.HttpStatusCode.Conflict)
@@ -57,8 +56,6 @@ public class SubscribersController : Controller
             }
 
         }
-
-        //return View(viewModel);
         return RedirectToAction("Index", "Home", "dontWant");
     }
 
