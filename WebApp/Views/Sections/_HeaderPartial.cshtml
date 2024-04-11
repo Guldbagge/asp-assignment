@@ -52,11 +52,18 @@
                 <a class="btn-gray" asp-controller="Auth" asp-action="SignOut"><i class="fa-light fa-right-to-bracket"></i><span>Sign Out</span></a>
                 <div class="profile-img">
                     <a asp-controller="Account" asp-action="Details">
-                       <img src="~/images/uploads/profiles/@user.ProfileImageUrl" alt="">
-                        @*  <img src="~/images/profile-image.svg" alt="Profile image"> *@
+                        @if (user != null && !string.IsNullOrEmpty(user.ProfileImageUrl))
+                        {
+                            <img src="~/images/uploads/profiles/@user.ProfileImageUrl" alt="Profile image">
+                        }
+                        else
+                        {
+                            <img src="~/images/uploads/profiles/avatar.jpg" alt="Default Profile Image">
+                        }
                     </a>
                 </div>
             }
+
             else
             {
                 <a class="btn-gray" asp-controller="Auth" asp-action="SignIn"><i class="fa-light fa-right-to-bracket"></i><span>Sign in</span></a>
@@ -92,4 +99,5 @@
                 </nav>
             </div>
         </div>
+    
 </header>

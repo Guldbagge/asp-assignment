@@ -283,18 +283,18 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
                 if (result.Succeeded)
                 {
                     await HttpContext.SignOutAsync();
-                    ViewData["SuccessMessage"] = "Account deleted successfully!";
+                    TempData["SuccessMessage"] = "Account deleted successfully!";
                     await Task.Delay(1000);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Subscribers");
                 }
                 else
                 {
-                    ViewData["ErrorMessage"] = "Failed to delete the account";
+                    TempData["ErrorMessage"] = "Failed to delete the account";
                 }
             }
             else
             {
-                ViewData["ErrorMessage"] = "User not found";
+                TempData["ErrorMessage"] = "User not found";
             }
         }
         else

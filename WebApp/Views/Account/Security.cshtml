@@ -110,6 +110,21 @@
                         <button class="btn-delete" type="submit">Delete</button>
                     </div>
                 </form>
+
+@*                  @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"]?.ToString()))
+            {
+                <span class="alert alert-danger">
+                    @TempData["ErrorMessage"]
+                </span>
+            }
+
+            @if (!string.IsNullOrEmpty(ViewData["SuccessMessage"]?.ToString()))
+            {
+                <span class="alert alert-success">
+                    @TempData["SuccessMessage"]
+                </span>
+            } *@
+
             </section>
         </div>
     </section>
