@@ -356,7 +356,9 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
             var userId = user.Id;
 
             // Hårdkodad URI
-            var uri = "https://localhost:7026/api/UserCourses/" + userId;
+            //var uri = "https://localhost:7026/api/UserCourses/" + userId;
+            var uri = $"https://localhost:7026/api/UserCourses/{userId}?key=5e29b885-1414-4046-bb3c-33ac9c611b01";
+
 
             // Anrop till API:et med den hårdkodade URI:en
             var response = await _http.GetAsync(uri);
@@ -386,81 +388,67 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
         }
     }
 
-    //public async Task<IActionResult> GetSavedCourses()
-    //{
-    //    try
-    //    {
-    //        Hämta den inloggade användarens ID
-    //       var user = await _userManager.GetUserAsync(User);
-    //        var userId = user.Id;
+    [HttpPost]
+    public async Task<IActionResult> DeleteSavedCourse(int courseId)
+    {
+        try
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var userId = user.Id;
+            //var uri = $"https://localhost:7026/api/UserCourses/{userId}/{courseId}";
+            var uri = $"https://localhost:7026/api/UserCourses/{userId}/{courseId}?key=5e29b885-1414-4046-bb3c-33ac9c611b01";
 
-    //        var coursesResult = await _courseService.GetSavedCoursesAsync(userId);
+            var response = await _http.DeleteAsync(uri);
 
-    //        var viewModel = new SavedCourseViewModel
-    //        {
-    //            Courses = coursesResult
-    //        };
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "Course removed successfully.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to remove course.";
+            }
 
-    //        return View(viewModel); // Använd SavedCourseViewModel här istället för CoursesIndexViewModel
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        var statusCode = ex is HttpRequestException httpEx && httpEx.StatusCode.HasValue ?
-    //            ((int)httpEx.StatusCode.Value).ToString() :
-    //            "Unknown"; // Om ingen statuskod finns, använd "Unknown"
+            return RedirectToAction(nameof(GetSavedCourses));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+            TempData["ErrorMessage"] = "Failed to remove course. Please try again later.";
+            return RedirectToAction(nameof(GetSavedCourses));
+        }
+    }
 
-    //        TempData["StatusCode"] = statusCode;
+    [HttpPost]
+    public async Task<IActionResult> DeleteAllSavedCourses()
+    {
+        try
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var userId = user.Id;
+            //var uri = $"https://localhost:7026/api/UserCourses/all/{userId}";
+            var uri = $"https://localhost:7026/api/UserCourses/all/{userId}?key=5e29b885-1414-4046-bb3c-33ac9c611b01";
 
-    //        var viewModel = new SavedCourseViewModel();
-    //        return View(viewModel);
-    //    }
+            var response = await _http.DeleteAsync(uri);
 
-    //}
+            if (response.IsSuccessStatusCode)
+            {
+                TempData["SuccessMessage"] = "All courses removed successfully.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Failed to remove all courses.";
+            }
 
-
-    //[HttpGet]
-    //public async Task<IActionResult> GetSavedCourses()
-    //{
-    //    try
-    //    {
-    //        var user = await _userManager.GetUserAsync(User);
-    //        if (user == null)
-    //        {
-    //            return Unauthorized(); 
-    //        }
-
-    //        var savedCourses = await _courseService.GetSavedCoursesAsync(user.Id);
-
-    //        var viewModel = new List<UserSavedCourseModel>();
-    //        foreach(var course in savedCourses)
-    //        {
-    //            var userSavedCourse = new UserSavedCourseModel
-    //            {
-    //                CourseId = course.CourseId,
-    //                Title = course.Title,
-    //                Price = course.Price,
-    //                DiscountPrice = course.DiscountPrice,
-    //                Hours = course.Hours,
-    //                IsBestseller = course.IsBestseller,
-    //                LikesInNumbers = course.LikesInNumbers,
-    //                LikesInProcent = course.LikesInProcent,
-    //                Author = course.Author,
-    //                ImageName = course.ImageName
-    //            };
-    //            viewModel.Add(userSavedCourse);
-    //        }
-
-    //        return View(viewModel);
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Console.WriteLine($"Error: {ex.Message}");
-
-    //        var errorMessage = "Failed to retrieve saved courses";
-    //        TempData["ErrorMessage"] = errorMessage;
-    //        return StatusCode(500, errorMessage);
-    //    }
-    //}
+            return RedirectToAction(nameof(GetSavedCourses));
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+            TempData["ErrorMessage"] = "Failed to remove all courses. Please try again later.";
+            return RedirectToAction(nameof(GetSavedCourses));
+        }
+    }
 
     [HttpPost]
     public async Task<IActionResult> SavedCourses(UserCourseModel userCourse)

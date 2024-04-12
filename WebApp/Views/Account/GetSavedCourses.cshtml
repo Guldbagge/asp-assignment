@@ -6,24 +6,6 @@
 }
 
 <div class="container">
-
-    <span class="information mt-3 mb-3">
-        @if (TempData["StatusCode"] != null)
-        {
-            <span class="alert alert-danger">Status Code: @TempData["StatusCode"]</span>
-        }
-
-        @if (TempData["SuccessMessage"] != null)
-        {
-            <span class="alert alert-success">@TempData["SuccessMessage"]</span>
-        }
-        @if (TempData["ErrorMessage"] != null)
-        {
-            <span class="alert alert-danger">@TempData["ErrorMessage"]</span>
-        }
-    </span>
-
-
     <section id="saved-courses">
         <aside>
             <div class="profile-info">
@@ -52,73 +34,107 @@
 
             </nav>
         </aside>
+        <div class="content">
+            <div class="headning">
+                <h1 class="h3">Saved Courses</h1>
+                <span>
+                    <form asp-controller="Account" asp-action="DeleteAllSavedCourses" method="post">
+                        <button class="btn-delete" type="submit">
+                            <i class="fas fa-trash-alt"></i> Delete all
+                            </button>
+                    
+                    </form>
+                </span>
+            </div>
 
-        @if (Model.Courses != null)
-        {
-            <div class="grid">
 
-                @foreach (var item in Model.Courses)
+            <span class="information mt-3 mb-3">
+                @if (TempData["StatusCode"] != null)
                 {
-
-                    <a asp-action="SaveCourse" asp-controller="Account" asp-route-id="@item.CourseId">
-
-                        <div class="course-card">
-                            <div class="course-card_img">
-                                <img class="img-card" src="~/images/courses/@item.ImageName" alt="Course card">
-                                @if (item.IsBestseller)
-                                {
-                                    <div class="bestseller">
-                                        <p>Bestseller</p>
-                                    </div>
-                                }
-                                <form asp-controller="Account" asp-action="SavedCourses" method="post" style="display: inline;">
-                                    <input type="hidden" name="courseId" value="@item.CourseId" />
-                                    <button type="submit" class="bookmark" style="border: none; background: none; padding: 0; cursor: pointer;">
-                                        <img class="bookmark" src="~/images/courses/bookmark.svg" alt="bookmark" style="display: block;">
-                                    </button>
-                                </form>
-                            </div>
-                            <div class="course-card_body">
-                                <h2 class="h5">@item.Title</h2>
-                                <p class="text-s">@item.Author</p>
-                                <div class="price">
-
-                                    @if (item.DiscountPrice <= 0)
-                                    {
-                                        <p class="original-price">$@item.Price</p>
-                                    }
-
-                                    @if (item.DiscountPrice > 0)
-                                    {
-
-                                        <p class="original-price"></p>
-                                        <p class="discounted-price">$@item.DiscountPrice</p>
-                                        <p class="discounted-price-line-through">$@item.Price</p>
-                                    }
-                                </div>
-
-                            </div>
-                            <div class="line"></div>
-                            <div class="course-card__footer">
-                                <div>
-                                    <i class="fa-regular fa-clock"></i>
-                                    <p>@item.Hours hours</p>
-                                </div>
-                                <div>
-                                    <i class="fa-regular fa-thumbs-up"></i>
-                                    <p>
-                                        @($"{item.LikesInProcent * 100:0}%")
-                                        @($"{item.LikesInNumbers / 1000:N1}K")
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
+                    <span class="alert alert-danger">Status Code: @TempData["StatusCode"]</span>
                 }
 
-            </div>
-        }
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <span class="alert alert-success">@TempData["SuccessMessage"]</span>
+                }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <span class="alert alert-danger">@TempData["ErrorMessage"]</span>
+                }
+            </span>
+
+            @if (Model.Courses != null)
+            {
+                <div class="grid">
+
+                    @foreach (var item in Model.Courses)
+                    {
+
+                        <a asp-action="SaveCourse" asp-controller="Account" asp-route-id="@item.CourseId">
+
+                            <div class="course-card">
+                                <div class="course-card_img">
+                                    <img class="img-card" src="~/images/courses/@item.ImageName" alt="Course card">
+                                    @if (item.IsBestseller)
+                                    {
+                                        <div class="bestseller">
+                                            <p>Bestseller</p>
+                                        </div>
+                                    }
+                                    <form asp-controller="Account" asp-action="DeleteSavedCourse" method="post" style="display: inline;">
+                                        <input type="hidden" name="courseId" value="@item.CourseId" />
+                                        <button type="submit" class="bookmark" style="border: none; background: none; padding: 0; cursor: pointer;">
+                                            <img class="bookmark" src="~/images/courses/bookmark_add.svg" alt="bookmark" style="display: block;">
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="course-card_body">
+                                    <h2 class="h5">@item.Title</h2>
+                                    <p class="text-s">@item.Author</p>
+                                    <div class="price">
+
+                                        @if (item.DiscountPrice <= 0)
+                                        {
+                                            <p class="original-price">$@item.Price</p>
+                                        }
+
+                                        @if (item.DiscountPrice > 0)
+                                        {
+
+                                            <p class="original-price"></p>
+                                            <p class="discounted-price">$@item.DiscountPrice</p>
+                                            <p class="discounted-price-line-through">$@item.Price</p>
+                                        }
+                                    </div>
+
+                                </div>
+                                <div class="line"></div>
+                                <div class="course-card__footer">
+                                    <div>
+                                        <i class="fa-regular fa-clock"></i>
+                                        <p>@item.Hours hours</p>
+                                    </div>
+                                    <div>
+                                        <i class="fa-regular fa-thumbs-up"></i>
+                                        <p>
+                                            @($"{item.LikesInProcent * 100:0}%")
+                                            @($"{item.LikesInNumbers / 1000:N1}K")
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+
+                    }
+
+                </div>
+            }
+
+        </div>
+
+
+
     </section>
 </div>
 
