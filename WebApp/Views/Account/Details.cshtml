@@ -14,7 +14,6 @@
         <aside>
             <div class="profile-info">
                 <div class=" profile-info-img">
-                    @* <img src="~/images/@Model.ProfileInfo.ProfileImageUrl" alt="@Model.ProfileInfo.FirstName @Model.ProfileInfo.LastName" /> *@
                     <img src="~/images/uploads/profiles/@user.ProfileImageUrl" alt="@Model.ProfileInfo.FirstName @Model.ProfileInfo.LastName" />
                     <form enctype="multipart/form-data" method="post" asp-action="UploadProfilImage" asp-controller="Account">
                         <input id="fileUploader" type="file" name="file" hidden />
