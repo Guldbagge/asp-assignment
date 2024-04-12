@@ -21,6 +21,8 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
     private readonly CategoryService _categoryService = categoryService;
     private readonly CourseService _courseService = courseService;
 
+    private readonly HttpClient _http = new HttpClient();
+
 
     [HttpGet]
     [Route("/account/details")]
@@ -344,51 +346,121 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
 
     }
 
-    [HttpGet]
+
     public async Task<IActionResult> GetSavedCourses()
     {
         try
         {
+            // Hämta den inloggade användarens ID
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return Unauthorized(); 
-            }
+            var userId = user.Id;
 
-            var savedCourses = await _courseService.GetSavedCoursesAsync(user.Id);
-        
-            var viewModel = new List<UserSavedCourseModel>();
-            foreach(var course in savedCourses)
+            // Hårdkodad URI
+            var uri = "https://localhost:7026/api/UserCourses/" + userId;
+
+            // Anrop till API:et med den hårdkodade URI:en
+            var response = await _http.GetAsync(uri);
+
+            response.EnsureSuccessStatusCode();
+
+            var coursesResultJson = await response.Content.ReadAsStringAsync();
+            var coursesResult = JsonConvert.DeserializeObject<List<UserSavedCourseModel>>(coursesResultJson);
+
+            var viewModel = new SavedCourseViewModel
             {
-                var userSavedCourse = new UserSavedCourseModel
-                {
-                    CourseId = course.CourseId,
-                    Title = course.Title,
-                    Price = course.Price,
-                    DiscountPrice = course.DiscountPrice,
-                    Hours = course.Hours,
-                    IsBestseller = course.IsBestseller,
-                    LikesInNumbers = course.LikesInNumbers,
-                    LikesInProcent = course.LikesInProcent,
-                    Author = course.Author,
-                    ImageName = course.ImageName
-                };
-                viewModel.Add(userSavedCourse);
-            }
+                Courses = coursesResult
+            };
 
             return View(viewModel);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error: {ex.Message}");
-    
-            var errorMessage = "Failed to retrieve saved courses";
-            TempData["ErrorMessage"] = errorMessage;
-            return StatusCode(500, errorMessage);
+            var statusCode = ex is HttpRequestException httpEx && httpEx.StatusCode.HasValue ?
+                ((int)httpEx.StatusCode.Value).ToString() :
+                "Unknown"; // Om ingen statuskod finns, använd "Unknown"
+
+            TempData["StatusCode"] = statusCode;
+
+            var viewModel = new SavedCourseViewModel();
+            return View(viewModel);
         }
     }
 
+    //public async Task<IActionResult> GetSavedCourses()
+    //{
+    //    try
+    //    {
+    //        Hämta den inloggade användarens ID
+    //       var user = await _userManager.GetUserAsync(User);
+    //        var userId = user.Id;
 
+    //        var coursesResult = await _courseService.GetSavedCoursesAsync(userId);
+
+    //        var viewModel = new SavedCourseViewModel
+    //        {
+    //            Courses = coursesResult
+    //        };
+
+    //        return View(viewModel); // Använd SavedCourseViewModel här istället för CoursesIndexViewModel
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        var statusCode = ex is HttpRequestException httpEx && httpEx.StatusCode.HasValue ?
+    //            ((int)httpEx.StatusCode.Value).ToString() :
+    //            "Unknown"; // Om ingen statuskod finns, använd "Unknown"
+
+    //        TempData["StatusCode"] = statusCode;
+
+    //        var viewModel = new SavedCourseViewModel();
+    //        return View(viewModel);
+    //    }
+
+    //}
+
+
+    //[HttpGet]
+    //public async Task<IActionResult> GetSavedCourses()
+    //{
+    //    try
+    //    {
+    //        var user = await _userManager.GetUserAsync(User);
+    //        if (user == null)
+    //        {
+    //            return Unauthorized(); 
+    //        }
+
+    //        var savedCourses = await _courseService.GetSavedCoursesAsync(user.Id);
+
+    //        var viewModel = new List<UserSavedCourseModel>();
+    //        foreach(var course in savedCourses)
+    //        {
+    //            var userSavedCourse = new UserSavedCourseModel
+    //            {
+    //                CourseId = course.CourseId,
+    //                Title = course.Title,
+    //                Price = course.Price,
+    //                DiscountPrice = course.DiscountPrice,
+    //                Hours = course.Hours,
+    //                IsBestseller = course.IsBestseller,
+    //                LikesInNumbers = course.LikesInNumbers,
+    //                LikesInProcent = course.LikesInProcent,
+    //                Author = course.Author,
+    //                ImageName = course.ImageName
+    //            };
+    //            viewModel.Add(userSavedCourse);
+    //        }
+
+    //        return View(viewModel);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine($"Error: {ex.Message}");
+
+    //        var errorMessage = "Failed to retrieve saved courses";
+    //        TempData["ErrorMessage"] = errorMessage;
+    //        return StatusCode(500, errorMessage);
+    //    }
+    //}
 
     [HttpPost]
     public async Task<IActionResult> SavedCourses(UserCourseModel userCourse)
@@ -404,25 +476,57 @@ public class AccountController(UserManager<UserEntity> userManager, AddressManag
             var response = await _courseService.AddCourseToSavedAsync(user.Id, userCourse.CourseId);
             if (response.IsSuccessStatusCode)
             {
-
                 TempData["SuccessMessage"] = "Course added to saved courses successfully.";
-                return RedirectToAction(nameof(SavedCourses)); 
             }
             else
             {
-
-                TempData["ErrorMessage"] = "Failed to add course to saved courses.";
-                return RedirectToAction(nameof(SavedCourses)); 
+                TempData["ErrorMessage"] = "Course already exists for this user.";
             }
         }
         catch (Exception ex)
         {
-
             Console.WriteLine($"Error: {ex.Message}");
             TempData["ErrorMessage"] = "Failed to add course to saved courses. Please try again later.";
-            return RedirectToAction(nameof(SavedCourses)); 
         }
+
+    
+        return RedirectToAction("GetSavedCourses", "Account");
     }
+
+
+    //[HttpPost]
+    //public async Task<IActionResult> SavedCourses(UserCourseModel userCourse)
+    //{
+    //    try
+    //    {
+    //        var user = await _userManager.GetUserAsync(User);
+    //        if (user == null)
+    //        {
+    //            return Unauthorized();
+    //        }
+
+    //        var response = await _courseService.AddCourseToSavedAsync(user.Id, userCourse.CourseId);
+    //        if (response.IsSuccessStatusCode)
+    //        {
+
+    //            TempData["SuccessMessage"] = "Course added to saved courses successfully.";
+    //            return RedirectToAction(nameof(SavedCourses)); 
+    //        }
+    //        else
+    //        {
+
+    //            TempData["ErrorMessage"] = "Failed to add course to saved courses.";
+    //            return RedirectToAction(nameof(SavedCourses)); 
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+
+    //        Console.WriteLine($"Error: {ex.Message}");
+    //        TempData["ErrorMessage"] = "Failed to add course to saved courses. Please try again later.";
+    //        return RedirectToAction(nameof(SavedCourses)); 
+    //    }
+    //}
 
 
     //[HttpPost]
