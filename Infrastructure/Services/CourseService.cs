@@ -36,9 +36,22 @@ public class CourseService(HttpClient http, IConfiguration configuration)
 
     }
 
+    //public async Task<CourseModel> GetCourseByIdAsync(int courseId)
+    //{
+    //    var response = await _http.GetAsync($"{_configuration["ApiUris:Courses"]}/{courseId}");
+
+    //    if (response.IsSuccessStatusCode)
+    //    {
+    //        var course = JsonConvert.DeserializeObject<CourseModel>(await response.Content.ReadAsStringAsync());
+    //        return course;
+    //    }
+
+    //    return null;
+    //}
+
     public async Task<CourseModel> GetCourseByIdAsync(int courseId)
     {
-        var response = await _http.GetAsync($"{_configuration["ApiUris:Courses"]}/{courseId}");
+        var response = await _http.GetAsync($"{_configuration["ApiUris:Courses"]}/{courseId}?key=5e29b885-1414-4046-bb3c-33ac9c611b01");
 
         if (response.IsSuccessStatusCode)
         {
@@ -48,6 +61,7 @@ public class CourseService(HttpClient http, IConfiguration configuration)
 
         return null;
     }
+
 
     public async Task<HttpResponseMessage> CreateCourseAsync(CourseModel course)
     {

@@ -3756,23 +3756,23 @@ background-position: 5px center;*/
   display: flex;
   gap: 4rem;
 }
-.singel-courses .programdetails .container .box-one {
+.singel-courses .programdetails .container .box-three {
   flex: 2;
 }
-.singel-courses .programdetails .container .box-one h2 {
+.singel-courses .programdetails .container .box-three h2 {
   margin-top: 2rem;
 }
-.singel-courses .programdetails .container .box-one .content {
+.singel-courses .programdetails .container .box-three .content {
   display: flex;
   justify-content: start;
   align-items: center;
   gap: 1rem;
 }
-.singel-courses .programdetails .container .box-one .content .circle-gray {
+.singel-courses .programdetails .container .box-three .content .circle-gray {
   display: none;
 }
 @media (min-width: 992px) {
-  .singel-courses .programdetails .container .box-one .content .circle-gray {
+  .singel-courses .programdetails .container .box-three .content .circle-gray {
     z-index: -1;
     width: 80px;
     height: 80px;
@@ -3784,7 +3784,7 @@ background-position: 5px center;*/
     margin-bottom: 3rem;
   }
 }
-.singel-courses .programdetails .container .box-one .content .circle-gray .circle-wite {
+.singel-courses .programdetails .container .box-three .content .circle-gray .circle-wite {
   z-index: 1;
   width: 60px;
   height: 60px;
@@ -3793,8 +3793,9 @@ background-position: 5px center;*/
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
-.singel-courses .programdetails .container .box-one .content .circle-gray .circle-wite p {
+.singel-courses .programdetails .container .box-three .content .circle-gray .circle-wite p {
   z-index: 2;
   margin-bottom: 0;
   color: #000;
@@ -3806,15 +3807,30 @@ background-position: 5px center;*/
   justify-content: center;
   align-items: center;
 }
-.singel-courses .programdetails .container .box-one .content .content-text {
+.singel-courses .programdetails .container .box-three .content .content-text {
   flex: 5;
   margin-bottom: 3rem;
 }
-.singel-courses .programdetails .container .box-two {
+.singel-courses .programdetails .container .box-three .line-vertical {
   display: none;
 }
 @media (min-width: 992px) {
-  .singel-courses .programdetails .container .box-two {
+  .singel-courses .programdetails .container .box-three .line-vertical {
+    position: absolute;
+    z-index: -1;
+    display: block;
+    border-left: 2px solid var(--gray-300);
+    height: 900px;
+    margin-left: 40px;
+    margin-top: 20px;
+  }
+}
+.singel-courses .programdetails .container .box-four {
+  display: none;
+}
+@media (min-width: 992px) {
+  .singel-courses .programdetails .container .box-four {
+    display: block;
     flex: 1;
   }
 }
@@ -3907,508 +3923,6 @@ background-position: 5px center;*/
   width: 200px;
 }
 
-/*.singel-courses {
-.singel-courses-box {
-    position: relative;
-    z-index: 11;
-    background-position: center;
-    background-color: rgba(0, 0, 0, 0.7);*/ /* Justera opaciteten här för att göra överlägget mörkare */
-/*img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    position: absolute;
-    opacity: 0.7;
-}
-
-.container {
-    padding-top: 3rem;
-
-
-    .home-course {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        gap: 1rem;
-        width: 100%;
-
-        .home-and-course {
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            gap: 0.5rem;
-
-            .fa-house {
-                color: $gray-400;
-            }
-
-            .home {
-                color: $gray-600;
-                margin-bottom: 0;
-                color: $gray-400;
-            }
-
-
-            &:hover {
-                .home,
-                .fa-house {
-                    color: $black;
-                }
-
-                text-decoration: none;
-                cursor: pointer;
-            }
-        }
-
-
-
-        .fa-angles-right {
-            color: $gray-300;
-        }
-
-        .courses {
-            color: $theme;
-            margin-bottom: 0;
-            color: $gray-300;
-        }
-    }
-}
-
-.content {
-    display: none;
-
-    @include lg {
-        display: contents;
-    }
-
-    .label {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        gap: 1rem;
-
-        .bestseller {
-            top: 1rem;
-            left: 1rem;
-            background: $success;
-            color: $white;
-            padding-top: 0.1rem;
-            padding-bottom: 0.1rem;
-            padding-right: 0.7rem;
-            padding-left: 0.7rem;
-            border-radius: 5px;
-            margin-top: 2rem;
-
-            p {
-                margin: 0;
-            }
-        }
-
-        .digital {
-            top: 1rem;
-            left: 1rem;
-            background: $gray-200;
-            color: $black;
-            padding-top: 0.1rem;
-            padding-bottom: 0.1rem;
-            padding-right: 0.7rem;
-            padding-left: 0.7rem;
-            border-radius: 5px;*/
-/*margin-top: 2rem;*/
-/*p {
-                        margin: 0;
-                    }
-                }
-            }
-
-            .h1 {
-                padding-top: 1rem;
-                color: $white;
-            }
-
-            .text-xl {
-                color: $gray-400;
-            }
-
-            .rating {
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                gap: 0.5rem;
-                color: $gray-400;
-
-
-                .fa-star {
-                    color: $warning;
-                }
-
-                .fa-regular {
-                    color: $gray-400;
-                }
-            }
-
-            .reviews {
-                display: flex;
-                margin-top: 1rem;
-
-                div {
-                    border-right: 1px solid $gray-400;
-                    padding-left: 1rem;
-                    margin-bottom: 1rem;
-                }
-            }
-
-            .likes {
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                gap: 0.5rem;
-                color: $gray-400;
-                margin-bottom: 0;
-
-                .fa-heart {
-                    color: $danger;
-                }
-
-                p {
-                    margin-top: 1rem;
-                }
-
-                div {
-                    border-right: 1px solid $gray-400;
-                    padding-left: 1rem;
-                    margin-bottom: 0,5rem;
-                }
-            }
-
-            .hours {
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                gap: 0.5rem;
-                color: $gray-400;
-                margin-bottom: 0;
-
-                .fa-clock {
-                    color: $gray-400;
-                }
-
-                p {
-                    margin-top: 1rem;
-                }
-            }
-
-            .auther {
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                gap: 5rem;
-                color: $gray-400;
-                margin-bottom: 0;
-                padding-top: 5rem;
-                padding-bottom: 5rem;
-
-                .author-image {
-                    margin-bottom: 3rem;
-
-                    .created-img {
-                        width: 50px;
-                        height: 50px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                        border-radius: 50%;
-                    }
-                }
-
-                .author-info {
-                    color: $gray-200;
-                    margin-bottom: 0;
-
-                    p {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-        }
-    }
-
-    .course-box-description {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        @include lg {
-            display: flex;
-            flex-direction: row;
-            justify-content: start;
-            align-items: center;
-        }
-
-        .box-one {
-            flex: 2;
-
-            h2 {
-                margin-top: 2rem;
-            }
-
-            p {
-                color: $gray-700;
-            }
-
-            h3 {
-                margin-top: 2rem;
-            }
-
-            .content-box {
-                .box {
-                    display: flex;
-                    justify-content: start;
-                    align-items: center;
-                    margin-bottom: 0.7rem;
-
-                    p {
-                        margin-bottom: 0;
-                        color: $gray-700;
-                        margin-left: 1rem;
-                    }
-
-                    i {
-                        color: $theme;
-                    }
-                }
-            }
-        }
-
-        .box-two {
-            flex: 1;
-            border: $gray-300 solid 1px;
-            border-radius: 5px;
-            padding: 2rem;
-            box-shadow: $gray-300 0px 0px 10px;
-            margin-top: 4rem;
-
-            h3 {
-                color: black;
-                margin-bottom: 1rem;
-            }
-
-            .content-box {
-
-                .box {
-                    display: flex;
-                    justify-content: start;
-                    align-items: center;
-                    margin-bottom: 0.7rem;
-
-                    p {
-                        margin-bottom: 0;
-                        color: $gray-700;
-                        margin-left: 1rem;
-                    }
-
-                    i {
-                        color: $gray-700;
-                    }
-                }
-            }
-
-            .price {
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                margin-bottom: 1rem;
-
-                h1 {
-                    color: $black;
-                    margin-right: 1rem;
-                    margin-bottom: 0;
-                }
-
-                h3 {
-                    color: $gray-700;
-                    margin-right: 1rem;
-                    margin-bottom: 0;
-                    text-decoration: line-through;
-                }
-            }
-        }
-    }
-
-    .programdetails {
-        .container {
-            display: flex;
-            gap: 4rem;
-
-            .box-one {
-                flex: 2;
-
-                h2 {
-                    margin-top: 2rem;
-                }
-
-                .content {
-                    display: flex;
-                    justify-content: start;
-                    align-items: center;
-                    gap: 1rem;
-
-                    .circle-gray {
-                        display: none;
-
-                        @include lg {
-                            z-index: -1;
-                            width: 80px;
-                            height: 80px;
-                            background: $gray-200;
-                            border-radius: 50%;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            margin-bottom: 3rem;
-                        }
-
-                        .circle-wite {
-                            z-index: 1;
-                            width: 60px;
-                            height: 60px;
-                            background-color: $white;
-                            border-radius: 50%;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-
-                            p {
-                                z-index: 2;
-                                margin-bottom: 0;
-                                color: $black;
-                                font-size: 2rem;
-                                font-weight: 700;
-                                width: 40px;
-                                height: 40px;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                            }
-                        }
-                    }
-
-                    .content-text {
-                        flex: 5;
-                        margin-bottom: 3rem;
-                    }
-                }
-            }
-
-            .box-two {
-                display: none;
-
-                @include lg {
-                    flex: 1;
-                }
-            }
-        }
-    }
-
-    .albert-flores {
-        margin-top: 7rem;
-
-        .container {
-            position: relative;
-            display: flex;
-            background-color: $gray-900;
-            padding-left: 0;
-
-            .albert-flores-img {
-                display: none;
-
-                @include lg {
-                    display: flex;
-                }
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    border-radius: 0;
-                }
-            }
-
-            .albert-flores-text {
-                flex: 2;
-                padding: 1rem;
-
-                @include lg {
-                    padding: 7rem;
-                }
-
-                h2 {
-                    color: $white;
-                    margin-bottom: 1rem;
-                }
-
-                h5 {
-                    color: $white;
-                    margin-bottom: 1rem;
-                }
-
-                p {
-                    color: $white;
-                    margin-bottom: 1rem;
-                }
-
-                .wave {
-                    display: none;
-
-                    @include lg {
-                        position: absolute;
-                        top: 0;
-                        bottom: 0;
-                        display: flex;
-                    }
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: 0;
-                    }
-                }
-
-                .button {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    flex-direction: column;
-                    gap: 1rem;
-                    margin-top: 2rem;
-
-                    @include lg {
-                        display: flex;
-                        justify-content: start;
-                        align-items: center;
-                        gap: 1rem;
-                        margin-top: 2rem;
-                    }
-
-                    .fa-play {
-                        color: $theme;
-                    }
-                }
-
-                .danger {
-                    background-color: $danger;
-                    width: 200px;
-                }
-
-                .btn-theme {
-                    width: 200px;
-                }
-            }
-        }
-    }
-}*/
 #cookie-consent {
   padding: 1rem 0 !important;
   border-radius: 0;
