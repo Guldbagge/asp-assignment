@@ -4,7 +4,7 @@
         position: relative;
         z-index: 11;
         background-position: center;
-        background-color: rgba(0, 0, 0, 0.7); /* Justera opaciteten här för att göra överlägget mörkare */
+        background-color: rgba(0, 0, 0, 0.7);
 
         img {
             width: 100%;
@@ -96,8 +96,13 @@
                 }
 
                 .digital {
-                    background: var(--gray-200);
-                    color: #000;
+                    background: var(--gray-300);
+                    color: var(--black);
+
+                    .dark & {
+                        background: var(--gray-700);
+                        color: var(--white);
+                    }
                 }
             }
 

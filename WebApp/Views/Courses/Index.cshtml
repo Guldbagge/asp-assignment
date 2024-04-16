@@ -77,15 +77,15 @@
                                         <p>Bestseller</p>
                                     </div>
                                 }
-                            <form asp-controller="Account" asp-action="SavedCourses" method="post" style="display: inline;">
-                                <input type="hidden" name="courseId" value="@item.Id" />
-                                <button type="submit" class="bookmark" style="border: none; background: none; padding: 0; cursor: pointer;">
-                                    <img class="bookmark" src="~/images/courses/bookmark.svg" alt="bookmark" style="display: block;">
-                                </button>
-                            </form>
+                                <form asp-controller="Account" asp-action="SavedCourses" method="post" style="display: inline;">
+                                    <input type="hidden" name="courseId" value="@item.Id" />
+                                    <button type="submit" class="bookmark" style="border: none; background: none; padding: 0; cursor: pointer;">
+                                        <img class="bookmark" src="~/images/courses/bookmark.svg" alt="bookmark" style="display: block;">
+                                    </button>
+                                </form>
                             </div>
                             <div class="course-card_body">
-                                <h2 class="h5">@item.Title</h2>
+                                <h2 class="h5 multi-line-title">@item.Title</h2>
                                 <p class="text-s">@item.Author</p>
                                 <div class="price">
                             
@@ -129,6 +129,32 @@
         @if (Model.Pagination != null && Model.Pagination.TotalPages > 1)
         {
             <div class="pagination">
+                <a class="btn-transparent" href="@Url.Action("Index", new { pageNumber = Model.Pagination.CurrentPage - 1, pageSize = Model.Pagination.PageSize })"><i class="fa-light fa-chevron-left"></i></a>
+                @for (int i = 1; i <= Model.Pagination.TotalPages; i++)
+                {
+                    if (i == Model.Pagination.CurrentPage)
+                    {
+                        <a class="btn-theme">@i</a>
+                    }
+                    else if (i == 1 || i == Model.Pagination.TotalPages)
+                    {
+                        <a class="btn-transparent" href="@Url.Action("Index", new { pageNumber = i, pageSize = Model.Pagination.PageSize })">@i</a>
+                    }
+                    else
+                    {
+                        <a class="btn-gray" href="@Url.Action("Index", new { pageNumber = i, pageSize = Model.Pagination.PageSize })">@i</a>
+                    }
+                }
+                <a class="btn-transparent" href="@Url.Action("Index", new { pageNumber = Model.Pagination.CurrentPage + 1, pageSize = Model.Pagination.PageSize })"><i class="fa-light fa-chevron-right"></i></a>
+            </div>
+        }
+
+
+
+
+@*         @if (Model.Pagination != null && Model.Pagination.TotalPages > 1)
+        {
+            <div class="pagination">
                 <a class="btn-transparent"><i class="fa-light fa-chevron-left"></i></a>
                 @for (int i = 1; i <= Model.Pagination.TotalPages; i++)
                 {
@@ -143,7 +169,7 @@
                 }
                 <a class="btn-transparent"><i class="fa-light fa-chevron-right"></i></a>
             </div>
-        }
+        } *@
 
         <div class="banner">
             <div class="banner-text">

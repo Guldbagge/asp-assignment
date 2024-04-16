@@ -23,7 +23,7 @@ public class CoursesController(CategoryService categoryService, CourseService co
     private readonly CategoryService _categoryService = categoryService;
     private readonly CourseService _courseService = courseService;
 
-    public async Task<IActionResult> Index(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 6)
+    public async Task<IActionResult> Index(string category = "", string searchQuery = "", int pageNumber = 1, int pageSize = 9)
     {
         try
         {

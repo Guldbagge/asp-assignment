@@ -109,9 +109,9 @@
             }
 
             .btn-delete {
-             background: var(--white);
-             color: var(--danger);
-             border: 1px solid var(--danger);
+                background: var(--white);
+                color: var(--danger);
+                border: 1px solid var(--danger);
             }
         }
 
@@ -131,6 +131,11 @@
 
             a {
                 text-decoration: none;
+                background-color: var(--white);
+
+                .dark & {
+                    background-color: var(--gray-100) !important;
+                }
 
                 :hover {
                     background-color: var(--gray-200);
