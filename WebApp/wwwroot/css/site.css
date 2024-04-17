@@ -1612,6 +1612,16 @@ body {
 .dontWant .container .contentEmail .email {
   margin-top: 40px;
   margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.dontWant .container .contentEmail .email .envelope {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  color: var(--gray-500);
+  z-index: 2;
 }
 @media (min-width: 992px) {
   .dontWant .container .contentEmail .email {

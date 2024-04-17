@@ -1,26 +1,9 @@
-﻿
-
-
-@* @model DontWantViewModel *@
-
-@using WebApp.Models
+﻿@using WebApp.Models
 @model SubscribeViewModel
 
 @{
     ViewData["Title"] = "Subscribe";
 }
-
-@* @if (Model.IsSubscribed)
-{
-    <div>Thank you for subscribing!</div>
-} *@
-
-@* <form asp-action="Index" asp-controller="Subscribers" method="post">
-    <input asp-for="@Model.Email" />
-    <button type="submit">Subscribe</button>
-</form> *@
-
-
 
 <div class="dontWant"">
     <div class="container">
@@ -82,10 +65,11 @@
 
                 <div class="contentEmail">
                     <div class="email">
+                        <span id="envelope" class="envelope"><i class="fa fa-envelope"></i></span>
                         <div id="form-email" class="input-group">
-                            @* <label asp-for="Form.Email"></label> *@
+                            @*<label asp-for="Form.Email"></label> *@
                             <span asp-validation-for="Email"> </span>
-                            <input asp-for="Email" />
+                            <input asp-for="Email"/>
                         </div>
                         <button id="form-submit" type="submit" class="btn-theme">Subscribe@* @Model.Title *@ </button>
                     </div>

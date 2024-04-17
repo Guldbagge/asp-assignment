@@ -31,10 +31,24 @@ const textValidator = (element, minLength = 2) => {
     }
 }
 
+//const emailValidator = (element) => {
+//    const regEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+//    formErrorHandler(element, regEx.test(element.value))
+//}
+
 const emailValidator = (element) => {
     const regEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
     formErrorHandler(element, regEx.test(element.value))
+
+    let envelopeIcon = document.getElementById('envelope');
+
+    if (element.value.trim() === '') {
+        envelopeIcon.style.display = 'inline-block';
+    } else {
+        envelopeIcon.style.display = 'none';
+    }
 }
+
 
 const passwordValidator = (element) => {
     if (element.dataset.valEqualToOther !== undefined) {
