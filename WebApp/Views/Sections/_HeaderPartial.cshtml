@@ -84,6 +84,9 @@
             @if (_signInManager.IsSignedIn(User))
             {
                 <a class="btn-gray" asp-controller="Auth" asp-action="SignOut"><i class="fa-light fa-right-to-bracket"></i><span>Sign Out</span></a>
+                <a class="btn-theme" asp-controller="Account" asp-action="Details">Details</a>
+                <a class="btn-theme" asp-controller="Courses" asp-action="Index">Courses</a>
+              
             }
             else
             {
@@ -99,5 +102,7 @@
                 </nav>
             </div>
         </div>
+    </div>
+
     
 </header>
